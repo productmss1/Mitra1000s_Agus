@@ -120,7 +120,7 @@
                 ],
                 path: "prototypes/migrasi_otp.html",
                 lastUpdate: "2026-05-19T16:30:00Z",
-                formattedDate: "19 Mei 2026, 16:30"
+                formattedDate: "19 Mei 2026"
             },
             {
                 title: "Star Sales",
@@ -136,7 +136,7 @@
                 ],
                 path: "prototypes/star_sales.html",
                 lastUpdate: "2026-05-20T08:30:00Z",
-                formattedDate: "20 Mei 2026, 08:30"
+                formattedDate: "20 Mei 2026"
             },
             {
                 title: "Multi-Akses (On Behalf)",
@@ -152,9 +152,31 @@
                 ],
                 path: "prototypes/multi_akses_on_behalf.html",
                 lastUpdate: "2026-03-15T14:20:00Z",
-                formattedDate: "15 Mar 2026, 14:20"
+                formattedDate: "15 Mar 2026"
             }
         ];
+
+        // Helper to format date as Indonesian format (e.g., "2026-05-20" -> "20 Mei 2026")
+        function formatDateIndonesian(dateStr) {
+            if (!dateStr) return '';
+            if (/[a-zA-Z]/.test(dateStr)) return dateStr;
+            try {
+                const date = new Date(dateStr);
+                if (isNaN(date.getTime())) return dateStr;
+                const day = date.getDate();
+                const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                const monthName = months[date.getMonth()];
+                const year = date.getFullYear();
+                return `${day} ${monthName} ${year}`;
+            } catch (e) {
+                return dateStr;
+            }
+        }
+
+        // Initialize formattedDate for each project using fallback date
+        projects.forEach(p => {
+            p.formattedDate = formatDateIndonesian(p.lastUpdate);
+        });
 
         // Default sorting: Sort by lastUpdate descending (most recent first)
         projects.sort((a, b) => new Date(b.lastUpdate) - new Date(a.lastUpdate));
@@ -268,8 +290,46 @@
             renderProjects(filtered);
         }
 
-        // Initial Render
+        // Fetch updates dynamically from each prototype file
+        async function loadLastUpdatedDates() {
+            let updatedAny = false;
+            const fetchPromises = projects.map(async (project) => {
+                try {
+                    const response = await fetch(project.path);
+                    if (response.ok) {
+                        const htmlText = await response.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(htmlText, 'text/html');
+                        const meta = doc.querySelector('meta[name="last-updated"]');
+                        if (meta && meta.getAttribute('content')) {
+                            const newDateStr = meta.getAttribute('content');
+                            if (project.lastUpdate !== newDateStr) {
+                                project.lastUpdate = newDateStr;
+                                project.formattedDate = formatDateIndonesian(newDateStr);
+                                updatedAny = true;
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.warn(`Gagal memuat meta last-updated dari ${project.path}:`, e);
+                }
+            });
+
+            await Promise.all(fetchPromises);
+
+            if (updatedAny) {
+                // Re-sort projects based on the dynamically loaded dates
+                projects.sort((a, b) => new Date(b.lastUpdate) - new Date(a.lastUpdate));
+                // Render the updated and sorted list
+                const query = document.getElementById('search-input').value.toLowerCase().trim();
+                const filtered = projects.filter(p => p.title.toLowerCase().includes(query));
+                renderProjects(filtered);
+            }
+        }
+
+        // Initial Render & Dynamic Load
         renderProjects(projects);
+        loadLastUpdatedDates();
     </script>
 
 </body>
