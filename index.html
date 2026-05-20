@@ -119,8 +119,8 @@
                     "Add option OTP via email"
                 ],
                 path: "prototypes/migrasi_otp.html",
-                lastUpdate: "2026-05-19",
-                formattedDate: "19 Mei 2026"
+                lastUpdate: "2026-05-20",
+                formattedDate: "20 Mei 2026"
             },
             {
                 title: "Star Sales",
@@ -152,7 +152,7 @@
                 ],
                 path: "prototypes/multi_akses_on_behalf.html",
                 lastUpdate: "2026-03-15",
-                formattedDate: "15 Mar 2026"
+                formattedDate: "15 Maret 2026"
             }
         ];
 
@@ -162,12 +162,26 @@
             // If already in formatted Indonesian date (contains spaces), return as is
             if (dateStr.includes(' ')) return dateStr;
             try {
+                // Parse YYYY-MM-DD manually to prevent timezone shifts
+                const parts = dateStr.split('-');
+                if (parts.length === 3) {
+                    const year = parseInt(parts[0], 10);
+                    const monthIndex = parseInt(parts[1], 10) - 1;
+                    const day = parseInt(parts[2], 10);
+                    if (!isNaN(year) && !isNaN(monthIndex) && !isNaN(day)) {
+                        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                        if (monthIndex >= 0 && monthIndex < 12) {
+                            return `${day} ${months[monthIndex]} ${year}`;
+                        }
+                    }
+                }
+                // Fallback to UTC parsing if manual split fails
                 const date = new Date(dateStr);
                 if (isNaN(date.getTime())) return dateStr;
-                const day = date.getDate();
+                const day = date.getUTCDate();
                 const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-                const monthName = months[date.getMonth()];
-                const year = date.getFullYear();
+                const monthName = months[date.getUTCMonth()];
+                const year = date.getUTCFullYear();
                 return `${day} ${monthName} ${year}`;
             } catch (e) {
                 return dateStr;
