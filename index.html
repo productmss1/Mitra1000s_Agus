@@ -119,7 +119,7 @@
                     "Add option OTP via email"
                 ],
                 path: "prototypes/migrasi_otp.html",
-                lastUpdate: "2026-05-19T16:30:00Z",
+                lastUpdate: "2026-05-19",
                 formattedDate: "19 Mei 2026"
             },
             {
@@ -127,7 +127,7 @@
                 category: "Performa Sales",
                 version: "v1.0",
                 shortDescription: "Halaman performa, perolehan level bintang (Star Leveling), target pencapaian toko aktif, serta sistem leaderboard kompetisi sales CR.",
-                description: "Meningkatkan performa penjualan melalui gamifikasi dan leveling Star Sales. Sistem melacak pencapaian toko aktif berdasarkan akumulasi transaksi dan menampilkan peringkat sales pada leaderboard.",
+                description: "Meningkatkan performa penjualan melalui gamifikasi and leveling Star Sales. Sistem melacak pencapaian toko aktif berdasarkan akumulasi transaksi dan menampilkan peringkat sales pada leaderboard.",
                 brdLink: "https://www.notion.so/BRD-Star-Sales-Placeholder",
                 features: [
                     "Halaman Utama & Detail Target",
@@ -135,7 +135,7 @@
                     "Filter Kategori Toko (Hampir Aktif/Belum)"
                 ],
                 path: "prototypes/star_sales.html",
-                lastUpdate: "2026-05-20T08:30:00Z",
+                lastUpdate: "2026-05-20",
                 formattedDate: "20 Mei 2026"
             },
             {
@@ -151,7 +151,7 @@
                     "Kelola Relasi & Audit Log (Web Admin)"
                 ],
                 path: "prototypes/multi_akses_on_behalf.html",
-                lastUpdate: "2026-03-15T14:20:00Z",
+                lastUpdate: "2026-03-15",
                 formattedDate: "15 Mar 2026"
             }
         ];
@@ -159,7 +159,8 @@
         // Helper to format date as Indonesian format (e.g., "2026-05-20" -> "20 Mei 2026")
         function formatDateIndonesian(dateStr) {
             if (!dateStr) return '';
-            if (/[a-zA-Z]/.test(dateStr)) return dateStr;
+            // If already in formatted Indonesian date (contains spaces), return as is
+            if (dateStr.includes(' ')) return dateStr;
             try {
                 const date = new Date(dateStr);
                 if (isNaN(date.getTime())) return dateStr;
