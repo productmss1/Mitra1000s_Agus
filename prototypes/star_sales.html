@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <title>Star Sales — Final Premium Prototype</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* CSS ASLI v1 - JANGAN DIUBAH DASARNYA */
+    :root {
+      --navy: #0D2461;
+      --blue: #1565C0;
+      --blue2: #1E88E5;
+      --gold: #FFB300;
+      --ok: #4CAF50;
+      --warn: #FF9800;
+      --danger: #F44336;
+      --bg: #F0F4F8;
+      --white: #fff;
+      --gray1: #F5F5F5;
+      --gray2: #E0E0E0;
+      --gray3: #9E9E9E;
+      --gray4: #424242
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      font-family: 'Inter', sans-serif
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a1a4e, #1565C0, #0a1a4e);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      gap: 50px
+    }
+
+    /* PHONE FRAME v1 */
+    .phone {
+      width: 390px;
+      height: 820px;
+      background: var(--bg);
+      border-radius: 40px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 0 10px #111, 0 40px 80px rgba(0, 0, 0, .6);
+      position: relative;
+      flex-shrink: 0
+    }
+
+    .statusbar {
+      background: var(--navy);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 22px;
+      font-size: 12px;
+      font-weight: 600
+    }
+
+    .screens {
+      flex: 1;
+      overflow: hidden;
+      position: relative
+    }
+
+    .screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background: var(--bg);
+      display: none;
+      flex-direction: column
+    }
+
+    .screen.active {
+      display: flex
+    }
+
+    /* HOME COMPONENTS v1 */
+    .hdr {
+      background: linear-gradient(180deg, #0D2461, #0f2d75);
+      padding: 12px 16px
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px
+    }
+
+    .logo-ic {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, #1E88E5, #0D2461);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff
+    }
+
+    .pcard {
+      background: rgba(255, 255, 255, .13);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #fff
+    }
+
+    .av {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .25);
+      border: 2px solid rgba(255, 255, 255, .4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px
+    }
+
+    .saldo-amt {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 2px
+    }
+
+    .ss-card {
+      background: linear-gradient(135deg, #0D2461, #1565C0, #1E88E5);
+      margin: 12px;
+      border-radius: 16px;
+      padding: 16px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(21, 101, 192, .35);
+      color: #fff
+    }
+
+    .ss-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, .2);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      margin-bottom: 8px
+    }
+
+    .ss-stats {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0
+    }
+
+    .ss-stat {
+      text-align: center;
+      flex: 1
+    }
+
+    .ss-stat h4 {
+      font-size: 18px;
+      font-weight: 800
+    }
+
+    .ss-stat p {
+      font-size: 10px;
+      opacity: .7
+    }
+
+    .divv {
+      width: 1px;
+      background: rgba(255, 255, 255, .2);
+      align-self: stretch
+    }
+
+    /* DASHBOARD HERO v1 BASED */
+    .ss-hero {
+      padding: 12px 16px 20px;
+      background: linear-gradient(180deg, #1565C0, #0D2461 130%);
+      color: #fff
+    }
+
+    .hero-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px
+    }
+
+    .back-btn {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      color: #fff;
+      border: none
+    }
+
+    .hero-info-line {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .75);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500
+    }
+
+    .hero-rank-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px
+    }
+
+    .hero-stars-box {
+      display: flex;
+      gap: 3px
+    }
+
+    .hero-stars-box span {
+      font-size: 24px
+    }
+
+    .hero-rank-pill {
+      background: rgba(255, 255, 255, .15);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .25)
+    }
+
+    /* GRID 4 KOLOM v1 BASED (Boxes Style) */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px
+    }
+
+    .hero-box {
+      background: rgba(255, 255, 255, .13);
+      border-radius: 14px;
+      padding: 12px 4px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 95px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .hero-box .l-top {
+      font-size: 9px;
+      font-weight: 700;
+      opacity: .65;
+      margin-bottom: 4px;
+      letter-spacing: .3px
+    }
+
+    .hero-box h4 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 2px
+    }
+
+    .hero-box .l-bot {
+      font-size: 10px;
+      opacity: .6
+    }
+
+    /* ALERT v1 */
+    .alert-bar {
+      background: rgba(255, 140, 0, .15);
+      border-top: 1px solid rgba(255, 140, 0, .3);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600
+    }
+
+    .alert-bar.warn {
+      color: #FFB74D
+    }
+
+    .alert-bar.danger {
+      background: rgba(244, 67, 54, .12);
+      border-top-color: rgba(244, 67, 54, .3);
+      color: #FF8A80
+    }
+
+    /* TABS v1 */
+    .tabs {
+      display: flex;
+      background: var(--white);
+      border-bottom: 2px solid var(--gray2);
+      position: sticky;
+      top: 0;
+      z-index: 15
+    }
+
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray3);
+      cursor: pointer;
+      border-bottom: 2px solid transparent
+    }
+
+    .tab.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue)
+    }
+
+    /* LEADERBOARD v1 STYLE */
+    .podium {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 6px;
+      padding: 20px 14px 10px;
+      background: linear-gradient(180deg, #0D2461, #1565C0)
+    }
+
+    .pod-av {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      border: 3px solid rgba(255, 255, 255, .4);
+      background: rgba(255, 255, 255, .2)
+    }
+
+    .pod-av.s1 {
+      width: 56px;
+      height: 56px;
+      border-color: var(--gold)
+    }
+
+    .pod-base {
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff
+    }
+
+    .pod-base.b1 {
+      height: 60px;
+      background: rgba(255, 179, 0, .4);
+      min-width: 90px
+    }
+
+    .pod-base.b2 {
+      height: 44px;
+      background: rgba(255, 255, 255, .2);
+      min-width: 80px
+    }
+
+    .pod-base.b3 {
+      height: 34px;
+      background: rgba(255, 255, 255, .1);
+      min-width: 70px
+    }
+
+    .lb-item {
+      background: var(--white);
+      margin: 0 10px 6px;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .06)
+    }
+
+    .lb-item.me {
+      background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+      border: 2px solid var(--blue2)
+    }
+
+    .lb-rank {
+      width: 28px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gray3)
+    }
+
+    .lb-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray4)
+    }
+
+    .lb-star-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px
+    }
+
+    .s5-tag {
+      background: #FFF8E1;
+      color: #F57F17
+    }
+
+    .s4-tag {
+      background: #E8EAF6;
+      color: #283593
+    }
+
+    /* SIDEBAR & CARD LAYOUT */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 320px;
+      flex-shrink: 0;
+    }
+
+    .info-card {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(255, 255, 255, .05);
+      padding: 25px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      backdrop-filter: blur(10px);
+    }
+
+    .info-card h3 {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: .8;
+    }
+
+    .info-card p {
+      color: rgba(255, 255, 255, .7);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .flow-btn {
+      background: rgba(168, 85, 247, 0.2) !important;
+      border-color: rgba(168, 85, 247, 0.4) !important;
+      text-align: center !important;
+      font-weight: 700 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .flow-btn:hover {
+      background: rgba(168, 85, 247, 0.35) !important;
+    }
+
+    /* EXTERNAL CONTROLS (Clean Style) */
+    .controls {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(255, 255, 255, .05);
+      padding: 25px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      backdrop-filter: blur(10px)
+    }
+
+    .controls h3 {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: .8
+    }
+
+    .sw-btn {
+      background: rgba(255, 255, 255, .1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .1);
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: all .3s
+    }
+
+    .sw-btn:hover {
+      background: rgba(255, 255, 255, .2)
+    }
+
+    .sw-btn.active {
+      background: var(--blue);
+      border-color: var(--blue2);
+      box-shadow: 0 4px 12px rgba(21, 101, 192, .4)
+    }
+
+    /* Flowchart Overlay Panel */
+    .flow-panel {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: white;
+      z-index: 999;
+      display: none;
+    }
+
+    .canvas-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: grab;
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .canvas-container:active { cursor: grabbing; }
+
+    #flow-area {
+      transform-origin: 0 0;
+      transition: transform 0.1s ease-out;
+      padding: 500px;
+      display: inline-block;
+      white-space: nowrap;
+      position: relative;
+      min-width: 4000px;
+      min-height: 2000px;
+    }
+
+    .node {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 20px;
+      min-width: 160px;
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      font-size: 12px;
+      font-weight: 700;
+      color: #1e293b;
+      position: absolute;
+      z-index: 10;
+      user-select: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .node:hover {
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+      z-index: 20;
+    }
+
+    .n-start { width: 80px; height: 80px; min-width: 80px; border-radius: 50%; background: #dcfce7; border-color: #22c55e; color: #166534; }
+    .n-end { width: 80px; height: 80px; min-width: 80px; border-radius: 50%; background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+    .n-purple { background: #f3e8ff; border-color: #d8b4fe; color: #6b21a8; }
+    .n-gray { background: #f1f5f9; border-color: #cbd5e1; color: #334155; }
+    .n-pink { background: #fce7f3; border-color: #f9a8d4; color: #9d174d; border-style: dashed; font-size: 10px; min-width: 120px; }
+    
+    .n-decision {
+      width: 100px; height: 100px; min-width: 100px; transform: rotate(45deg);
+      background: #ffedd5; border-color: #fdba74; color: #9a3412; padding: 0; border-radius: 10px;
+    }
+    .n-decision:hover { transform: rotate(45deg) scale(1.05); }
+    .n-decision span { transform: rotate(-45deg); text-align: center; display: block; width: 100%; }
+
+    .svg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
+    .connection-path { fill: none; stroke: #94a3b8; stroke-width: 2; }
+    
+    .connection-label {
+      position: absolute; background: white; padding: 3px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 800; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      pointer-events: none; transform: translate(-50%, -50%); z-index: 15; border: 1px solid #e2e8f0;
+    }
+    .label-yes { color: #059669; border-color: #10b981; }
+    .label-no { color: #dc2626; border-color: #ef4444; }
+
+    .flow-ctrl-panel { position: absolute; top: 25px; right: 25px; display: flex; gap: 10px; z-index: 100; }
+    .btn-ctrl {
+      width: 45px; height: 45px; background: white; border-radius: 12px; border: 1px solid #e2e8f0;
+      display: flex; align-items: center; justify-content: center; color: #64748b;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: all 0.2s; cursor: pointer;
+    }
+    .btn-ctrl:hover { background: #f8fafc; color: #4f46e5; transform: translateY(-2px); }
+
+    .legend {
+      position: absolute; bottom: 30px; left: 30px; background: white; padding: 15px;
+      border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 100; font-size: 11px; pointer-events: none;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, .8);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 350px;
+      overflow: hidden;
+      animation: pop .3s cubic-bezier(.17, .67, .83, .67)
+    }
+
+    .modal-header {
+      padding: 20px;
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+      font-weight: 800
+    }
+
+    .modal-body {
+      padding: 20px
+    }
+
+    .prize-table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .prize-table td,
+    .prize-table th {
+      padding: 12px 8px;
+      font-size: 12px;
+      border-bottom: 1px solid #f0f0f0
+    }
+
+    .close-modal {
+      width: 100%;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      margin-top: 15px;
+      font-weight: 800;
+      cursor: pointer
+    }
+  /* STORE TAB STYLES (RESTORED) */
+    .search-row { padding: 12px 14px; background: var(--bg) }
+    .search-box { background: var(--white); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 4px rgba(0, 0, 0, .05) }
+    .search-box input { border: none; outline: none; font-size: 13px; width: 100%; color: var(--gray4); background: transparent }
+    .store-card { background: var(--white); margin: 0 12px 10px; border-radius: 18px; padding: 14px; position: relative; box-shadow: 0 1px 6px rgba(0, 0, 0, .05); display: flex; flex-direction: column; gap: 10px }
+    .store-top { display: flex; align-items: center; gap: 12px }
+    .store-ic { width: 40px; height: 40px; background: #E8F5E9; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px }
+    .store-ic.warn { background: #FFF3E0 }
+    .store-info { flex: 1 }
+    .store-info h5 { font-size: 14px; font-weight: 800; color: var(--gray4) margin-bottom: 2px }
+    .store-info p { font-size: 11px; color: var(--gray3) }
+    .status-flag { background: #E8F5E9; color: #2E7D32; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 6px; display: flex; align-items: center; gap: 4px }
+    .status-flag.active-flag { border: 1px solid #C8E6C9 }
+    .amt-text { font-size: 12px; font-weight: 700; color: var(--gray3); text-align: right }
+    .progress-container { margin-top: 4px }
+    .progress-bg { height: 6px; background: var(--gray1); border-radius: 10px; overflow: hidden }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #FF9800, #F57C00); border-radius: 10px }
+    .show-more { text-align: center; padding: 10px; color: var(--blue); font-size: 12px; font-weight: 800; cursor: pointer }
+
+    /* LEADERBOARD REFINEMENT (CLEAN) */
+    .podium { display: flex; justify-content: center; align-items: flex-end; gap: 12px; padding: 35px 14px 15px; background: linear-gradient(180deg, #0D2461, #1565C0) }
+    .pod-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 95px }
+    .pod-icon { font-size: 28px; margin-bottom: 4px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)) }
+    .pod-name { font-size: 12px; font-weight: 800; color: #fff; margin-top: 5px }
+    .pod-ta { font-size: 11px; color: rgba(255, 255, 255, .8); margin-bottom: 8px }
+    .pod-base { border-radius: 10px 10px 0 0; width: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px; color: rgba(255, 255, 255, .8) }
+    .pod-base.b1 { height: 75px; background: rgba(255, 255, 255, .25); color: #fff }
+    .pod-base.b2 { height: 55px; background: rgba(255, 255, 255, .15) }
+    .pod-base.b3 { height: 45px; background: rgba(255, 255, 255, .1) }
+
+    .lb-item { background: var(--white); margin: 0 12px 10px; border-radius: 18px; padding: 16px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, .04) }
+    .lb-rank { font-size: 18px; font-weight: 900; color: #FFB300; width: 35px }
+    .lb-av-small { width: 42px; height: 42px; border-radius: 50%; background: #F5F5F5; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--gray4) }
+    .lb-info { flex: 1 }
+    .lb-info h5 { font-size: 14px; font-weight: 800; color: var(--gray4); margin-bottom: 2px }
+    .lb-info p { font-size: 12px; color: var(--gray3) }
+    .star-tag { background: #FFF9E1; color: #FF8F00; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; display: flex; align-items: center; gap: 4px; border: 1px solid #FFE082 }
+  </style>
+</head>
+
+<body>
+
+  <div class="phone">
+    <div class="statusbar"><span>15:38</span><span>⚡ 30%</span></div>
+    <div class="screens">
+      <!-- HOME SCREEN (Identical v1) -->
+      <div class="screen active" id="s-home">
+        <div class="hdr">
+          <div class="logo">
+            <div class="logo-ic">NN</div>
+            <p style="color:#fff;font-size:14px;font-weight:700">Sales 1000s</p>
+          </div>
+          <div class="pcard">
+            <div class="av">👤</div>
+            <div style="flex:1">
+              <p style="font-size:11px;opacity:.7">T50044</p>
+              <p style="font-size:15px;font-weight:700">AFIF CHOIRUL ANAM</p>
+              <div class="saldo-amt">Rp15,133,662</div>
+            </div>
+          </div>
+        </div>
+        <div class="ss-card" onclick="goToDashboard()">
+          <div class="ss-tag">⭐ STAR SALES · APRIL 2026</div>
+          <p style="font-size:17px;font-weight:800;margin-bottom:4px">Posisi Kamu Saat Ini</p>
+          <div class="ss-stats">
+            <div class="ss-stat">
+              <p>Peringkat</p>
+              <h4>#31</h4>
+            </div>
+            <div class="divv"></div>
+            <div class="ss-stat">
+              <p>Total Toko Aktif</p>
+              <h4>22</h4>
+            </div>
+            <div class="divv"></div>
+            <div class="ss-stat">
+              <p>Level</p>
+              <h4>Star 4</h4>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-size:18px">⭐⭐⭐⭐<span style="filter:grayscale(1);opacity:.4">⭐</span></div>
+            <span style="font-size:12px;font-weight:800">Lihat Detail →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD SCREEN (v1 Style Tokens + Image Layout) -->
+      <div class="screen" id="s-dashboard">
+        <div class="ss-hero">
+          <div class="hero-top-row">
+            <button class="back-btn" onclick="goToHome()">←</button>
+            <span class="ss-tag" id="status-label" style="margin-bottom:0">STATUS: BERJALAN</span>
+          </div>
+
+          <div class="hero-info-line">📅 April 2026 · Update: 27 Apr 09:00 WIB</div>
+          <div class="hero-rank-line">
+            <div class="hero-stars-box" id="dash-stars"></div>
+            <div class="hero-rank-pill" id="dash-rank-pill">Star 4 · #31 dari 127</div>
+          </div>
+
+          <!-- GRID 4 KOLOM v1 PRECISE LOOK -->
+          <div class="hero-grid">
+            <div class="hero-box">
+              <div class="l-top">TOTAL TA</div>
+              <h4 id="m-ta">22</h4>
+              <div class="l-bot">toko</div>
+            </div>
+            <div class="hero-box">
+              <div class="l-top">PERINGKAT</div>
+              <h4 id="m-rank">#31</h4>
+              <div class="l-bot">CR</div>
+            </div>
+            <div class="hero-box">
+              <div class="l-top">BRAND</div>
+              <h4 id="m-brand">5</h4>
+              <div class="l-bot">distinct</div>
+            </div>
+            <div class="hero-box">
+              <div class="l-top">SKU</div>
+              <h4 id="m-sku">34</h4>
+              <div class="l-bot">distinct</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="alert-area"></div>
+
+        <div class="tabs">
+          <div class="tab active" id="t-toko-btn" onclick="switchTab('toko')">Toko</div>
+          <div class="tab" id="tab-lb-btn" onclick="switchTab('lb')">Leaderboard</div>
+        </div>
+
+        <div id="cont-toko" style="flex:1;overflow-y:auto;padding-bottom:100px">
+          <!-- SEARCH -->
+          <div class="search-row">
+            <div class="search-box">
+              <span>🔍</span>
+              <input type="text" placeholder="Cari toko...">
+            </div>
+          </div>
+
+          <!-- TOKO AKTIF -->
+          <div style="padding:16px 14px 10px;font-size:13px;font-weight:800;color:var(--gray4);display:flex;align-items:center;gap:6px">
+            <span style="color:var(--ok)">✅</span> TOKO AKTIF (22)
+          </div>
+
+          <div class="store-card">
+            <div class="store-top">
+              <div class="store-ic">🏢</div>
+              <div class="store-info">
+                <h5>Toko Sumber Rejeki</h5>
+                <p>Palmerah, Jakarta Barat</p>
+              </div>
+              <div style="text-align:right">
+                <div class="status-flag active-flag">✅ Aktif</div>
+                <div class="amt-text" style="margin-top:4px">Rp 1.250.000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-card">
+            <div class="store-top">
+              <div class="store-ic">🏢</div>
+              <div class="store-info">
+                <h5>CV Mandiri Jaya</h5>
+                <p>Kemanggisan, Jakarta Barat</p>
+              </div>
+              <div style="text-align:right">
+                <div class="status-flag active-flag">✅ Aktif</div>
+                <div class="amt-text" style="margin-top:4px">Rp 1.800.000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="store-card">
+            <div class="store-top">
+              <div class="store-ic">🏢</div>
+              <div class="store-info">
+                <h5>UD Makmur Sentosa</h5>
+                <p>Tambora, Jakarta Barat</p>
+              </div>
+              <div style="text-align:right">
+                <div class="status-flag active-flag">✅ Aktif</div>
+                <div class="amt-text" style="margin-top:4px">Rp 1.100.000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="show-more">+ 19 toko aktif lainnya</div>
+
+          <!-- HAMPIR AKTIF -->
+          <div style="padding:20px 14px 10px;font-size:13px;font-weight:800;color:var(--gray4);display:flex;align-items:center;gap:6px">
+            <span>⏳</span> HAMPIR AKTIF (5)
+          </div>
+
+          <div class="store-card">
+            <div class="store-top">
+              <div class="store-ic warn">🏪</div>
+              <div class="store-info">
+                <h5>Toko Mawar Indah</h5>
+                <p style="color:var(--gray4);font-weight:700">Rp 920.000</p>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:11px;font-weight:800;color:#F57C00">Kurang Rp 80.000</div>
+              </div>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bg"><div class="progress-fill" style="width:92%"></div></div>
+            </div>
+          </div>
+
+          <div class="store-card">
+            <div class="store-top">
+              <div class="store-ic warn">🏪</div>
+              <div class="store-info">
+                <h5>UD Cahaya Terang</h5>
+                <p style="color:var(--gray4);font-weight:700">Rp 850.000</p>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:11px;font-weight:800;color:#F57C00">Kurang Rp 150.000</div>
+              </div>
+            </div>
+            <div class="progress-container">
+              <div class="progress-bg"><div class="progress-fill" style="width:85%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="cont-lb" style="flex:1;overflow-y:auto;padding-bottom:100px;display:none">
+          <div
+            style="padding:12px 16px;background:#fff;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--gray1)">
+            <select
+              style="background:var(--gray1);border:none;padding:8px 12px;border-radius:10px;font-size:11px;font-weight:700;outline:none">
+              <option>📅 April 2026</option>
+              <option>📅 Maret 2026</option>
+            </select>
+            <button style="color:var(--blue);font-size:12px;font-weight:800;background:none;border:none;cursor:pointer"
+              onclick="openPrize()">🎁 Info Hadiah</button>
+          </div>
+
+          <div class="podium">
+            <!-- Rank 2 -->
+            <div class="pod-item">
+              <div class="pod-icon">🥈</div>
+              <div class="pod-name">Budi S.</div>
+              <div class="pod-ta">45 TA</div>
+              <div class="pod-base b2">2</div>
+            </div>
+            <!-- Rank 1 -->
+            <div class="pod-item">
+              <div class="pod-icon" style="font-size:36px;margin-bottom:0">👑</div>
+              <div class="pod-name" style="font-size:14px">Ahmad R.</div>
+              <div class="pod-ta">52 TA</div>
+              <div class="pod-base b1">1</div>
+            </div>
+            <!-- Rank 3 -->
+            <div class="pod-item">
+              <div class="pod-icon">🥉</div>
+              <div class="pod-name">Siti R.</div>
+              <div class="pod-ta">41 TA</div>
+              <div class="pod-base b3">3</div>
+            </div>
+          </div>
+
+          <div id="lb-dynamic-list" style="margin-top:10px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIZE MODAL -->
+    <div class="modal-overlay" id="prize-modal">
+      <div class="modal">
+        <div class="modal-header">DAFTAR PENERIMA HADIAH</div>
+        <div class="modal-body">
+          <table class="prize-table">
+            <tr style="background:#f9f9f9;text-align:left">
+              <th>RANK</th>
+              <th>NAMA</th>
+              <th>HADIAH</th>
+            </tr>
+            <tr>
+              <td><b>1</b></td>
+              <td>Ahmad R.</td>
+              <td>Trip Bali (All-in)</td>
+            </tr>
+            <tr>
+              <td><b>2</b></td>
+              <td>Budi S.</td>
+              <td>Voucher Belanja Rp 1jt</td>
+            </tr>
+            <tr>
+              <td><b>...</b></td>
+              <td>...</td>
+              <td>...</td>
+            </tr>
+          </table>
+          <button class="close-modal" onclick="closePrize()">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR CONTAINER -->
+  <div class="sidebar">
+    <!-- PROJECT INFO CARD -->
+    <div class="info-card">
+      <h3>Info Project</h3>
+      <p>Meningkatkan performa penjualan melalui gamifikasi dan leveling Star Sales. Sistem melacak pencapaian toko aktif berdasarkan akumulasi transaksi dan menampilkan peringkat sales pada leaderboard.</p>
+      <button class="sw-btn flow-btn" onclick="openFlowchart()">
+        <i class="fas fa-sitemap"></i> Flowchart
+      </button>
+    </div>
+
+    <!-- EXTERNAL CONTROLS (v6) -->
+    <div class="controls">
+      <h3>Skenario Case</h3>
+      <button class="sw-btn active" onclick="setCase('star4', event)"><b>#31 (Star 4)</b><br>Lihat Top 20% + Kamu + 3 Bawah</button>
+      <button class="sw-btn" onclick="setCase('star5', event)"><b>#15 (Star 5)</b><br>Lihat Full Daftar Star 5 (1-25)</button>
+      <button class="sw-btn" onclick="setCase('star1', event)"><b>#112 (Star 1)</b><br>Peringatan Penalti TA &lt; 15</button>
+      <button class="sw-btn" onclick="setCase('done', event)"><b>STATUS SELESAI</b><br>Tampilan periode berakhir</button>
+      <div style="height:5px"></div>
+      <button class="sw-btn" style="background:rgba(255,255,255,.15)" onclick="goToHome()">🏠 Ke Beranda Internal</button>
+      <button class="sw-btn" style="background:rgba(21, 101, 192, 0.4); border-color: var(--blue2)" onclick="goToDashboardProto()">💻 Ke Dashboard Hub (Utama)</button>
+    </div>
+  </div>
+
+  <!-- FLOWCHART PANEL OVERLAY -->
+  <div class="flow-panel">
+      <button onclick="closeFlowchart()" class="absolute top-6 left-6 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-md border border-gray-200 hover:bg-gray-50 z-[250] font-bold flex items-center gap-2" style="position: absolute; top: 24px; left: 24px;"><i class="fas fa-arrow-left"></i> Kembali ke Prototype</button>
+      <div class="flow-ctrl-panel">
+          <button class="btn-ctrl" onclick="zoomView(1.2)" title="Zoom In"><i class="fas fa-search-plus"></i></button>
+          <button class="btn-ctrl" onclick="zoomView(0.8)" title="Zoom Out"><i class="fas fa-search-minus"></i></button>
+          <button class="btn-ctrl" onclick="resetZoom()" title="Reset View"><i class="fas fa-expand"></i></button>
+      </div>
+
+      <div class="legend space-y-2">
+          <p class="font-extrabold text-gray-800 mb-2 border-b pb-1" style="font-weight: 800; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">Keterangan Node</p>
+          <div class="flex items-center gap-2" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 11px; color: #475569;">
+              <div class="w-3 h-3 rounded-full bg-green-200 border border-green-500" style="width: 12px; height: 12px; border-radius: 50%; background: #dcfce7; border: 1px solid #22c55e;"></div> Titik Mulai
+          </div>
+          <div class="flex items-center gap-2" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 11px; color: #475569;">
+              <div class="w-3 h-3 rounded bg-purple-100 border border-purple-400" style="width: 12px; height: 12px; border-radius: 2px; background: #f3e8ff; border: 1px solid #d8b4fe;"></div> Aksi User
+          </div>
+          <div class="flex items-center gap-2" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 11px; color: #475569;">
+              <div class="w-3 h-3 rounded bg-slate-100 border border-slate-400" style="width: 12px; height: 12px; border-radius: 2px; background: #f1f5f9; border: 1px solid #cbd5e1;"></div> Proses Sistem
+          </div>
+          <div class="flex items-center gap-2" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 11px; color: #475569;">
+              <div class="w-3 h-3 rotate-45 bg-orange-100 border border-orange-400" style="width: 12px; height: 12px; transform: rotate(45deg); background: #ffedd5; border: 1px solid #fdba74;"></div> Keputusan
+          </div>
+          <div class="flex items-center gap-2" style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 11px; color: #475569;">
+              <div class="w-3 h-3 rounded-full bg-red-200 border border-red-500" style="width: 12px; height: 12px; border-radius: 50%; background: #fee2e2; border: 1px solid #ef4444;"></div> Titik Akhir
+          </div>
+      </div>
+
+      <div class="canvas-container" id="canvas-container">
+          <div id="flow-area">
+              <svg class="svg-layer" id="svg-layer">
+                  <defs>
+                      <marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="6" markerHeight="6" orient="auto">
+                          <path d="M 0 -5 L 10 0 L 0 5 Z" fill="#94a3b8" />
+                      </marker>
+                  </defs>
+              </svg>
+
+              <!-- FLOWCHART NODES -->
+              <div id="f-start" class="node n-start" style="left: 600px; top: 600px;">Buka Star Sales</div>
+              <div id="f-fetch-data" class="node n-gray" style="left: 800px; top: 600px;">Tarik Data Transaksi<br>Sales & Toko CR</div>
+              <div id="f-calc-ta" class="node n-gray" style="left: 1050px; top: 600px;">Kalkulasi Akumulasi Belanja<br>Toko (Min Rp 1 Juta)</div>
+              <div id="f-is-active" class="node n-decision" style="left: 1300px; top: 590px;">
+                  <span>Toko Aktif<br>(>= 1jt)?</span>
+              </div>
+              <div id="f-mark-active" class="node n-purple" style="left: 1550px; top: 500px;">Toko Masuk Kategori<br>"Toko Aktif" (TA)</div>
+              <div id="f-mark-almost" class="node n-purple" style="left: 1550px; top: 700px;">Toko Masuk Kategori<br>"Hampir Aktif"</div>
+              <div id="f-calc-level" class="node n-gray" style="left: 1800px; top: 600px;">Hitung Star Level<br>(Star 1 - 5) & Points</div>
+              <div id="f-check-penalti" class="node n-decision" style="left: 2050px; top: 590px;">
+                  <span>Toko Aktif<br>&lt; 15 Toko?</span>
+              </div>
+              <div id="f-show-warning" class="node n-gray" style="left: 2300px; top: 500px;">Tampilkan Alert<br>Peringatan Penalti</div>
+              <div id="f-show-normal" class="node n-gray" style="left: 2300px; top: 700px;">Tampilkan Progres<br>& Leaderboard Normal</div>
+              <div id="f-end" class="node n-end" style="left: 2550px; top: 600px;">Selesai</div>
+              
+              <div class="node n-pink" style="left: 1570px; top: 800px;">
+                  <i class="fas fa-info-circle mr-1"></i> Hampir Aktif jika belanja<br>Rp 500rb - < Rp 1jt
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    const scenarios = {
+      star4: { ta: 22, rank: 31, star: 4, label: 'STATUS: BERJALAN', alert: { type: 'warn', text: 'Tambah 3 TA lagi untuk reward penuh Star 4' } },
+      star5: { ta: 32, rank: 15, star: 5, label: 'STATUS: BERJALAN', alert: null },
+      star1: { ta: 12, rank: 112, star: 1, label: 'STATUS: BERJALAN', alert: { type: 'danger', text: '⚠️ Terancam penalti (TA < 15). Kejar 3 TA lagi!' } },
+      done: { ta: 28, rank: 24, star: 4, label: 'STATUS: SELESAI', alert: null }
+    };
+    let currentCase = 'star4';
+    function goToDashboardProto() {
+      if (window.location.pathname.includes('/prototypes/')) {
+        window.location.href = '../index.html';
+      } else {
+        window.location.href = '../../index.html';
+      }
+    }
+    function goToDashboard() { document.getElementById('s-home').classList.remove('active'); document.getElementById('s-dashboard').classList.add('active'); }
+    function goToHome() { document.getElementById('s-dashboard').classList.remove('active'); document.getElementById('s-home').classList.add('active'); }
+    function switchTab(t) {
+      document.getElementById('t-toko-btn').classList.toggle('active', t === 'toko');
+      document.getElementById('tab-lb-btn').classList.toggle('active', t === 'lb');
+      document.getElementById('cont-toko').style.display = t === 'toko' ? 'block' : 'none';
+      document.getElementById('cont-lb').style.display = t === 'lb' ? 'block' : 'none';
+      if (t === 'lb') renderLeaderboard();
+    }
+    function setCase(k, e) {
+      currentCase = k; const c = scenarios[k];
+      document.querySelectorAll('.controls .sw-btn').forEach(b => b.classList.remove('active'));
+      if (e) e.currentTarget.classList.add('active');
+      document.getElementById('dash-rank-pill').innerText = `Star ${c.star} · #${c.rank} dari 127`;
+      document.getElementById('status-label').innerText = c.label;
+      document.getElementById('m-ta').innerText = c.ta;
+      document.getElementById('m-rank').innerText = '#' + c.rank;
+      const dStars = document.getElementById('dash-stars');
+      dStars.innerHTML = '';
+      for (let i = 1; i <= 5; i++) dStars.innerHTML += '<span style="font-size:24px;' + (i > c.star ? 'filter:grayscale(1);opacity:.3' : '') + '">⭐</span>';
+      const alertArea = document.getElementById('alert-area');
+      alertArea.innerHTML = '';
+      if (c.alert) alertArea.innerHTML = `<div class="alert-bar ${c.alert.type}"><span>${c.alert.type === 'warn' ? '⚠️' : '🚫'}</span><p>${c.alert.text}</p></div>`;
+      renderLeaderboard(); goToDashboard();
+    }
+    function renderLeaderboard() {
+      const list = document.getElementById('lb-dynamic-list'); list.innerHTML = '';
+      const names = ["Doni Prabowo", "Rina Oktavia", "Eko Prasetyo", "Maya Sari", "Andi Wijaya"];
+      const myRank = scenarios[currentCase].rank; const top20 = 25;
+      for (let i = 4; i <= top20; i++) {
+        const n = names[i % 5] + " " + i;
+        list.innerHTML += createLBItem(i, n, 38 - Math.floor(i/2), 5, (i === myRank));
+      }
+      if (myRank > top20) {
+        list.innerHTML += `<div style="text-align:center;padding:12px;color:var(--gray3);letter-spacing:6px">···</div>`;
+        list.innerHTML += createLBItem(myRank, `Afif Choirul (Kamu)`, scenarios[currentCase].ta, scenarios[currentCase].star, true);
+        for (let i = 1; i <= 3; i++) if (myRank + i <= 127) list.innerHTML += createLBItem(myRank + i, `Sales CR ${myRank + i}`, scenarios[currentCase].ta - i, 4, false);
+      }
+    }
+    function createLBItem(rank, name, ta, star, isMe) {
+      return `<div class="lb-item ${isMe ? 'me' : ''}">
+      <div class="lb-rank">#${rank}</div>
+      <div class="lb-info">
+        <h5>${name}</h5>
+        <p>${ta} TA</p>
+      </div>
+      <div class="star-tag">⭐ Star ${star}</div>
+    </div>`;
+    }
+    function openPrize() { document.getElementById('prize-modal').style.display = 'flex'; }
+    function closePrize() { document.getElementById('prize-modal').style.display = 'none'; }
+    setCase('star4');
+
+    // FLOWCHART JS INTERACTION CODE
+    function openFlowchart() {
+      document.querySelector('.flow-panel').style.display = 'block';
+      setTimeout(updateConnections, 100);
+    }
+
+    function closeFlowchart() {
+      document.querySelector('.flow-panel').style.display = 'none';
+    }
+
+    let scale = 1;
+    const area = document.getElementById('flow-area');
+    const container = document.getElementById('canvas-container');
+    const svgLayer = document.getElementById('svg-layer');
+
+    const connections = [
+      { from: 'f-start', to: 'f-fetch-data', fromEdge: 'right', toEdge: 'left' },
+      { from: 'f-fetch-data', to: 'f-calc-ta', fromEdge: 'right', toEdge: 'left' },
+      { from: 'f-calc-ta', to: 'f-is-active', fromEdge: 'right', toEdge: 'left' },
+      { from: 'f-is-active', to: 'f-mark-active', fromEdge: 'top', toEdge: 'left', label: 'YA (>= 1jt)', labelClass: 'label-yes' },
+      { from: 'f-is-active', to: 'f-mark-almost', fromEdge: 'bottom', toEdge: 'left', label: 'TIDAK (< 1jt)', labelClass: 'label-no' },
+      { from: 'f-mark-active', to: 'f-calc-level', fromEdge: 'right', toEdge: 'top' },
+      { from: 'f-mark-almost', to: 'f-calc-level', fromEdge: 'right', toEdge: 'bottom' },
+      { from: 'f-calc-level', to: 'f-check-penalti', fromEdge: 'right', toEdge: 'left' },
+      { from: 'f-check-penalti', to: 'f-show-warning', fromEdge: 'top', toEdge: 'left', label: 'YA', labelClass: 'label-no' },
+      { from: 'f-check-penalti', to: 'f-show-normal', fromEdge: 'bottom', toEdge: 'left', label: 'TIDAK', labelClass: 'label-yes' },
+      { from: 'f-show-warning', to: 'f-end', fromEdge: 'right', toEdge: 'top' },
+      { from: 'f-show-normal', to: 'f-end', fromEdge: 'right', toEdge: 'bottom' }
+    ];
+
+    function getEdgePoint(el, edge) {
+      const isDiamond = el.classList.contains('n-decision');
+      const isCircle = el.classList.contains('n-start') || el.classList.contains('n-end');
+      
+      const x = el.offsetLeft; const y = el.offsetTop;
+      const w = el.offsetWidth; const h = el.offsetHeight;
+      const cx = x + w / 2; const cy = y + h / 2;
+
+      if (isDiamond) {
+        const offset = (w / 2) * Math.SQRT2;
+        switch (edge) {
+          case 'top': return { x: cx, y: cy - offset };
+          case 'bottom': return { x: cx, y: cy + offset };
+          case 'left': return { x: cx - offset, y: cy };
+          case 'right': return { x: cx + offset, y: cy };
+        }
+      } else if (isCircle) {
+         const r = w / 2;
+         switch (edge) {
+          case 'top': return { x: cx, y: cy - r };
+          case 'bottom': return { x: cx, y: cy + r };
+          case 'left': return { x: cx - r, y: cy };
+          case 'right': return { x: cx + r, y: cy };
+        }
+      } else {
+        switch (edge) {
+          case 'top': return { x: cx, y: y };
+          case 'bottom': return { x: cx, y: y + h };
+          case 'left': return { x: x, y: cy };
+          case 'right': return { x: x + w, y: cy };
+        }
+      }
+      return { x: cx, y: cy };
+    }
+
+    function updateConnections() {
+      while (svgLayer.firstChild) {
+        if (svgLayer.firstChild.tagName === 'defs') {
+          if (svgLayer.children.length === 1) break;
+          let defs = svgLayer.firstChild;
+          svgLayer.innerHTML = '';
+          svgLayer.appendChild(defs);
+          break;
+        }
+        svgLayer.removeChild(svgLayer.firstChild);
+      }
+      document.querySelectorAll('.connection-label').forEach(l => l.remove());
+
+      connections.forEach(conn => {
+        const fromEl = document.getElementById(conn.from);
+        const toEl = document.getElementById(conn.to);
+        if (!fromEl || !toEl) return;
+
+        const start = getEdgePoint(fromEl, conn.fromEdge);
+        const end = getEdgePoint(toEl, conn.toEdge);
+
+        const points = [start];
+        const offset = 25;
+
+        let p1 = { ...start };
+        if (conn.fromEdge === 'top') p1.y -= offset;
+        else if (conn.fromEdge === 'bottom') p1.y += offset;
+        else if (conn.fromEdge === 'left') p1.x -= offset;
+        else if (conn.fromEdge === 'right') p1.x += offset;
+        points.push(p1);
+
+        let p2 = { ...end };
+        if (conn.toEdge === 'top') p2.y -= offset;
+        else if (conn.toEdge === 'bottom') p2.y += offset;
+        else if (conn.toEdge === 'left') p2.x -= offset;
+        else if (conn.toEdge === 'right') p2.x += offset;
+
+        if (conn.fromEdge === 'left' || conn.fromEdge === 'right') {
+          if (conn.toEdge === 'top' || conn.toEdge === 'bottom') {
+            points.push({ x: p2.x, y: p1.y });
+          } else {
+            const midX = (p1.x + p2.x) / 2;
+            points.push({ x: midX, y: p1.y });
+            points.push({ x: midX, y: p2.y });
+          }
+        } else {
+          if (conn.toEdge === 'left' || conn.toEdge === 'right') {
+            points.push({ x: p1.x, y: p2.y });
+          } else {
+            const midY = (p1.y + p2.y) / 2;
+            points.push({ x: p1.x, y: midY });
+            points.push({ x: p2.x, y: midY });
+          }
+        }
+
+        points.push(p2);
+        points.push(end);
+
+        let d = `M ${points[0].x} ${points[0].y}`;
+        for (let i = 1; i < points.length; i++) {
+          d += ` L ${points[i].x} ${points[i].y}`;
+        }
+
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", d);
+        path.setAttribute("class", "connection-path");
+        path.setAttribute("marker-end", "url(#arrow)");
+        svgLayer.appendChild(path);
+
+        if (conn.label) {
+          const label = document.createElement('div');
+          label.className = `connection-label ${conn.labelClass || ''}`;
+          label.innerText = conn.label;
+          
+          let labelX, labelY;
+          if (points.length === 6) { 
+            labelX = (points[2].x + points[3].x) / 2;
+            labelY = (points[2].y + points[3].y) / 2;
+          } else { 
+            labelX = points[2].x;
+            labelY = points[2].y;
+          }
+          
+          label.style.left = `${labelX}px`;
+          label.style.top = `${labelY}px`;
+          area.appendChild(label);
+        }
+      });
+    }
+
+    function zoomView(factor) {
+      scale *= factor;
+      scale = Math.min(Math.max(0.1, scale), 3);
+      area.style.transform = `scale(${scale})`;
+    }
+
+    function resetZoom() {
+      scale = 1;
+      area.style.transform = `scale(1)`;
+      container.scrollLeft = 200; 
+      container.scrollTop = 200;
+    }
+
+    let isPanning = false;
+    let startX, startY, scrollLeft, scrollTop;
+
+    container.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.btn-ctrl') || e.target.closest('button')) return; 
+      isPanning = true;
+      startX = e.pageX - container.offsetLeft;
+      startY = e.pageY - container.offsetTop;
+      scrollLeft = container.scrollLeft;
+      scrollTop = container.scrollTop;
+      container.style.cursor = 'grabbing';
+    });
+
+    container.addEventListener('mouseleave', () => { isPanning = false; container.style.cursor = 'grab'; });
+    container.addEventListener('mouseup', () => { isPanning = false; container.style.cursor = 'grab'; });
+    container.addEventListener('mousemove', (e) => {
+      if (!isPanning) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const y = e.pageY - container.offsetTop;
+      container.scrollLeft = scrollLeft - (x - startX) * 2;
+      container.scrollTop = scrollTop - (y - startY) * 2;
+    });
+
+    container.addEventListener('wheel', (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        if (e.deltaY > 0) zoomView(0.9);
+        else zoomView(1.1);
+      }
+    });
+
+    setTimeout(() => {
+      container.scrollLeft = 300;
+      container.scrollTop = 300;
+    }, 100);
+  </script>
+</body>
+
+</html>
