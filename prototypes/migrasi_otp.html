@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <title>Migrasi OTP — Interactive Premium Prototype</title>
+    <meta name="last-updated" content="2026-05-20">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -428,6 +429,10 @@
             <button class="sw-btn" style="background:rgba(245, 158, 11, 0.2); border-color: rgba(245, 158, 11, 0.4)" onclick="resetDebug()">
                 🔄 Reset Limit WA (24 Jam)
             </button>
+            <div style="height:5px"></div>
+            <button class="sw-btn" style="background:rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4)" onclick="triggerMaxLimitWA()">
+                🚨 Habiskan Limit WA (Set 5x)
+            </button>
             
             <div style="height:5px"></div>
             <button class="sw-btn" style="background:rgba(255,255,255,.15)" onclick="showScreen('screen-dashboard')">
@@ -604,11 +609,80 @@
             showScreen('screen-trigger');
         }
 
+
         function resetDebug() {
             waLimitCount = 0;
             isWaSuspended = false;
             document.getElementById('debug-count').innerText = `${waLimitCount} / 5x`;
+            const limitInfo = document.getElementById('wa-limit-info');
+            if (limitInfo) {
+                limitInfo.classList.add('hidden');
+                limitInfo.classList.remove('bg-red-50', 'border-red-200', 'text-red-800');
+                limitInfo.classList.add('bg-amber-50', 'border-amber-200', 'text-amber-800');
+            }
+            const timerEl = document.getElementById('timer-text');
+            if (timerEl) {
+                timerEl.classList.remove('text-gray-400');
+                timerEl.classList.add(activeFlow === 'sales_incentive' ? 'text-[#2563EB]' : 'text-[#0B1F8F]');
+            }
             alert("Limit WA telah di-reset! (Simulasi 24 Jam berlalu)");
+        }
+
+        function triggerMaxLimitWA() {
+            waLimitCount = 5;
+            isWaSuspended = true;
+            document.getElementById('debug-count').innerText = `${waLimitCount} / 5x`;
+            
+            const futureDate = new Date();
+            futureDate.setHours(futureDate.getHours() + 24);
+            const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+            const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+            const dayName = days[futureDate.getDay()];
+            const dateNum = futureDate.getDate();
+            const monthName = months[futureDate.getMonth()];
+            const yearNum = futureDate.getFullYear();
+            const hours = futureDate.getHours().toString().padStart(2, '0');
+            const mins = futureDate.getMinutes().toString().padStart(2, '0');
+            const resendTimeStr = `${dayName}, ${dateNum} ${monthName} ${yearNum} pukul ${hours}:${mins}`;
+
+            // Update wa-error-msg on Method Selection screen
+            const waError = document.getElementById('wa-error-msg');
+            const btnWa = document.getElementById('btn-wa');
+            if (waError && btnWa) {
+                waError.innerHTML = `<i class="fas fa-exclamation-circle mr-1"></i> Batas maksimal pengiriman OTP via WhatsApp telah tercapai. Anda baru dapat mencoba kembali pada <b>${resendTimeStr}</b> atau gunakan metode Email.`;
+                btnWa.disabled = true;
+                btnWa.classList.add('opacity-50', 'cursor-not-allowed', 'border-gray-300', 'bg-gray-100', 'text-gray-400');
+                btnWa.classList.remove('border-green-500', 'bg-green-50', 'text-green-700', 'hover:bg-green-100');
+                waError.classList.remove('hidden');
+            }
+
+            // Only update PIN screen warnings if currentMethod is WA
+            if (currentMethod === 'wa') {
+                // Update wa-limit-info on PIN screen
+                const limitInfo = document.getElementById('wa-limit-info');
+                const limitText = document.getElementById('wa-limit-text');
+                if (limitInfo && limitText) {
+                    limitInfo.classList.remove('hidden');
+                    limitInfo.classList.remove('bg-amber-50', 'border-amber-200', 'text-amber-800');
+                    limitInfo.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
+                    limitText.innerHTML = `Batas pengiriman OTP via WhatsApp adalah 5x sehari. <b>Sisa limit Anda: 0 kali. WhatsApp Anda ditangguhkan selama 24 jam. Anda baru dapat meminta OTP WhatsApp kembali pada ${resendTimeStr}.</b>`;
+                }
+
+                const timerEl = document.getElementById('timer-text');
+                if (timerEl) {
+                    timerEl.style.cursor = "not-allowed";
+                    timerEl.classList.remove('text-[#0B1F8F]', 'text-[#2563EB]');
+                    timerEl.classList.add('text-gray-400');
+                    timerEl.onclick = null;
+                }
+            } else {
+                // Ensure warning banner is hidden if we are on Email screen
+                const limitInfo = document.getElementById('wa-limit-info');
+                if (limitInfo) {
+                    limitInfo.classList.add('hidden');
+                }
+            }
+            alert("Limit WA disimulasikan habis! (Request ke-5 terkirim)");
         }
 
         function goToMethodSelection() {
@@ -625,6 +699,21 @@
                 btnWa.disabled = true;
                 btnWa.classList.add('opacity-50', 'cursor-not-allowed', 'border-gray-300', 'bg-gray-100', 'text-gray-400');
                 btnWa.classList.remove('border-green-500', 'bg-green-50', 'text-green-700', 'hover:bg-green-100');
+                
+                // Calculate release date/time H+24h
+                const futureDate = new Date();
+                futureDate.setHours(futureDate.getHours() + 24);
+                const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+                const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                const dayName = days[futureDate.getDay()];
+                const dateNum = futureDate.getDate();
+                const monthName = months[futureDate.getMonth()];
+                const yearNum = futureDate.getFullYear();
+                const hours = futureDate.getHours().toString().padStart(2, '0');
+                const mins = futureDate.getMinutes().toString().padStart(2, '0');
+                const resendTimeStr = `${dayName}, ${dateNum} ${monthName} ${yearNum} pukul ${hours}:${mins}`;
+
+                waError.innerHTML = `<i class="fas fa-exclamation-circle mr-1"></i> Batas maksimal pengiriman OTP via WhatsApp telah tercapai. Anda baru dapat mencoba kembali pada <b>${resendTimeStr}</b> atau gunakan metode Email.`;
                 waError.classList.remove('hidden');
             } else {
                 btnWa.disabled = false;
@@ -637,10 +726,16 @@
         }
 
         function requestOTP(method) {
+            if (method === 'wa' && isWaSuspended) {
+                alert("WhatsApp ditangguhkan selama 24 jam karena limit harian tercapai. Silakan pilih metode Email.");
+                goToMethodSelection();
+                return;
+            }
             currentMethod = method;
             let phone = document.getElementById('trigger-input').value;
             let themeClass = activeFlow === 'sales_incentive' ? 'text-blue-600' : 'text-gray-800';
             
+            let resendTimeStr = '';
             if (method === 'wa') {
                 waLimitCount++;
                 document.getElementById('debug-count').innerText = `${waLimitCount} / 5x`;
@@ -657,7 +752,28 @@
                 if (limitInfo && limitText) {
                     limitInfo.classList.remove('hidden');
                     const remaining = Math.max(0, 5 - waLimitCount);
-                    limitText.innerHTML = `Batas pengiriman OTP via WhatsApp adalah 5x sehari. Sisa limit Anda: <b>${remaining} kali</b>.`;
+                    if (remaining === 0) {
+                        limitInfo.classList.remove('bg-amber-50', 'border-amber-200', 'text-amber-800');
+                        limitInfo.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
+                        
+                        const futureDate = new Date();
+                        futureDate.setHours(futureDate.getHours() + 24);
+                        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+                        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                        const dayName = days[futureDate.getDay()];
+                        const dateNum = futureDate.getDate();
+                        const monthName = months[futureDate.getMonth()];
+                        const yearNum = futureDate.getFullYear();
+                        const hours = futureDate.getHours().toString().padStart(2, '0');
+                        const mins = futureDate.getMinutes().toString().padStart(2, '0');
+                        resendTimeStr = `${dayName}, ${dateNum} ${monthName} ${yearNum} pukul ${hours}:${mins}`;
+
+                        limitText.innerHTML = `Batas pengiriman OTP via WhatsApp adalah 5x sehari. <b>Sisa limit Anda: 0 kali. WhatsApp Anda ditangguhkan selama 24 jam. Anda baru dapat meminta OTP WhatsApp kembali pada ${resendTimeStr}.</b>`;
+                    } else {
+                        limitInfo.classList.remove('bg-red-50', 'border-red-200', 'text-red-800');
+                        limitInfo.classList.add('bg-amber-50', 'border-amber-200', 'text-amber-800');
+                        limitText.innerHTML = `Batas pengiriman OTP via WhatsApp adalah 5x sehari. Sisa limit Anda: <b>${remaining} kali</b>.`;
+                    }
                 }
 
                 document.querySelectorAll('.node').forEach(n => {
@@ -698,6 +814,8 @@
             timerEl.innerText = `Kirim Ulang (05)`;
             timerEl.style.cursor = "default";
             timerEl.onclick = null;
+            timerEl.classList.remove('text-gray-400');
+            timerEl.classList.add(activeFlow === 'sales_incentive' ? 'text-[#2563EB]' : 'text-[#0B1F8F]');
             
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
@@ -707,9 +825,19 @@
                 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    timerEl.innerText = `Kirim Ulang`;
-                    timerEl.style.cursor = "pointer";
-                    timerEl.onclick = function() { requestOTP(currentMethod); };
+                    if (currentMethod === 'wa' && waLimitCount >= 5) {
+                        timerEl.innerText = `Kirim Ulang`;
+                        timerEl.style.cursor = "not-allowed";
+                        timerEl.classList.remove('text-[#0B1F8F]', 'text-[#2563EB]');
+                        timerEl.classList.add('text-gray-400');
+                        timerEl.onclick = null;
+                    } else {
+                        timerEl.innerText = `Kirim Ulang`;
+                        timerEl.style.cursor = "pointer";
+                        timerEl.classList.remove('text-gray-400');
+                        timerEl.classList.add(activeFlow === 'sales_incentive' ? 'text-[#2563EB]' : 'text-[#0B1F8F]');
+                        timerEl.onclick = function() { requestOTP(currentMethod); };
+                    }
                     
                     btnChange.disabled = false;
                     document.getElementById('f-timer-end').classList.replace('n-decision', 'n-purple');
