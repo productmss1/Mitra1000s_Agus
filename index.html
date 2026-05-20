@@ -2,938 +2,276 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-  <title>Star Sales BNN — Final Premium Prototype</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    /* CSS ASLI v1 - JANGAN DIUBAH DASARNYA */
-    :root {
-      --navy: #0D2461;
-      --blue: #1565C0;
-      --blue2: #1E88E5;
-      --gold: #FFB300;
-      --ok: #4CAF50;
-      --warn: #FF9800;
-      --danger: #F44336;
-      --bg: #F0F4F8;
-      --white: #fff;
-      --gray1: #F5F5F5;
-      --gray2: #E0E0E0;
-      --gray3: #9E9E9E;
-      --gray4: #424242
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-      font-family: 'Inter', sans-serif
-    }
-
-    body {
-      background: linear-gradient(135deg, #0a1a4e, #1565C0, #0a1a4e);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      gap: 50px
-    }
-
-    /* PHONE FRAME v1 */
-    .phone {
-      width: 390px;
-      height: 820px;
-      background: var(--bg);
-      border-radius: 40px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 0 10px #111, 0 40px 80px rgba(0, 0, 0, .6);
-      position: relative;
-      flex-shrink: 0
-    }
-
-    .statusbar {
-      background: var(--navy);
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 22px;
-      font-size: 12px;
-      font-weight: 600
-    }
-
-    .screens {
-      flex: 1;
-      overflow: hidden;
-      position: relative
-    }
-
-    .screen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      background: var(--bg);
-      display: none;
-      flex-direction: column
-    }
-
-    .screen.active {
-      display: flex
-    }
-
-    /* HOME COMPONENTS v1 */
-    .hdr {
-      background: linear-gradient(180deg, #0D2461, #0f2d75);
-      padding: 12px 16px
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 12px
-    }
-
-    .logo-ic {
-      width: 30px;
-      height: 30px;
-      background: linear-gradient(135deg, #1E88E5, #0D2461);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 900;
-      color: #fff
-    }
-
-    .pcard {
-      background: rgba(255, 255, 255, .13);
-      border-radius: 12px;
-      padding: 12px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      color: #fff
-    }
-
-    .av {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .25);
-      border: 2px solid rgba(255, 255, 255, .4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px
-    }
-
-    .saldo-amt {
-      color: #fff;
-      font-size: 22px;
-      font-weight: 800;
-      margin-top: 2px
-    }
-
-    .ss-card {
-      background: linear-gradient(135deg, #0D2461, #1565C0, #1E88E5);
-      margin: 12px;
-      border-radius: 16px;
-      padding: 16px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(21, 101, 192, .35);
-      color: #fff
-    }
-
-    .ss-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      background: rgba(255, 255, 255, .2);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 10px;
-      margin-bottom: 8px
-    }
-
-    .ss-stats {
-      display: flex;
-      gap: 12px;
-      margin: 12px 0
-    }
-
-    .ss-stat {
-      text-align: center;
-      flex: 1
-    }
-
-    .ss-stat h4 {
-      font-size: 18px;
-      font-weight: 800
-    }
-
-    .ss-stat p {
-      font-size: 10px;
-      opacity: .7
-    }
-
-    .divv {
-      width: 1px;
-      background: rgba(255, 255, 255, .2);
-      align-self: stretch
-    }
-
-    /* DASHBOARD HERO v1 BASED */
-    .ss-hero {
-      padding: 12px 16px 20px;
-      background: linear-gradient(180deg, #1565C0, #0D2461 130%);
-      color: #fff
-    }
-
-    .hero-top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px
-    }
-
-    .back-btn {
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, .15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      color: #fff;
-      border: none
-    }
-
-    .hero-info-line {
-      font-size: 11px;
-      color: rgba(255, 255, 255, .75);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 500
-    }
-
-    .hero-rank-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px
-    }
-
-    .hero-stars-box {
-      display: flex;
-      gap: 3px
-    }
-
-    .hero-stars-box span {
-      font-size: 24px
-    }
-
-    .hero-rank-pill {
-      background: rgba(255, 255, 255, .15);
-      border-radius: 20px;
-      padding: 5px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, .25)
-    }
-
-    /* GRID 4 KOLOM v1 BASED (Boxes Style) */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px
-    }
-
-    .hero-box {
-      background: rgba(255, 255, 255, .13);
-      border-radius: 14px;
-      padding: 12px 4px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 95px;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, .05)
-    }
-
-    .hero-box .l-top {
-      font-size: 9px;
-      font-weight: 700;
-      opacity: .65;
-      margin-bottom: 4px;
-      letter-spacing: .3px
-    }
-
-    .hero-box h4 {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 2px
-    }
-
-    .hero-box .l-bot {
-      font-size: 10px;
-      opacity: .6
-    }
-
-    /* ALERT v1 */
-    .alert-bar {
-      background: rgba(255, 140, 0, .15);
-      border-top: 1px solid rgba(255, 140, 0, .3);
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 600
-    }
-
-    .alert-bar.warn {
-      color: #FFB74D
-    }
-
-    .alert-bar.danger {
-      background: rgba(244, 67, 54, .12);
-      border-top-color: rgba(244, 67, 54, .3);
-      color: #FF8A80
-    }
-
-    /* TABS v1 */
-    .tabs {
-      display: flex;
-      background: var(--white);
-      border-bottom: 2px solid var(--gray2);
-      position: sticky;
-      top: 0;
-      z-index: 15
-    }
-
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 14px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gray3);
-      cursor: pointer;
-      border-bottom: 2px solid transparent
-    }
-
-    .tab.active {
-      color: var(--blue);
-      border-bottom-color: var(--blue)
-    }
-
-    /* LEADERBOARD v1 STYLE */
-    .podium {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 6px;
-      padding: 20px 14px 10px;
-      background: linear-gradient(180deg, #0D2461, #1565C0)
-    }
-
-    .pod-av {
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      border: 3px solid rgba(255, 255, 255, .4);
-      background: rgba(255, 255, 255, .2)
-    }
-
-    .pod-av.s1 {
-      width: 56px;
-      height: 56px;
-      border-color: var(--gold)
-    }
-
-    .pod-base {
-      border-radius: 10px 10px 0 0;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 18px;
-      color: #fff
-    }
-
-    .pod-base.b1 {
-      height: 60px;
-      background: rgba(255, 179, 0, .4);
-      min-width: 90px
-    }
-
-    .pod-base.b2 {
-      height: 44px;
-      background: rgba(255, 255, 255, .2);
-      min-width: 80px
-    }
-
-    .pod-base.b3 {
-      height: 34px;
-      background: rgba(255, 255, 255, .1);
-      min-width: 70px
-    }
-
-    .lb-item {
-      background: var(--white);
-      margin: 0 10px 6px;
-      border-radius: 12px;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, .06)
-    }
-
-    .lb-item.me {
-      background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
-      border: 2px solid var(--blue2)
-    }
-
-    .lb-rank {
-      width: 28px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--gray3)
-    }
-
-    .lb-name {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--gray4)
-    }
-
-    .lb-star-tag {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px
-    }
-
-    .s5-tag {
-      background: #FFF8E1;
-      color: #F57F17
-    }
-
-    .s4-tag {
-      background: #E8EAF6;
-      color: #283593
-    }
-
-    /* EXTERNAL CONTROLS (Clean Style) */
-    .controls {
-      width: 320px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      background: rgba(255, 255, 255, .05);
-      padding: 25px;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, .1);
-      backdrop-filter: blur(10px)
-    }
-
-    .controls h3 {
-      color: #fff;
-      font-size: 15px;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      opacity: .8
-    }
-
-    .sw-btn {
-      background: rgba(255, 255, 255, .1);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, .1);
-      padding: 14px;
-      border-radius: 14px;
-      font-size: 12px;
-      cursor: pointer;
-      text-align: left;
-      transition: all .3s
-    }
-
-    .sw-btn:hover {
-      background: rgba(255, 255, 255, .2)
-    }
-
-    .sw-btn.active {
-      background: var(--blue);
-      border-color: var(--blue2);
-      box-shadow: 0 4px 12px rgba(21, 101, 192, .4)
-    }
-
-    /* MODAL */
-    .modal-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, .8);
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px
-    }
-
-    .modal {
-      background: #fff;
-      border-radius: 28px;
-      width: 100%;
-      max-width: 350px;
-      overflow: hidden;
-      animation: pop .3s cubic-bezier(.17, .67, .83, .67)
-    }
-
-    .modal-header {
-      padding: 20px;
-      background: var(--navy);
-      color: #fff;
-      text-align: center;
-      font-weight: 800
-    }
-
-    .modal-body {
-      padding: 20px
-    }
-
-    .prize-table {
-      width: 100%;
-      border-collapse: collapse
-    }
-
-    .prize-table td,
-    .prize-table th {
-      padding: 12px 8px;
-      font-size: 12px;
-      border-bottom: 1px solid #f0f0f0
-    }
-
-    .close-modal {
-      width: 100%;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 14px;
-      margin-top: 15px;
-      font-weight: 800;
-      cursor: pointer
-    }
-  /* STORE TAB STYLES (RESTORED) */
-    .search-row { padding: 12px 14px; background: var(--bg) }
-    .search-box { background: var(--white); border-radius: 14px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 4px rgba(0, 0, 0, .05) }
-    .search-box input { border: none; outline: none; font-size: 13px; width: 100%; color: var(--gray4); background: transparent }
-    .store-card { background: var(--white); margin: 0 12px 10px; border-radius: 18px; padding: 14px; position: relative; box-shadow: 0 1px 6px rgba(0, 0, 0, .05); display: flex; flex-direction: column; gap: 10px }
-    .store-top { display: flex; align-items: center; gap: 12px }
-    .store-ic { width: 40px; height: 40px; background: #E8F5E9; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px }
-    .store-ic.warn { background: #FFF3E0 }
-    .store-info { flex: 1 }
-    .store-info h5 { font-size: 14px; font-weight: 800; color: var(--gray4) }
-    .store-info p { font-size: 11px; color: var(--gray3) }
-    .status-flag { background: #E8F5E9; color: #2E7D32; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 6px; display: flex; align-items: center; gap: 4px }
-    .status-flag.active-flag { border: 1px solid #C8E6C9 }
-    .amt-text { font-size: 12px; font-weight: 700; color: var(--gray3); text-align: right }
-    .progress-container { margin-top: 4px }
-    .progress-bg { height: 6px; background: var(--gray1); border-radius: 10px; overflow: hidden }
-    .progress-fill { height: 100%; background: linear-gradient(90deg, #FF9800, #F57C00); border-radius: 10px }
-    .show-more { text-align: center; padding: 10px; color: var(--blue); font-size: 12px; font-weight: 800; cursor: pointer }
-
-    /* LEADERBOARD REFINEMENT (CLEAN) */
-    .podium { display: flex; justify-content: center; align-items: flex-end; gap: 12px; padding: 35px 14px 15px; background: linear-gradient(180deg, #0D2461, #1565C0) }
-    .pod-item { display: flex; flex-direction: column; align-items: center; text-align: center; width: 95px }
-    .pod-icon { font-size: 28px; margin-bottom: 4px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)) }
-    .pod-name { font-size: 12px; font-weight: 800; color: #fff; margin-top: 5px }
-    .pod-ta { font-size: 11px; color: rgba(255, 255, 255, .8); margin-bottom: 8px }
-    .pod-base { border-radius: 10px 10px 0 0; width: 100%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 22px; color: rgba(255, 255, 255, .8) }
-    .pod-base.b1 { height: 75px; background: rgba(255, 255, 255, .25); color: #fff }
-    .pod-base.b2 { height: 55px; background: rgba(255, 255, 255, .15) }
-    .pod-base.b3 { height: 45px; background: rgba(255, 255, 255, .1) }
-
-    .lb-item { background: var(--white); margin: 0 12px 10px; border-radius: 18px; padding: 16px; display: flex; align-items: center; gap: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, .04) }
-    .lb-rank { font-size: 18px; font-weight: 900; color: #FFB300; width: 35px }
-    .lb-av-small { width: 42px; height: 42px; border-radius: 50%; background: #F5F5F5; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--gray4) }
-    .lb-info { flex: 1 }
-    .lb-info h5 { font-size: 14px; font-weight: 800; color: var(--gray4); margin-bottom: 2px }
-    .lb-info p { font-size: 12px; color: var(--gray3) }
-    .star-tag { background: #FFF9E1; color: #FF8F00; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; display: flex; align-items: center; gap: 4px; border: 1px solid #FFE082 }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitra1000s - Prototype Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0B1F8F 0%, #1565C0 100%);
+        }
+
+        /* Custom Scrollbar for Cards */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.3);
+            border-radius: 20px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(156, 163, 175, 0.5);
+        }
+    </style>
 </head>
 
-<body>
+<body class="min-h-screen flex flex-col">
 
-  <div class="phone">
-    <div class="statusbar"><span>15:38</span><span>⚡ 30%</span></div>
-    <div class="screens">
-      <!-- HOME SCREEN (Identical v1) -->
-      <div class="screen active" id="s-home">
-        <div class="hdr">
-          <div class="logo">
-            <div class="logo-ic">NN</div>
-            <p style="color:#fff;font-size:14px;font-weight:700">Sales 1000s</p>
-          </div>
-          <div class="pcard">
-            <div class="av">👤</div>
-            <div style="flex:1">
-              <p style="font-size:11px;opacity:.7">T50044</p>
-              <p style="font-size:15px;font-weight:700">AFIF CHOIRUL ANAM</p>
-              <div class="saldo-amt">Rp15,133,662</div>
+    <!-- Header Section -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-8 md:py-12 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Mitra1000s <span
+                            class="text-[#f36c01]">Hub</span></h1>
+                    <p class="text-sm text-blue-100 opacity-90">Pool Utama Prototype Performa & Migrasi Fitur</p>
+                </div>
             </div>
-          </div>
+            <div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-xs font-semibold text-blue-100">
+                <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Mitra1000s Local Workspace
+            </div>
         </div>
-        <div class="ss-card" onclick="goToDashboard()">
-          <div class="ss-tag">⭐ STAR SALES · APRIL 2026</div>
-          <p style="font-size:17px;font-weight:800;margin-bottom:4px">Posisi Kamu Saat Ini</p>
-          <div class="ss-stats">
-            <div class="ss-stat">
-              <p>Peringkat</p>
-              <h4>#31</h4>
-            </div>
-            <div class="divv"></div>
-            <div class="ss-stat">
-              <p>Total Toko Aktif</p>
-              <h4>22</h4>
-            </div>
-            <div class="divv"></div>
-            <div class="ss-stat">
-              <p>Level</p>
-              <h4>Star 4</h4>
-            </div>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div style="font-size:18px">⭐⭐⭐⭐<span style="filter:grayscale(1);opacity:.4">⭐</span></div>
-            <span style="font-size:12px;font-weight:800">Lihat Detail →</span>
-          </div>
-        </div>
-      </div>
+    </header>
 
-      <!-- DASHBOARD SCREEN (v1 Style Tokens + Image Layout) -->
-      <div class="screen" id="s-dashboard">
-        <div class="ss-hero">
-          <div class="hero-top-row">
-            <button class="back-btn" onclick="goToHome()">←</button>
-            <span class="ss-tag" id="status-label" style="margin-bottom:0">STATUS: BERJALAN</span>
-          </div>
+    <!-- Main Content -->
+    <main class="flex-1 max-w-6xl mx-auto px-4 py-10 w-full">
 
-          <div class="hero-info-line">📅 April 2026 · Update: 27 Apr 09:00 WIB</div>
-          <div class="hero-rank-line">
-            <div class="hero-stars-box" id="dash-stars"></div>
-            <div class="hero-rank-pill" id="dash-rank-pill">Star 4 · #31 dari 127</div>
-          </div>
-
-          <!-- GRID 4 KOLOM v1 PRECISE LOOK -->
-          <div class="hero-grid">
-            <div class="hero-box">
-              <div class="l-top">TOTAL TA</div>
-              <h4 id="m-ta">22</h4>
-              <div class="l-bot">toko</div>
+        <!-- Filter & Search Controls -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div>
+                <h2 class="text-xl font-bold text-slate-800">Daftar Prototype Fitur</h2>
+                <p class="text-sm text-slate-500">Gunakan kolom pencarian untuk menemukan simulasi prototype yang
+                    relevan.</p>
             </div>
-            <div class="hero-box">
-              <div class="l-top">PERINGKAT</div>
-              <h4 id="m-rank">#31</h4>
-              <div class="l-bot">CR</div>
+            <div class="relative w-full md:w-80">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" id="search-input" oninput="filterProjects()" placeholder="Cari judul project..."
+                    class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0B1F8F] focus:border-transparent shadow-sm transition">
             </div>
-            <div class="hero-box">
-              <div class="l-top">BRAND</div>
-              <h4 id="m-brand">5</h4>
-              <div class="l-bot">distinct</div>
-            </div>
-            <div class="hero-box">
-              <div class="l-top">SKU</div>
-              <h4 id="m-sku">34</h4>
-              <div class="l-bot">distinct</div>
-            </div>
-          </div>
         </div>
 
-        <div id="alert-area"></div>
-
-        <div class="tabs">
-          <div class="tab active" id="t-toko-btn" onclick="switchTab('toko')">Toko</div>
-          <div class="tab" id="tab-lb-btn" onclick="switchTab('lb')">Leaderboard</div>
+        <!-- Project Grid (Rendered via JS) -->
+        <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+            <!-- Dynamic cards go here -->
         </div>
 
-        <div id="cont-toko" style="flex:1;overflow-y:auto;padding-bottom:100px">
-          <!-- SEARCH -->
-          <div class="search-row">
-            <div class="search-box">
-              <span>🔍</span>
-              <input type="text" placeholder="Cari toko...">
+        <!-- Empty State -->
+        <div id="empty-state"
+            class="hidden text-center py-16 bg-white border border-dashed border-slate-200 rounded-2xl">
+            <div class="text-slate-300 text-5xl mb-4">
+                <i class="fa-solid fa-folder-open"></i>
             </div>
-          </div>
-
-          <!-- TOKO AKTIF -->
-          <div style="padding:16px 14px 10px;font-size:13px;font-weight:800;color:var(--gray4);display:flex;align-items:center;gap:6px">
-            <span style="color:var(--ok)">✅</span> TOKO AKTIF (22)
-          </div>
-
-          <div class="store-card">
-            <div class="store-top">
-              <div class="store-ic">🏢</div>
-              <div class="store-info">
-                <h5>Toko Sumber Rejeki</h5>
-                <p>Palmerah, Jakarta Barat</p>
-              </div>
-              <div style="text-align:right">
-                <div class="status-flag active-flag">✅ Aktif</div>
-                <div class="amt-text" style="margin-top:4px">Rp 1.250.000</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="store-card">
-            <div class="store-top">
-              <div class="store-ic">🏢</div>
-              <div class="store-info">
-                <h5>CV Mandiri Jaya</h5>
-                <p>Kemanggisan, Jakarta Barat</p>
-              </div>
-              <div style="text-align:right">
-                <div class="status-flag active-flag">✅ Aktif</div>
-                <div class="amt-text" style="margin-top:4px">Rp 1.800.000</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="store-card">
-            <div class="store-top">
-              <div class="store-ic">🏢</div>
-              <div class="store-info">
-                <h5>UD Makmur Sentosa</h5>
-                <p>Tambora, Jakarta Barat</p>
-              </div>
-              <div style="text-align:right">
-                <div class="status-flag active-flag">✅ Aktif</div>
-                <div class="amt-text" style="margin-top:4px">Rp 1.100.000</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="show-more">+ 19 toko aktif lainnya</div>
-
-          <!-- HAMPIR AKTIF -->
-          <div style="padding:20px 14px 10px;font-size:13px;font-weight:800;color:var(--gray4);display:flex;align-items:center;gap:6px">
-            <span>⏳</span> HAMPIR AKTIF (5)
-          </div>
-
-          <div class="store-card">
-            <div class="store-top">
-              <div class="store-ic warn">🏪</div>
-              <div class="store-info">
-                <h5>Toko Mawar Indah</h5>
-                <p style="color:var(--gray4);font-weight:700">Rp 920.000</p>
-              </div>
-              <div style="text-align:right">
-                <div style="font-size:11px;font-weight:800;color:#F57C00">Kurang Rp 80.000</div>
-              </div>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bg"><div class="progress-fill" style="width:92%"></div></div>
-            </div>
-          </div>
-
-          <div class="store-card">
-            <div class="store-top">
-              <div class="store-ic warn">🏪</div>
-              <div class="store-info">
-                <h5>UD Cahaya Terang</h5>
-                <p style="color:var(--gray4);font-weight:700">Rp 850.000</p>
-              </div>
-              <div style="text-align:right">
-                <div style="font-size:11px;font-weight:800;color:#F57C00">Kurang Rp 150.000</div>
-              </div>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bg"><div class="progress-fill" style="width:85%"></div></div>
-            </div>
-          </div>
+            <h3 class="text-lg font-bold text-slate-700">Project tidak ditemukan</h3>
+            <p class="text-sm text-slate-400 mt-1">Coba masukkan kata kunci pencarian yang berbeda.</p>
         </div>
 
-        <div id="cont-lb" style="flex:1;overflow-y:auto;padding-bottom:100px;display:none">
-          <div
-            style="padding:12px 16px;background:#fff;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--gray1)">
-            <select
-              style="background:var(--gray1);border:none;padding:8px 12px;border-radius:10px;font-size:11px;font-weight:700;outline:none">
-              <option>📅 April 2026</option>
-              <option>📅 Maret 2026</option>
-            </select>
-            <button style="color:var(--blue);font-size:12px;font-weight:800;background:none;border:none;cursor:pointer"
-              onclick="openPrize()">🎁 Info Hadiah</button>
-          </div>
-          
-          <div class="podium">
-            <!-- Rank 2 -->
-            <div class="pod-item">
-              <div class="pod-icon">🥈</div>
-              <div class="pod-name">Budi S.</div>
-              <div class="pod-ta">45 TA</div>
-              <div class="pod-base b2">2</div>
-            </div>
-            <!-- Rank 1 -->
-            <div class="pod-item">
-              <div class="pod-icon" style="font-size:36px;margin-bottom:0">👑</div>
-              <div class="pod-name" style="font-size:14px">Ahmad R.</div>
-              <div class="pod-ta">52 TA</div>
-              <div class="pod-base b1">1</div>
-            </div>
-            <!-- Rank 3 -->
-            <div class="pod-item">
-              <div class="pod-icon">🥉</div>
-              <div class="pod-name">Siti R.</div>
-              <div class="pod-ta">41 TA</div>
-              <div class="pod-base b3">3</div>
-            </div>
-          </div>
+    </main>
 
-          <div id="lb-dynamic-list" style="margin-top:10px"></div>
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 text-xs">
+            <p>&copy; 2026 Mitra1000s. Created by Agus M.</p>
+            <p class="flex items-center gap-1"><i class="fa-solid fa-code"></i> Developed for Internal Testing &
+                Validation</p>
         </div>
-      </div>
-    </div>
+    </footer>
 
-    <!-- PRIZE MODAL -->
-    <div class="modal-overlay" id="prize-modal">
-      <div class="modal">
-        <div class="modal-header">DAFTAR PENERIMA HADIAH</div>
-        <div class="modal-body">
-          <table class="prize-table">
-            <tr style="background:#f9f9f9;text-align:left">
-              <th>RANK</th>
-              <th>NAMA</th>
-              <th>HADIAH</th>
-            </tr>
-            <tr>
-              <td><b>1</b></td>
-              <td>Ahmad R.</td>
-              <td>Trip Bali (All-in)</td>
-            </tr>
-            <tr>
-              <td><b>2</b></td>
-              <td>Budi S.</td>
-              <td>Voucher Belanja Rp 1jt</td>
-            </tr>
-            <tr>
-              <td><b>...</b></td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-          </table>
-          <button class="close-modal" onclick="closePrize()">Tutup</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script>
+        // Project list with timestamps
+        const projects = [
+            {
+                title: "Migrasi OTP (Nusa to Mekari Qontak) & OTP Improvement",
+                category: "Migrasi & Keamanan",
+                version: "v2.0",
+                shortDescription: "Simulasi migrasi pengiriman OTP dari Nusa ke Mekari Qontak dengan limitasi harian WhatsApp (5x limit) dan otomatis fallback ke metode Email.",
+                description: "Migrasi vendor pengiriman OTP dari Nusa ke Mekari Qontak untuk efisiensi biaya. Sistem ini mengamankan pengiriman OTP dengan membatasi spam (limit 5x/hari) dan menyediakan fallback otomatis ke Email.",
+                brdLink: "https://www.notion.so/BRD-Migrasi-OTP-Mekari-Qontak-Placeholder",
+                features: [
+                    "Touch Points: Daftar, Lupa Sandi, Sales Insentif",
+                    "Limit WhatsApp 5x/hari",
+                    "Add option OTP via email"
+                ],
+                path: "prototypes/migrasi_otp.html",
+                lastUpdate: "2026-05-19T16:30:00Z",
+                formattedDate: "19 Mei 2026, 16:30"
+            },
+            {
+                title: "Star Sales",
+                category: "Performa Sales",
+                version: "v1.0",
+                shortDescription: "Halaman performa, perolehan level bintang (Star Leveling), target pencapaian toko aktif, serta sistem leaderboard kompetisi sales CR.",
+                description: "Meningkatkan performa penjualan melalui gamifikasi dan leveling Star Sales. Sistem melacak pencapaian toko aktif berdasarkan akumulasi transaksi dan menampilkan peringkat sales pada leaderboard.",
+                brdLink: "https://www.notion.so/BRD-Star-Sales-Placeholder",
+                features: [
+                    "Halaman Utama & Detail Target",
+                    "Leaderboard Podium & Riwayat Reward",
+                    "Filter Kategori Toko (Hampir Aktif/Belum)"
+                ],
+                path: "prototypes/star_sales.html",
+                lastUpdate: "2026-05-20T08:30:00Z",
+                formattedDate: "20 Mei 2026, 08:30"
+            },
+            {
+                title: "Multi-Akses (On Behalf)",
+                category: "User Access",
+                version: "v1.0",
+                shortDescription: "Halaman navigasi pemilihan toko pusat dan toko cabang, pemetaan relasi akses toko merchant, serta notifikasi akses on-behalf.",
+                description: "Memungkinkan sales melakukan transaksi atas nama merchant (on-behalf) dan beralih multi-toko (pusat/cabang) dengan aman. Admin dapat mengelola relasi toko pusat-cabang dan melihat riwayat audit log aktivitas pemetaan akses.",
+                brdLink: "https://www.notion.so/BRD-Multi-Akses-On-Behalf-Placeholder",
+                features: [
+                    "Screen Pemilihan Toko Pusat/Cabang",
+                    "Pop-up Konfirmasi Akses & Notification Panel",
+                    "Kelola Relasi & Audit Log (Web Admin)"
+                ],
+                path: "prototypes/multi_akses_on_behalf.html",
+                lastUpdate: "2026-03-15T14:20:00Z",
+                formattedDate: "15 Mar 2026, 14:20"
+            }
+        ];
 
-  <!-- EXTERNAL CONTROLS (v6) -->
-  <div class="controls">
-    <h3>Skenario Case</h3>
-    <button class="sw-btn active" onclick="setCase('star4', event)"><b>#31 (Star 4)</b><br>Lihat Top 20% + Kamu + 3
-      Bawah</button>
-    <button class="sw-btn" onclick="setCase('star5', event)"><b>#15 (Star 5)</b><br>Lihat Full Daftar Star 5
-      (1-25)</button>
-    <button class="sw-btn" onclick="setCase('star1', event)"><b>#112 (Star 1)</b><br>Peringatan Penalti TA < 15</button>
-        <button class="sw-btn" onclick="setCase('done', event)"><b>STATUS SELESAI</b><br>Tampilan periode
-          berakhir</button>
-        <div style="height:10px"></div>
-        <button class="sw-btn" style="background:rgba(255,255,255,.15)" onclick="goToHome()">🏠 Ke Beranda
-          Utama</button>
-  </div>
+        // Default sorting: Sort by lastUpdate descending (most recent first)
+        projects.sort((a, b) => new Date(b.lastUpdate) - new Date(a.lastUpdate));
 
-  <script>
-    const scenarios = {
-      star4: { ta: 22, rank: 31, star: 4, label: 'STATUS: BERJALAN', alert: { type: 'warn', text: 'Tambah 3 TA lagi untuk reward penuh Star 4' } },
-      star5: { ta: 32, rank: 15, star: 5, label: 'STATUS: BERJALAN', alert: null },
-      star1: { ta: 12, rank: 112, star: 1, label: 'STATUS: BERJALAN', alert: { type: 'danger', text: '⚠️ Terancam penalti (TA < 15). Kejar 3 TA lagi!' } },
-      done: { ta: 28, rank: 24, star: 4, label: 'STATUS: SELESAI', alert: null }
-    };
-    let currentCase = 'star4';
-    function goToDashboard() { document.getElementById('s-home').classList.remove('active'); document.getElementById('s-dashboard').classList.add('active'); }
-    function goToHome() { document.getElementById('s-dashboard').classList.remove('active'); document.getElementById('s-home').classList.add('active'); }
-    function switchTab(t) {
-      document.getElementById('t-toko-btn').classList.toggle('active', t === 'toko');
-      document.getElementById('tab-lb-btn').classList.toggle('active', t === 'lb');
-      document.getElementById('cont-toko').style.display = t === 'toko' ? 'block' : 'none';
-      document.getElementById('cont-lb').style.display = t === 'lb' ? 'block' : 'none';
-      if (t === 'lb') renderLeaderboard();
-    }
-    function setCase(k, e) {
-      currentCase = k; const c = scenarios[k];
-      document.querySelectorAll('.controls .sw-btn').forEach(b => b.classList.remove('active'));
-      if (e) e.currentTarget.classList.add('active');
-      document.getElementById('dash-rank-pill').innerText = `Star ${c.star} · #${c.rank} dari 127`;
-      document.getElementById('status-label').innerText = c.label;
-      document.getElementById('m-ta').innerText = c.ta;
-      document.getElementById('m-rank').innerText = '#' + c.rank;
-      const dStars = document.getElementById('dash-stars');
-      dStars.innerHTML = '';
-      for (let i = 1; i <= 5; i++) dStars.innerHTML += '<span style="font-size:24px;' + (i > c.star ? 'filter:grayscale(1);opacity:.3' : '') + '">⭐</span>';
-      const alertArea = document.getElementById('alert-area');
-      alertArea.innerHTML = '';
-      if (c.alert) alertArea.innerHTML = `<div class="alert-bar ${c.alert.type}"><span>${c.alert.type === 'warn' ? '⚠️' : '🚫'}</span><p>${c.alert.text}</p></div>`;
-      renderLeaderboard(); goToDashboard();
-    }
-    function renderLeaderboard() {
-      const list = document.getElementById('lb-dynamic-list'); list.innerHTML = '';
-      const names = ["Doni Prabowo", "Rina Oktavia", "Eko Prasetyo", "Maya Sari", "Andi Wijaya"];
-      const myRank = scenarios[currentCase].rank; const top20 = 25;
-      for (let i = 4; i <= top20; i++) {
-        const n = names[i % 5] + " " + i;
-        list.innerHTML += createLBItem(i, n, 38 - Math.floor(i/2), 5, (i === myRank));
-      }
-      if (myRank > top20) {
-        list.innerHTML += `<div style="text-align:center;padding:12px;color:var(--gray3);letter-spacing:6px">···</div>`;
-        list.innerHTML += createLBItem(myRank, `Afif Choirul (Kamu)`, scenarios[currentCase].ta, scenarios[currentCase].star, true);
-        for (let i = 1; i <= 3; i++) if (myRank + i <= 127) list.innerHTML += createLBItem(myRank + i, `Sales CR ${myRank + i}`, scenarios[currentCase].ta - i, 4, false);
-      }
-    }
-    function createLBItem(rank, name, ta, star, isMe) {
-      return `<div class="lb-item ${isMe ? 'me' : ''}">
-      <div class="lb-rank">#${rank}</div>
-      <div class="lb-info">
-        <h5>${name}</h5>
-        <p>${ta} TA</p>
-      </div>
-      <div class="star-tag">⭐ Star ${star}</div>
-    </div>`;
-    }
-    function openPrize() { document.getElementById('prize-modal').style.display = 'flex'; }
-    function closePrize() { document.getElementById('prize-modal').style.display = 'none'; }
-    setCase('star4');
-  </script>
+        function renderProjects(list) {
+            const grid = document.getElementById('project-grid');
+            const emptyState = document.getElementById('empty-state');
+            grid.innerHTML = '';
+
+            if (list.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            list.forEach(project => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition duration-300 flex flex-col h-[480px]";
+
+                const featuresHtml = project.features.map(f => `
+                    <div class="flex items-center gap-2 text-xs text-slate-500">
+                        <i class="fa-solid fa-check text-emerald-500 w-4"></i>
+                        ${f}
+                    </div>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="p-6 flex-1 flex flex-col overflow-y-auto custom-scrollbar">
+                        <div class="flex items-center justify-between mb-4 flex-shrink-0">
+                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-200">
+                                ${project.category}
+                            </span>
+                            <span class="text-xs text-slate-400 font-medium">${project.version}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800 mb-2 flex-shrink-0">${project.title}</h3>
+                        
+                        <!-- Executive Summary (Always Visible) -->
+                        <div class="mb-4 flex-shrink-0">
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Executive Summary</div>
+                            <p class="text-sm text-slate-600 leading-relaxed">${project.description}</p>
+                        </div>
+
+                        <!-- Toggle Button -->
+                        <button onclick="toggleCard(this)" class="w-full flex items-center justify-between text-xs text-[#0B1F8F] font-bold py-2.5 bg-slate-50 hover:bg-blue-50 border border-slate-100 rounded-xl px-4 transition mb-4 flex-shrink-0">
+                            <span>Lihat Detail Project</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200"></i>
+                        </button>
+
+                        <!-- Collapsible Section -->
+                        <div class="collapsible-section hidden transition-all duration-300 flex-1 flex flex-col mb-4">
+                            <!-- Notion BRD Link -->
+                            <div class="mb-5 flex-shrink-0">
+                                <a href="${project.brdLink}" target="_blank" 
+                                   class="inline-flex items-center gap-1.5 text-xs text-[#0B1F8F] hover:text-blue-900 font-semibold transition group">
+                                    <i class="fa-brands fa-notion text-slate-700 group-hover:text-slate-900 text-sm"></i>
+                                    <span>Link BRD (Notion)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-70 group-hover:opacity-100 transition"></i>
+                                </a>
+                            </div>
+
+                            <!-- Highlights -->
+                            <div>
+                                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Highlight Fitur & Ubahan</div>
+                                <div class="space-y-2">
+                                    ${featuresHtml}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Last Update Row (Always Visible) -->
+                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 mt-auto flex-shrink-0">
+                            <span><i class="fa-solid fa-clock-rotate-left mr-1"></i>Last Update:</span>
+                            <span class="font-semibold text-slate-600">${project.formattedDate}</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border-t border-slate-100 p-4 flex-shrink-0">
+                        <a href="${project.path}" 
+                           class="w-full flex items-center justify-center gap-2 bg-[#0B1F8F] hover:bg-blue-900 text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition">
+                            Buka Prototype <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleCard(btn) {
+            const parent = btn.closest('.flex-1');
+            const section = parent.querySelector('.collapsible-section');
+            const icon = btn.querySelector('.fa-chevron-down');
+            const label = btn.querySelector('span');
+
+            if (section.classList.contains('hidden')) {
+                section.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+                label.innerText = 'Sembunyikan Detail';
+            } else {
+                section.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                label.innerText = 'Lihat Detail Project';
+            }
+        }
+
+        // Filter functionality
+        function filterProjects() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const filtered = projects.filter(p => p.title.toLowerCase().includes(query));
+            renderProjects(filtered);
+        }
+
+        // Initial Render
+        renderProjects(projects);
+    </script>
+
 </body>
 
 </html>
