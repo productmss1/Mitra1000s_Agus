@@ -2834,7 +2834,7 @@
     // Seeding Shared State & Population
     function initializeSharedState() {
       // Force migration: check version to clear old cached periods/configs
-      const EXPECTED_VERSION = "v19"; // Increment to force cache eviction
+      const EXPECTED_VERSION = "v21"; // Increment to force cache eviction
       const currentVersion = localStorage.getItem('star_sales_periods_version');
       if (currentVersion !== EXPECTED_VERSION) {
         localStorage.removeItem('star_sales_periods');
@@ -2950,7 +2950,7 @@
         },
         {
           id: "SS-BNN-06202601",
-          title: "Star Sales BNN Juni - Back to VA",
+          title: "Star Sales BNN Juni 2026",
           month: "2026-06",
           startDate: "2026-06-01",
           endDate: "2026-06-30",
@@ -3023,7 +3023,7 @@
         },
         {
           id: "SS-CPD-06202601",
-          title: "Kompetisi CPD Juni - Target Tinggi",
+          title: "Star Sales CPD Juni 2026",
           month: "2026-06",
           startDate: "2026-06-01",
           endDate: "2026-06-30",
