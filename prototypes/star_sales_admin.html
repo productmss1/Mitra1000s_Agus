@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MANAGEMENT STAR SALES — Administrator Merchant 1000saudara.com</title>
+  <title>MANAGEMENT STAR SALES — Administrator Merchant mitra1000s</title>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1097,9 +1097,9 @@
           <text x="26" y="11" fill="#D32F2F" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800"
             font-size="6" letter-spacing="0.2">mitra bangunan</text>
           <text x="26" y="22" fill="#0D47A1" font-family="'Outfit', sans-serif" font-weight="900"
-            font-size="11">1000saudara</text>
+            font-size="11">mitra1000s</text>
           <text x="96" y="22" fill="#00BCD4" font-family="'Outfit', sans-serif" font-weight="700"
-            font-size="9">.com</text>
+            font-size="9"></text>
         </svg>
       </div>
       <button class="hamburger-btn" style="margin-left: 12px;">
@@ -1893,14 +1893,15 @@
 
               <!-- Participants Preview Table -->
               <div
-                style="max-height: 250px; overflow-y: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm);">
+                style="max-height: 250px; overflow-y: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm); position: relative;">
                 <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                   <thead>
-                    <tr style="background: var(--slate-100);">
-                      <th style="padding: 10px; width: 60px; text-align: center;">No.</th>
-                      <th style="padding: 10px; width: 120px;">ID Sales / NIK</th>
-                      <th style="padding: 10px;">Nama Sales</th>
-                      <th style="padding: 10px; width: 60px; text-align: center;">
+                    <tr style="background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
+                      <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">No.</th>
+                      <th style="padding: 10px; width: 120px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">ID Sales / NIK</th>
+                      <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Nama Sales</th>
+                      <th style="padding: 10px; width: 100px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Status</th>
+                      <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
                         <input type="checkbox" id="check-all-participants" onchange="toggleSelectAllParticipants(this)"
                           style="cursor: pointer; width: 14px; height: 14px;">
                       </th>
@@ -1921,9 +1922,7 @@
                 Manajemen Pemenang &amp; Konten Hadiah
               </div>
               <p style="font-size: 11px; color: var(--slate-600); line-height: 1.6; margin-bottom: 16px;">
-                Periode ini berstatus <strong>Final/Selesai</strong>. Peringkat pemenang dikunci secara permanen. Unduh
-                template Excel pemenang di bawah untuk mengisi deskripsi hadiah kustom non-uang (seperti 'Trip Bali'),
-                lalu unggah kembali untuk merilis hadiah ke aplikasi Sales.
+                Bagian ini menampilkan pratinjau (preview) hasil pencapaian program Star Sales. Melalui tabel di bawah, Anda dapat melihat daftar lengkap sales yang berhasil menjadi pemenang kompetisi, peserta yang tidak mendapatkan reward apa pun (karena tidak lolos kualifikasi minimum), serta peserta yang terkena potongan penalti akibat tidak mencapai target minimal per tier bintang.
               </p>
 
               <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;">
@@ -1931,29 +1930,23 @@
                   style="font-size: 11px; padding: 8px 12px; background: #2E7D32;">
                   <i class="fa-solid fa-file-excel" style="color: white;"></i> Download Pemenang (Excel Template)
                 </button>
-                <button type="button" class="btn btn-secondary" onclick="exportCompetitionReport()"
-                  style="font-size: 11px; padding: 8px 12px; background: #00BCD4; color: white;">
-                  <i class="fa-solid fa-file-excel" style="color: white;"></i> Ekspor Laporan Kompetisi (Excel)
-                </button>
-                <label class="btn btn-primary"
-                  style="font-size: 11px; padding: 8px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; background: var(--primary); margin: 0;">
-                  <i class="fa-solid fa-file-excel"></i> Upload Laporan (.xlsx)
-                  <input type="file" id="winner-excel-file" accept=".xlsx, .xls" onchange="uploadWinnerExcel(event)"
-                    style="display: none;">
-                </label>
               </div>
 
               <!-- Winners Preview Table -->
-              <div style="overflow-x: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm);">
+              <div style="max-height: 400px; overflow-y: auto; overflow-x: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm); position: relative;">
                 <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
                   <thead>
-                    <tr style="background: var(--slate-100);">
-                      <th style="padding: 10px; width: 60px;">Rank</th>
-                      <th style="padding: 10px; width: 100px;">ID_Sales/NIK</th>
-                      <th style="padding: 10px;">Nama Sales</th>
-                      <th style="padding: 10px; width: 70px;">TA</th>
-                      <th style="padding: 10px; width: 80px;">Level Bintang</th>
-                      <th style="padding: 10px;">Deskripsi Hadiah</th>
+                    <tr style="background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
+                      <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Rank</th>
+                      <th style="padding: 10px; width: 110px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">ID Sales / NIK</th>
+                      <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Nama Sales</th>
+                      <th style="padding: 10px; width: 85px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total TA</th>
+                      <th style="padding: 10px; width: 95px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total Brand</th>
+                      <th style="padding: 10px; width: 85px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total SKU</th>
+                      <th style="padding: 10px; width: 100px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Level Bintang</th>
+                      <th style="padding: 10px; width: 110px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Reward (Rp)</th>
+                      <th style="padding: 10px; width: 110px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Penalti (Rp)</th>
+                      <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Deskripsi Hadiah</th>
                     </tr>
                   </thead>
                   <tbody id="winners-tbody">
@@ -2463,7 +2456,7 @@
           <text x="593" y="401" text-anchor="middle" font-size="10" font-weight="700" fill="#b45309">Duplikat</text>
 
           <!-- 5. Pilihan Aksi → Kelola (down into Lane B) -->
-          <path d="M510,365 L510,650 L578,650 L578,690" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#ah)"/>
+          <path d="M510,365 L510,690 L578,690" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#ah)"/>
           <rect x="484" y="486" width="50" height="20" rx="4" fill="white" stroke="#64748b" stroke-width="1"/>
           <text x="509" y="499" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">Kelola</text>
 
@@ -2481,20 +2474,20 @@
           <!-- 9. Klik Kembali right → Ada Input? left -->
           <line x1="940" y1="99" x2="1058" y2="99" stroke="#64748b" stroke-width="2" marker-end="url(#ah)"/>
 
-          <!-- 10. Ada Input? TIDAK → Dashboard top (y=25 loop) -->
-          <path d="M1110,49 L1110,25 L302,25 L302,276" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahg)"/>
-          <rect x="634" y="13" width="160" height="20" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
-          <text x="714" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">Tidak (Langsung Kembali)</text>
+          <!-- 10. Ada Input? TIDAK → Dashboard top (spaced out at x=330, y=40) -->
+          <path d="M1110,49 L1110,40 L330,40 L330,276" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahg)"/>
+          <rect x="634" y="30" width="160" height="20" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
+          <text x="714" y="43" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">Tidak (Langsung Kembali)</text>
 
           <!-- 11. Ada Input? YA → Tinggalkan? -->
           <line x1="1160" y1="99" x2="1278" y2="99" stroke="#dc2626" stroke-width="2" marker-end="url(#ahr)"/>
           <rect x="1168" y="82" width="36" height="20" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
           <text x="1186" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Ya</text>
 
-          <!-- 12. Tinggalkan? YA KELUAR → Dashboard top (y=14 loop, offset from path 10) -->
-          <path d="M1330,49 L1330,14 L298,14 L298,276" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
-          <rect x="1288" y="16" width="70" height="20" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
-          <text x="1323" y="29" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Ya, Keluar</text>
+          <!-- 12. Tinggalkan? YA KELUAR → Dashboard top (spaced out at x=270, y=20) -->
+          <path d="M1330,49 L1330,20 L270,20 L270,276" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
+          <rect x="1288" y="10" width="70" height="20" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
+          <text x="1323" y="23" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Ya, Keluar</text>
 
           <!-- 13. Tinggalkan? BATAL → Input Form top (route ABOVE Input Form at y=190) -->
           <path d="M1280,99 L1240,99 L1240,190 L960,190 L960,218" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahg)"/>
@@ -2526,9 +2519,9 @@
 
           <!-- ═══════════════════════════════════════════════════════════
                LANE B — STATUS ROW  (y-center = 690, box top=646)
-               Col x-centers: Pilih=655  Terjadwal=855  Berjalan=1095
-                               Masa=1335  Menunggu=1580  Selesai=1835
-               END cx=2100 cy=690
+               Col x-centers: Pilih=655  Terjadwal=855  Berjalan=1145
+                               Masa=1435  Menunggu=1730  Selesai=2025
+               END cx=2230 cy=690
           ═══════════════════════════════════════════════════════════ -->
 
           <!-- B0: Pilih dari Daftar -->
@@ -2546,45 +2539,45 @@
           <text x="855" y="730" text-anchor="middle" font-size="9" fill="#a16207">otomatis sistem</text>
 
           <!-- B2: BERJALAN -->
-          <rect x="990" y="646" width="210" height="88" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2.5"/>
-          <text x="1095" y="670" text-anchor="middle" font-size="13" font-weight="800" fill="#14532d">▶ BERJALAN</text>
-          <text x="1095" y="688" text-anchor="middle" font-size="10" fill="#166534">(Active)</text>
-          <text x="1095" y="704" text-anchor="middle" font-size="9" fill="#15803d">Program aktif berjalan</text>
-          <text x="1095" y="718" text-anchor="middle" font-size="9" fill="#15803d">Klasemen update harian</text>
-          <text x="1095" y="730" text-anchor="middle" font-size="9" fill="#15803d">Peserta accumulate TA</text>
+          <rect x="1100" y="646" width="210" height="88" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="1205" y="670" text-anchor="middle" font-size="13" font-weight="800" fill="#14532d">▶ BERJALAN</text>
+          <text x="1205" y="688" text-anchor="middle" font-size="10" fill="#166534">(Active)</text>
+          <text x="1205" y="704" text-anchor="middle" font-size="9" fill="#15803d">Program aktif berjalan</text>
+          <text x="1205" y="718" text-anchor="middle" font-size="9" fill="#15803d">Klasemen update harian</text>
+          <text x="1205" y="730" text-anchor="middle" font-size="9" fill="#15803d">Peserta accumulate TA</text>
 
           <!-- B3: MASA TENGGANG -->
-          <rect x="1230" y="646" width="210" height="88" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
-          <text x="1335" y="667" text-anchor="middle" font-size="12" font-weight="800" fill="#1e3a8a">⏳ MASA TENGGANG</text>
-          <text x="1335" y="684" text-anchor="middle" font-size="10" fill="#1d4ed8">(Grace Period)</text>
-          <text x="1335" y="700" text-anchor="middle" font-size="9" fill="#1d4ed8">Setelah End Date tercapai</text>
-          <text x="1335" y="715" text-anchor="middle" font-size="9" fill="#1d4ed8">Verifikasi retur &amp; data</text>
-          <text x="1335" y="728" text-anchor="middle" font-size="9" fill="#1d4ed8">Data masih bisa diubah</text>
+          <rect x="1450" y="646" width="210" height="88" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2.5"/>
+          <text x="1555" y="667" text-anchor="middle" font-size="12" font-weight="800" fill="#1e3a8a">⏳ MASA TENGGANG</text>
+          <text x="1555" y="684" text-anchor="middle" font-size="10" fill="#1d4ed8">(Grace Period)</text>
+          <text x="1555" y="700" text-anchor="middle" font-size="9" fill="#1d4ed8">Setelah End Date tercapai</text>
+          <text x="1555" y="715" text-anchor="middle" font-size="9" fill="#1d4ed8">Verifikasi retur &amp; data</text>
+          <text x="1555" y="728" text-anchor="middle" font-size="9" fill="#1d4ed8">Data masih bisa diubah</text>
 
           <!-- B4: MENUNGGU PENGUMUMAN -->
-          <rect x="1470" y="646" width="220" height="88" rx="10" fill="#f3e8ff" stroke="#a855f7" stroke-width="2.5"/>
-          <text x="1580" y="667" text-anchor="middle" font-size="11" font-weight="800" fill="#581c87">🔔 MENUNGGU</text>
-          <text x="1580" y="682" text-anchor="middle" font-size="11" font-weight="800" fill="#581c87">PENGUMUMAN</text>
-          <text x="1580" y="700" text-anchor="middle" font-size="9" fill="#6b21a8">Cutoff grace period lewat</text>
-          <text x="1580" y="714" text-anchor="middle" font-size="9" fill="#6b21a8">Tombol "Umumkan Pemenang"</text>
-          <text x="1580" y="727" text-anchor="middle" font-size="9" fill="#6b21a8">aktif di detail program</text>
+          <rect x="1800" y="646" width="220" height="88" rx="10" fill="#f3e8ff" stroke="#a855f7" stroke-width="2.5"/>
+          <text x="1910" y="667" text-anchor="middle" font-size="11" font-weight="800" fill="#581c87">🔔 MENUNGGU</text>
+          <text x="1910" y="682" text-anchor="middle" font-size="11" font-weight="800" fill="#581c87">PENGUMUMAN</text>
+          <text x="1910" y="700" text-anchor="middle" font-size="9" fill="#6b21a8">Cutoff grace period lewat</text>
+          <text x="1910" y="714" text-anchor="middle" font-size="9" fill="#6b21a8">Tombol "Umumkan Pemenang"</text>
+          <text x="1910" y="727" text-anchor="middle" font-size="9" fill="#6b21a8">aktif di detail program</text>
 
           <!-- B5: SELESAI -->
-          <rect x="1730" y="646" width="210" height="88" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2.5"/>
-          <text x="1835" y="670" text-anchor="middle" font-size="13" font-weight="800" fill="#14532d">✅ SELESAI</text>
-          <text x="1835" y="688" text-anchor="middle" font-size="10" fill="#166534">(Finished)</text>
-          <text x="1835" y="704" text-anchor="middle" font-size="9" fill="#15803d">Lock permanen</text>
-          <text x="1835" y="718" text-anchor="middle" font-size="9" fill="#15803d">Data payout tersedia</text>
-          <text x="1835" y="730" text-anchor="middle" font-size="9" fill="#15803d">Tidak bisa diubah</text>
+          <rect x="2160" y="646" width="210" height="88" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2.5"/>
+          <text x="2265" y="670" text-anchor="middle" font-size="13" font-weight="800" fill="#14532d">✅ SELESAI</text>
+          <text x="2265" y="688" text-anchor="middle" font-size="10" fill="#166534">(Finished)</text>
+          <text x="2265" y="704" text-anchor="middle" font-size="9" fill="#15803d">Lock permanen</text>
+          <text x="2265" y="718" text-anchor="middle" font-size="9" fill="#15803d">Data payout tersedia</text>
+          <text x="2265" y="730" text-anchor="middle" font-size="9" fill="#15803d">Tidak bisa diubah</text>
 
           <!-- END -->
-          <circle cx="2100" cy="690" r="48" fill="#fee2e2" stroke="#ef4444" stroke-width="3"/>
-          <text x="2100" y="686" text-anchor="middle" font-size="13" font-weight="800" fill="#991b1b">END</text>
-          <text x="2100" y="702" text-anchor="middle" font-size="9" fill="#991b1b">Siklus Selesai</text>
+          <circle cx="2500" cy="690" r="48" fill="#fee2e2" stroke="#ef4444" stroke-width="3"/>
+          <text x="2500" y="686" text-anchor="middle" font-size="13" font-weight="800" fill="#991b1b">END</text>
+          <text x="2500" y="702" text-anchor="middle" font-size="9" fill="#991b1b">Siklus Selesai</text>
 
           <!-- ═══════════════════════════════════════════════════════════
                LANE B — CANCEL ROW  (y-center = 870, boxes y=837)
-               BC1 x=750  BC2 cx=1150  BC3 x=1280
+               BC1 x=750  BC2 cx=1145  BC3 x=1330
                Completely separated from Announce Row below
           ═══════════════════════════════════════════════════════════ -->
 
@@ -2594,126 +2587,105 @@
           <text x="870" y="875" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">"Batalkan Program"</text>
           <text x="870" y="895" text-anchor="middle" font-size="9" fill="#b91c1c">(Scheduled atau Active)</text>
 
-          <!-- BC2: Konfirmasi Batalkan? — diamond cx=1150 cy=870 half=52 -->
-          <polygon points="1150,818 1202,870 1150,922 1098,870" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
-          <text x="1150" y="864" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Konfirmasi</text>
-          <text x="1150" y="878" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Batalkan?</text>
+          <!-- BC2: Konfirmasi Batalkan? — diamond cx=1205 cy=870 half=52 -->
+          <polygon points="1205,818 1257,870 1205,922 1153,870" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="1205" y="864" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Konfirmasi</text>
+          <text x="1205" y="878" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Batalkan?</text>
 
-          <!-- BC3: DIBATALKAN — x=1280 y=837 w=210 h=68, right=1490 -->
-          <rect x="1280" y="837" width="210" height="68" rx="10" fill="#fee2e2" stroke="#ef4444" stroke-width="2.5"/>
-          <text x="1385" y="861" text-anchor="middle" font-size="13" font-weight="800" fill="#991b1b">❌ DIBATALKAN</text>
-          <text x="1385" y="879" text-anchor="middle" font-size="10" fill="#b91c1c">(Cancelled)</text>
-          <text x="1385" y="897" text-anchor="middle" font-size="9" fill="#b91c1c">Siklus dihentikan permanen</text>
+          <!-- BC3: DIBATALKAN -->
+          <rect x="1450" y="837" width="210" height="68" rx="10" fill="#fee2e2" stroke="#ef4444" stroke-width="2.5"/>
+          <text x="1555" y="861" text-anchor="middle" font-size="13" font-weight="800" fill="#991b1b">❌ DIBATALKAN</text>
+          <text x="1555" y="879" text-anchor="middle" font-size="10" fill="#b91c1c">(Cancelled)</text>
+          <text x="1555" y="897" text-anchor="middle" font-size="9" fill="#b91c1c">Siklus dihentikan permanen</text>
 
           <!-- ═══════════════════════════════════════════════════════════
                LANE B — ANNOUNCE ROW  (y-center = 1060, boxes y=1028)
-               BA1 x=1560  BA2 cx=1900
+               BA1 x=1605  BA2 cx=2025
                Completely below Cancel Row (cancel bottom=905, announce top=1028, gap=123px)
           ═══════════════════════════════════════════════════════════ -->
 
-          <!-- BA1: Admin Klik Umumkan Pemenang — x=1560 y=1028 w=250 h=64 -->
-          <rect x="1560" y="1028" width="250" height="64" rx="10" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
-          <text x="1685" y="1051" text-anchor="middle" font-size="11" font-weight="700" fill="#6b21a8">Admin Klik</text>
-          <text x="1685" y="1067" text-anchor="middle" font-size="11" font-weight="700" fill="#6b21a8">"Umumkan Pemenang"</text>
-          <text x="1685" y="1084" text-anchor="middle" font-size="9" fill="#9333ea">(manual trigger)</text>
+          <!-- BA1: Admin Klik Umumkan Pemenang -->
+          <rect x="1785" y="1028" width="250" height="64" rx="10" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+          <text x="1910" y="1051" text-anchor="middle" font-size="11" font-weight="700" fill="#6b21a8">Admin Klik</text>
+          <text x="1910" y="1067" text-anchor="middle" font-size="11" font-weight="700" fill="#6b21a8">"Umumkan Pemenang"</text>
+          <text x="1910" y="1084" text-anchor="middle" font-size="9" fill="#9333ea">(manual trigger)</text>
 
-          <!-- BA2: Konfirmasi Umumkan? — diamond cx=1900 cy=1060 half=52, right=1952 -->
-          <polygon points="1900,1008 1952,1060 1900,1112 1848,1060" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
-          <text x="1900" y="1054" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Konfirmasi</text>
-          <text x="1900" y="1068" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Umumkan?</text>
+          <!-- BA2: Konfirmasi Umumkan? -->
+          <polygon points="2265,1008 2317,1060 2265,1112 2213,1060" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="2265" y="1054" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Konfirmasi</text>
+          <text x="2265" y="1068" text-anchor="middle" font-size="10" font-weight="700" fill="#92400e">Umumkan?</text>
 
           <!-- ═══════════════════════════════════════════════════════════
                LANE B ARROWS
           ═══════════════════════════════════════════════════════════ -->
 
           <!-- ── HAPPY PATH ── -->
-
-          <!-- Kelola (from Decision bottom) → Pilih dari Daftar left -->
-          <path d="M510,365 L510,650 L578,650 L578,690" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#ah)"/>
+          <path d="M510,365 L510,690 L578,690" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#ah)"/>
 
           <!-- Pilih → Terjadwal -->
           <line x1="730" y1="690" x2="748" y2="690" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ah)"/>
 
           <!-- Terjadwal → Berjalan (Start Date) -->
-          <line x1="960" y1="690" x2="988" y2="690" stroke="#16a34a" stroke-width="2.5" marker-end="url(#ahg)"/>
-          <rect x="960" y="674" width="26" height="20" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
-          <text x="973" y="684" text-anchor="middle" font-size="7" font-weight="800" fill="#15803d">Start</text>
-          <text x="973" y="693" text-anchor="middle" font-size="7" font-weight="800" fill="#15803d">Date</text>
+          <line x1="960" y1="690" x2="1098" y2="690" stroke="#16a34a" stroke-width="2.5" marker-end="url(#ahg)"/>
+          <rect x="1002" y="678" width="56" height="24" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
+          <text x="1030" y="687" text-anchor="middle" font-size="8" font-weight="800" fill="#15803d">Start</text>
+          <text x="1030" y="697" text-anchor="middle" font-size="8" font-weight="800" fill="#15803d">Date</text>
 
           <!-- Berjalan → Masa Tenggang (End Date) -->
-          <line x1="1200" y1="690" x2="1228" y2="690" stroke="#16a34a" stroke-width="2.5" marker-end="url(#ahg)"/>
-          <rect x="1200" y="674" width="26" height="20" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
-          <text x="1213" y="684" text-anchor="middle" font-size="7" font-weight="800" fill="#15803d">End</text>
-          <text x="1213" y="693" text-anchor="middle" font-size="7" font-weight="800" fill="#15803d">Date</text>
+          <line x1="1310" y1="690" x2="1448" y2="690" stroke="#16a34a" stroke-width="2.5" marker-end="url(#ahg)"/>
+          <rect x="1352" y="678" width="56" height="24" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
+          <text x="1380" y="687" text-anchor="middle" font-size="8" font-weight="800" fill="#15803d">End</text>
+          <text x="1380" y="697" text-anchor="middle" font-size="8" font-weight="800" fill="#15803d">Date</text>
 
           <!-- Masa Tenggang → Menunggu (Cutoff Grace) -->
-          <line x1="1440" y1="690" x2="1468" y2="690" stroke="#16a34a" stroke-width="2.5" marker-end="url(#ahg)"/>
-          <rect x="1439" y="674" width="28" height="20" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
-          <text x="1453" y="684" text-anchor="middle" font-size="7" font-weight="800" fill="#15803d">Cut-</text>
-          <text x="1453" y="693" text-anchor="middle" font-size="7" font-weight="800" fill="#15803d">off</text>
+          <line x1="1660" y1="690" x2="1798" y2="690" stroke="#16a34a" stroke-width="2.5" marker-end="url(#ahg)"/>
+          <rect x="1702" y="678" width="56" height="24" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
+          <text x="1730" y="687" text-anchor="middle" font-size="8" font-weight="800" fill="#15803d">Cut-</text>
+          <text x="1730" y="697" text-anchor="middle" font-size="8" font-weight="800" fill="#15803d">off</text>
 
           <!-- Selesai → END -->
-          <line x1="1940" y1="690" x2="2050" y2="690" stroke="#64748b" stroke-width="2" marker-end="url(#ah)"/>
+          <line x1="2370" y1="690" x2="2448" y2="690" stroke="#64748b" stroke-width="2" marker-end="url(#ah)"/>
 
-          <!-- ── ANNOUNCE FLOW ──
-               Menunggu bottom (1580,734) → down x=1580 to y=950 → right to BA1 top center (1685,950) → down to BA1 top (1685,1028)
-               Clear of cancel row: BC3 right=1490, x=1580 > 1490 ✓
-          -->
-          <path d="M1580,734 L1580,950 L1685,950 L1685,1026" fill="none" stroke="#9333ea" stroke-width="2" marker-end="url(#ah)"/>
+          <!-- ── ANNOUNCE FLOW ── -->
+          <line x1="1910" y1="734" x2="1910" y2="1026" stroke="#9333ea" stroke-width="2" marker-end="url(#ah)"/>
 
           <!-- BA1 right → BA2 left -->
-          <line x1="1810" y1="1060" x2="1846" y2="1060" stroke="#64748b" stroke-width="2" marker-end="url(#ah)"/>
+          <line x1="2035" y1="1060" x2="2210" y2="1060" stroke="#64748b" stroke-width="2" marker-end="url(#ah)"/>
 
-          <!-- BA2 YA → SELESAI bottom (straight up x=1900)
-               x=1900, y=1008→734: clear of BC3→END path which goes via x=1540 only ✓ -->
-          <path d="M1900,1008 L1900,734" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#ahg)"/>
-          <rect x="1906" y="860" width="86" height="20" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
-          <text x="1949" y="873" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">Ya, Umumkan</text>
+          <!-- BA2 YA → SELESAI bottom -->
+          <line x1="2265" y1="1008" x2="2265" y2="734" stroke="#16a34a" stroke-width="2" marker-end="url(#ahg)"/>
+          <rect x="2271" y="860" width="86" height="20" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
+          <text x="2314" y="873" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">Ya, Umumkan</text>
 
-          <!-- BA2 BATAL → loop back to Menunggu
-               Route: right (1952,1060) → x=2020 → up to y=630 (16px above status top 646) → left to x=1580 → down to Menunggu top (1580,646)
-               x=2020 > SELESAI right(1940) ✓  x=2020 < END left(2052) ✓
-               y=630 above all status boxes (top=646) ✓
-          -->
-          <path d="M1952,1060 L2020,1060 L2020,630 L1580,630 L1580,646" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
-          <rect x="1952" y="1042" width="80" height="20" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
-          <text x="1992" y="1055" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Batal (Tunda)</text>
+          <!-- BA2 BATAL → loop back to Menunggu -->
+          <path d="M2317,1060 L2400,1060 L2400,630 L1910,630 L1910,646" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
+          <rect x="2318" y="1042" width="80" height="20" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
+          <text x="2358" y="1055" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Batal (Tunda)</text>
 
-          <!-- ── CANCEL FLOW ──
-               Two separate dashed arrows from Terjadwal and Berjalan bottoms
-               converging into BC1 top at different x points (855 and 885)
-               to avoid overlap between the two paths
-          -->
-          <!-- Terjadwal bottom (855,734) → down to y=800 → BC1 top at (870,837) -->
-          <path d="M855,734 L855,800 L870,800 L870,835" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
-          <!-- Berjalan bottom (1095,734) → down to y=800 → left to x=885 → BC1 top (885,837) -->
-          <path d="M1095,734 L1095,800 L885,800 L885,835" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
-          <!-- "Bisa Dibatalkan" note between status and cancel rows -->
-          <rect x="836" y="752" width="120" height="18" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
-          <text x="896" y="764" text-anchor="middle" font-size="9" font-weight="700" fill="#dc2626">Bisa Dibatalkan</text>
+          <!-- ── CANCEL FLOW ── -->
+          <!-- Terjadwal bottom → BC1 top -->
+          <path d="M840,734 L840,790 L870,790 L870,835" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
+          <!-- Berjalan bottom → BC1 top -->
+          <path d="M1180,734 L1180,790 L885,790 L885,835" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahr)"/>
+          <rect x="972" y="781" width="120" height="18" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
+          <text x="1032" y="793" text-anchor="middle" font-size="9" font-weight="700" fill="#dc2626">Bisa Dibatalkan</text>
 
           <!-- BC1 right → BC2 left -->
-          <line x1="990" y1="870" x2="1096" y2="870" stroke="#64748b" stroke-width="2" marker-end="url(#ah)"/>
+          <line x1="990" y1="870" x2="1148" y2="870" stroke="#64748b" stroke-width="2" marker-end="url(#ah)"/>
 
-          <!-- BC2 YA → BC3 (DIBATALKAN) -->
-          <line x1="1202" y1="870" x2="1278" y2="870" stroke="#dc2626" stroke-width="2" marker-end="url(#ahr)"/>
-          <rect x="1206" y="852" width="52" height="20" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
-          <text x="1232" y="865" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Ya, Batal</text>
+          <!-- BC2 YA → BC3 -->
+          <line x1="1257" y1="870" x2="1448" y2="870" stroke="#dc2626" stroke-width="2" marker-end="url(#ahr)"/>
+          <rect x="1323" y="852" width="60" height="20" rx="4" fill="white" stroke="#dc2626" stroke-width="1"/>
+          <text x="1353" y="865" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">Ya, Batal</text>
 
-          <!-- BC2 TIDAK → Berjalan bottom (loop back up)
-               From BC2 top (1150,818) → up to y=770 → left to Berjalan bottom center (1095,770) → up to (1095,734) -->
-          <path d="M1150,818 L1150,770 L1095,770 L1095,734" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahg)"/>
-          <rect x="1082" y="776" width="84" height="18" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
-          <text x="1124" y="788" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">Tidak (Tetap)</text>
+          <!-- BC2 TIDAK → Berjalan & Terjadwal bottom -->
+          <path d="M1205,818 L1205,760 L1230,760 L1230,734" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahg)"/>
+          <path d="M1205,760 L870,760 L870,734" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahg)"/>
+          <rect x="995" y="751" width="84" height="18" rx="4" fill="white" stroke="#16a34a" stroke-width="1"/>
+          <text x="1037" y="763" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">Tidak (Tetap)</text>
 
-          <!-- BC3 → END
-               Route: BC3 right (1490,871) → small step right to x=1540 (left of BA1 at x=1560)
-               → down to y=1200 (below BA2 bottom=1112) → right to x=2100 → up to END bottom (2100,740)
-               VERIFIED: at x=1540, y=871-1200 clears BA1 (starts x=1560) ✓
-                         at y=1200, x=1540-2100 clears BA1 (y<1028) and BA2 (y<1008) ✓
-                         at x=2100, y=1200-740 clears BA2 (right=1952) and Batal loop (x=2020) ✓
-          -->
-          <path d="M1490,871 L1540,871 L1540,1200 L2100,1200 L2100,740" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#ahr)"/>
+          <!-- BC3 → END -->
+          <path d="M1660,871 L1700,871 L1700,1200 L2500,1200 L2500,740" fill="none" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#ahr)"/>
 
         </svg>
         <!-- END SVG -->
@@ -2862,7 +2834,7 @@
     // Seeding Shared State & Population
     function initializeSharedState() {
       // Force migration: check version to clear old cached periods/configs
-      const EXPECTED_VERSION = "v18"; // Increment to force cache eviction
+      const EXPECTED_VERSION = "v19"; // Increment to force cache eviction
       const currentVersion = localStorage.getItem('star_sales_periods_version');
       if (currentVersion !== EXPECTED_VERSION) {
         localStorage.removeItem('star_sales_periods');
@@ -2886,8 +2858,23 @@
           if (i === 2) ta = 45;
           if (i === 3) ta = 41;
           if (i === 4) ta = 22;
-          if (ta < 0) ta = 0;
-          population.BNN.push({ cr_id, name, star, ta, brands: 3 + (i % 5), skus: 20 + (i % 20), lunasTimestamp: 1774880000000 + (i * 60000) });
+          // Set some negative TA for sales (due to previous month's cancellations)
+          if (i === 10) ta = -4;
+          if (i === 25) ta = -8;
+          if (i === 50) ta = -2;
+          
+          let status = (i % 15 === 0) ? "Resign" : "Aktif";
+
+          population.BNN.push({ 
+            cr_id, 
+            name, 
+            star, 
+            ta, 
+            status, 
+            brands: 3 + (i % 5), 
+            skus: 20 + (i % 20), 
+            lunasTimestamp: 1774880000000 + (i * 60000) 
+          });
         }
 
         for (let i = 1; i <= 80; i++) {
@@ -2896,8 +2883,22 @@
           let star = i <= 15 ? 5 : i <= 35 ? 4 : i <= 55 ? 3 : i <= 68 ? 2 : 1;
           let ta = 50 - Math.floor(i * 0.5);
           if (i === 4) ta = 22;
-          if (ta < 0) ta = 0;
-          population.CPD.push({ cr_id, name, star, ta, brands: 3 + (i % 4), skus: 15 + (i % 15), lunasTimestamp: 1774880000000 + (i * 60000) });
+          // Set some negative TA
+          if (i === 8) ta = -5;
+          if (i === 20) ta = -3;
+
+          let status = (i % 12 === 0) ? "Resign" : "Aktif";
+
+          population.CPD.push({ 
+            cr_id, 
+            name, 
+            star, 
+            ta, 
+            status, 
+            brands: 3 + (i % 4), 
+            skus: 15 + (i % 15), 
+            lunasTimestamp: 1774880000000 + (i * 60000) 
+          });
         }
         localStorage.setItem('star_sales_cr_population', JSON.stringify(population));
       }
@@ -4197,10 +4198,22 @@
       const period = mockPeriods.find(p => p.id === id);
       if (!period) return;
 
+      // Auto-populate participants from population if empty
+      if (!period.participants || !Array.isArray(period.participants) || period.participants.length === 0) {
+        const population = JSON.parse(localStorage.getItem('star_sales_cr_population') || '{"BNN":[],"CPD":[]}');
+        let crList = [];
+        if (period.area === 'ALL') {
+          crList = [...(population['BNN'] || []), ...(population['CPD'] || [])];
+        } else {
+          crList = population[period.area] || [];
+        }
+        period.participants = JSON.parse(JSON.stringify(crList));
+      }
+
       bindConfigToForm(period);
       renderParticipants(period);
 
-      const isLockedStatus = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled'].includes(period.status);
+      const isLockedStatus = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled', 'dibatalkan'].includes(period.status);
       document.getElementById('participant-lock-notice').style.display = isLockedStatus ? 'block' : 'none';
       document.getElementById('participant-upload-actions').style.display = isLockedStatus ? 'none' : 'flex';
 
@@ -5195,16 +5208,25 @@
       winners.forEach(w => {
         let rewardBadge = w.reward_type === 'non-cash' ?
           `<span class="badge-premium"><i class="fa-solid fa-gift"></i> ${w.reward}</span>` :
-          `<span style="font-weight: 700; color: #059669;">${w.reward}</span>`;
+          w.reward_type === 'cash' ?
+          `<span style="font-weight: 700; color: #059669;">${w.reward}</span>` :
+          `<span style="color: var(--slate-500); font-style: italic;">${w.reward}</span>`;
+
+        let rewardRpText = w.reward_rp && w.reward_rp > 0 ? `Rp ${w.reward_rp.toLocaleString('id-ID')}` : '-';
+        let penaltyRpText = w.penalty_rp && w.penalty_rp > 0 ? `<span style="color: var(--danger); font-weight: 700;">Rp ${w.penalty_rp.toLocaleString('id-ID')}</span>` : '-';
 
         tbody.innerHTML += `
           <tr style="border-bottom: 1px solid var(--slate-200);">
-            <td style="font-weight: 800; color: var(--navy);">#${w.rank}</td>
-            <td style="font-family: monospace;">${w.cr_id}</td>
-            <td style="font-weight: 600;">${w.name}</td>
-            <td style="font-weight: 700;">${w.ta} TA</td>
-            <td>⭐ Star ${w.star}</td>
-            <td>${rewardBadge}</td>
+            <td style="font-weight: 800; color: var(--navy); padding: 10px; text-align: center;">#${w.rank}</td>
+            <td style="font-family: monospace; padding: 10px;">${w.cr_id}</td>
+            <td style="font-weight: 600; padding: 10px;">${w.name}</td>
+            <td style="font-weight: 700; padding: 10px; text-align: right;">${w.ta} TA</td>
+            <td style="padding: 10px; text-align: center;">${w.brands || 0}</td>
+            <td style="padding: 10px; text-align: center;">${w.skus || 0}</td>
+            <td style="padding: 10px; text-align: center;">⭐ Star ${w.star}</td>
+            <td style="padding: 10px; text-align: right;">${rewardRpText}</td>
+            <td style="padding: 10px; text-align: right;">${penaltyRpText}</td>
+            <td style="padding: 10px;">${rewardBadge}</td>
           </tr>
         `;
       });
@@ -5496,10 +5518,10 @@
       if (!period) return;
 
       const data = [
-        ["ID_Sales/NIK", "Nama_Sales"],
-        ["CR-1001", "Ahmad R."],
-        ["CR-1002", "Budi S."],
-        ["CR-1003", "Siti R."]
+        ["ID_Sales/NIK", "Nama_Sales", "Status"],
+        ["CR-1001", "Ahmad R.", "Aktif"],
+        ["CR-1002", "Budi S.", "Aktif"],
+        ["CR-1003", "Siti R.", "Resign"]
       ];
 
       const ws = XLSX.utils.aoa_to_sheet(data);
@@ -5541,6 +5563,13 @@
         showToast("File Excel kosong atau format tidak sesuai.", "error", "fa-triangle-exclamation");
         return;
       }
+      
+      const isLocked = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled', 'dibatalkan'].includes(period.status);
+      if (isLocked) {
+        showToast("Tidak dapat mengunggah peserta pada program yang aktif/selesai/dibatalkan.", "error", "fa-triangle-exclamation");
+        return;
+      }
+
       const header = excelData[0].map(h => h ? h.toString().toLowerCase().trim() : "");
       let nikIdx = header.indexOf("id_sales/nik");
       if (nikIdx === -1) nikIdx = header.indexOf("id_sales");
@@ -5548,6 +5577,7 @@
       let nameIdx = header.indexOf("nama_sales");
       if (nameIdx === -1) nameIdx = header.indexOf("nama sales");
       if (nameIdx === -1) nameIdx = header.indexOf("nama");
+      let statusIdx = header.indexOf("status");
 
       if (nikIdx === -1 || nameIdx === -1) {
         showToast("Header Excel harus memiliki kolom 'ID_Sales/NIK' dan 'Nama_Sales'.", "error", "fa-triangle-exclamation");
@@ -5567,25 +5597,38 @@
         const name = row[nameIdx] ? row[nameIdx].toString().trim() : "";
         if (!nik || !name) continue;
 
+        let status = "Aktif";
+        if (statusIdx !== -1 && row[statusIdx]) {
+          const s = row[statusIdx].toString().trim().toLowerCase();
+          if (s === "resign" || s === "resigned") {
+            status = "Resign";
+          }
+        }
+
         let crMatch = globalCRs.find(c => c.cr_id === nik);
         if (crMatch) {
+          if (statusIdx === -1) {
+            status = crMatch.status || "Aktif";
+          }
           uploadedParticipants.push({
             cr_id: nik,
             name: name,
             star: crMatch.star,
             ta: crMatch.ta,
+            status: status,
             brands: crMatch.brands,
             skus: crMatch.skus,
             lunasTimestamp: crMatch.lunasTimestamp || (1774880000000 + i * 60000)
           });
         } else {
           const star = 1 + Math.floor(Math.random() * 5);
-          const ta = Math.floor(Math.random() * 45);
+          const ta = Math.floor(Math.random() * 45) - 5;
           uploadedParticipants.push({
             cr_id: nik,
             name: name,
             star: star,
             ta: ta,
+            status: status,
             brands: 2 + Math.floor(Math.random() * 6),
             skus: 10 + Math.floor(Math.random() * 30),
             lunasTimestamp: 1774880000000 + (i * 60000) + Math.floor(Math.random() * 30000)
@@ -5608,7 +5651,7 @@
       const checkAll = document.getElementById('check-all-participants');
       if (checkAll) {
         checkAll.checked = false;
-        checkAll.disabled = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled'].includes(period.status);
+        checkAll.disabled = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled', 'dibatalkan'].includes(period.status);
       }
 
       // Reset delete selected button
@@ -5619,20 +5662,28 @@
       if (participants.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="4" style="text-align: center; padding: 16px; color: var(--slate-500);">
+            <td colspan="5" style="text-align: center; padding: 16px; color: var(--slate-500);">
               Belum ada daftar peserta. Silakan unggah daftar peserta.
             </td>
           </tr>
         `;
         return;
       }
-      const isLocked = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled'].includes(period.status);
+      const isLocked = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled', 'dibatalkan'].includes(period.status);
       participants.forEach((p, idx) => {
+        let statusBadge = '';
+        if (p.status === 'Resign') {
+          statusBadge = `<span style="background: #fee2e2; color: #c62828; border: 1px solid #ffcdd2; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: 700; display: inline-block;">Resign</span>`;
+        } else {
+          statusBadge = `<span style="background: #E8F5E9; color: #2E7D32; border: 1px solid #C8E6C9; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: 700; display: inline-block;">Aktif</span>`;
+        }
+
         tbody.innerHTML += `
           <tr style="border-bottom: 1px solid var(--slate-200);">
             <td style="font-weight: 600; text-align: center; padding: 10px;">${idx + 1}</td>
             <td style="font-family: monospace; font-weight: 700; color: var(--navy); padding: 10px;">${p.cr_id}</td>
             <td style="font-weight: 600; padding: 10px;">${p.name}</td>
+            <td style="text-align: center; padding: 10px;">${statusBadge}</td>
             <td style="text-align: center; padding: 10px;">
               <input type="checkbox" class="participant-row-checkbox" value="${p.cr_id}" 
                 onchange="updateDeleteParticipantsButton()" 
@@ -5786,9 +5837,20 @@
 
       const winners = period.winners && period.winners.length > 0 ? period.winners : runRankingEngine(period, true);
 
-      const excelData = [["Rank", "ID_Sales/NIK", "Nama_Sales", "Deskripsi_Hadiah"]];
+      const excelData = [["Rank", "ID_Sales/NIK", "Nama_Sales", "Total_Brand", "Total_SKU", "Total_TA", "Level_Bintang", "Reward_Rp", "Penalti_Rp", "Deskripsi_Hadiah"]];
       winners.forEach(w => {
-        excelData.push([w.rank, w.cr_id, w.name, ""]);
+        excelData.push([
+          w.rank,
+          w.cr_id,
+          w.name,
+          w.brands || 0,
+          w.skus || 0,
+          w.ta,
+          `Star ${w.star}`,
+          w.reward_rp || 0,
+          w.penalty_rp || 0,
+          w.reward_type === 'non-cash' ? w.reward : ""
+        ]);
       });
 
       const ws = XLSX.utils.aoa_to_sheet(excelData);
@@ -5800,164 +5862,21 @@
     }
 
     // Winner Report Upload (.xlsx)
-    function uploadWinnerExcel(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        try {
-          const data = new Uint8Array(e.target.result);
-          const workbook = XLSX.read(data, { type: 'array' });
-          const firstSheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[firstSheetName];
-          const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-          const period = mockPeriods.find(p => p.id === activePeriodId);
-          if (period) {
-            processWinnersExcelData(excelData, period);
-          }
-        } catch (err) {
-          showToast("Gagal membaca file Excel. Pastikan formatnya benar.", "error", "fa-triangle-exclamation");
-          console.error(err);
-        }
-      };
-      reader.readAsArrayBuffer(file);
-      event.target.value = '';
-    }
-
-    function processWinnersExcelData(excelData, period) {
-      if (excelData.length < 2) {
-        showToast("File Excel kosong atau format tidak sesuai.", "error", "fa-triangle-exclamation");
-        return;
-      }
-
-      const header = excelData[0].map(h => h ? h.toString().toLowerCase().trim() : "");
-      const rankIdx = header.indexOf("rank");
-
-      let nikIdx = header.indexOf("id_sales/nik");
-      if (nikIdx === -1) nikIdx = header.indexOf("id_sales");
-      if (nikIdx === -1) nikIdx = header.indexOf("nik");
-
-      let rewardIdx = header.indexOf("deskripsi_hadiah");
-      if (rewardIdx === -1) rewardIdx = header.indexOf("deskripsi hadiah");
-      if (rewardIdx === -1) rewardIdx = header.indexOf("keterangan hadiah resmi");
-
-      if (rankIdx === -1 || nikIdx === -1 || rewardIdx === -1) {
-        showToast("Header Excel harus memiliki kolom 'Rank', 'ID_Sales/NIK', dan 'Deskripsi_Hadiah'.", "error", "fa-triangle-exclamation");
-        return;
-      }
-
-      const systemWinners = runRankingEngine(period, true);
-      const updatedWinners = [];
-      const dataRows = excelData.slice(1);
-
-      if (dataRows.length !== systemWinners.length) {
-        showToast(`Jumlah baris data (${dataRows.length}) tidak sesuai dengan jumlah pemenang di sistem (${systemWinners.length}).`, "error", "fa-triangle-exclamation");
-        return;
-      }
-
-      for (let i = 0; i < dataRows.length; i++) {
-        const row = dataRows[i];
-        if (!row || row.length < 3) continue;
-
-        const csvRank = parseInt(row[rankIdx]);
-        const csvNIK = row[nikIdx] ? row[nikIdx].toString().trim() : "";
-        const csvReward = row[rewardIdx] ? row[rewardIdx].toString().trim() : "";
-
-        const systemWinner = systemWinners[i];
-        if (!systemWinner) {
-          showToast(`Error di Baris ${i + 2}: Baris melebihi kapasitas pemenang.`, "error", "fa-triangle-exclamation");
-          return;
-        }
-
-        if (csvRank !== systemWinner.rank || csvNIK !== systemWinner.cr_id) {
-          showToast(`Error di Baris ${i + 2}: NIK ${csvNIK} tidak sesuai dengan Rank ${systemWinner.rank}`, "error", "fa-triangle-exclamation");
-          return;
-        }
-
-        updatedWinners.push({
-          rank: systemWinner.rank,
-          cr_id: systemWinner.cr_id,
-          name: systemWinner.name,
-          ta: systemWinner.ta,
-          star: systemWinner.star,
-          reward: csvReward || 'Tidak Ada Hadiah',
-          reward_type: csvReward.startsWith("Rp") ? "cash" : "non-cash"
-        });
-      }
-
-      period.winners = updatedWinners;
-      savePeriodsToStorage();
-      calculateAndRenderWinners(period);
-      showToast("Laporan pemenang Excel berhasil diunggah dan diverifikasi.", "success", "fa-circle-check");
-    }
-
-    // Export Competition Report (Laporan Lengkap .xlsx)
-    function exportCompetitionReport() {
-      const period = mockPeriods.find(p => p.id === activePeriodId);
-      if (!period) return;
-
-      const winners = period.winners && period.winners.length > 0 ? period.winners : runRankingEngine(period, true);
-
-      const excelData = [["Rank", "ID_Sales/NIK", "Nama_Sales", "Pencapaian_TA", "Star_Level", "Reward", "Penalti"]];
-
-      winners.forEach(w => {
-        let rewardStr = "";
-        let penaltyStr = "Tidak Ada Penalti";
-
-        let isLevelPenaltyActive = false;
-        let levelPenaltyAmt = 100000;
-        if (period.penalty && period.penalty["star" + w.star]) {
-          isLevelPenaltyActive = period.penalty["star" + w.star].active;
-          levelPenaltyAmt = period.penalty["star" + w.star].amt;
-        } else if (period.penalty) {
-          if (w.star === 1) {
-            isLevelPenaltyActive = period.penalty.active ?? true;
-            levelPenaltyAmt = period.penalty.amt ?? 100000;
-          }
-        }
-
-        let targetPenalty = 0;
-        const targetConfig = period.targets?.[`star${w.star}`];
-        if (typeof targetConfig === 'object' && targetConfig !== null) {
-          targetPenalty = targetConfig.penalty ?? 0;
-        } else if (typeof targetConfig === 'number') {
-          if (w.star === 1) {
-            targetPenalty = period.penalty?.limit ?? targetConfig;
-          }
-        }
-
-        if (isLevelPenaltyActive && w.ta < targetPenalty) {
-          rewardStr = "Tidak Mencapai Target";
-          penaltyStr = `Potongan Rp ${levelPenaltyAmt.toLocaleString('id-ID')}`;
-        } else {
-          rewardStr = w.reward;
-          if (w.reward_type === 'penalty') {
-            rewardStr = "Tidak Mencapai Target";
-            penaltyStr = `Potongan Rp ${levelPenaltyAmt.toLocaleString('id-ID')}`;
-          }
-        }
-
-        excelData.push([w.rank, w.cr_id, w.name, w.ta, w.star, rewardStr, penaltyStr]);
-      });
-
-      const ws = XLSX.utils.aoa_to_sheet(excelData);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Laporan");
-      XLSX.writeFile(wb, `star_sales_report_${period.area}_${period.month}.xlsx`);
-
-      showToast("Laporan kompetisi lengkap berhasil diekspor ke Excel.", "success", "fa-file-excel");
-    }
-
     // Ranking Engine Calculation
     function runRankingEngine(period, returnOnly = false) {
       const population = JSON.parse(localStorage.getItem('star_sales_cr_population') || '{"BNN":[],"CPD":[]}');
       const area = period.area || 'BNN';
-      // Use locked snapshot participants if available, otherwise fallback to global database list
-      const crList = (period.participants && period.participants.length > 0)
+      let crList = (period.participants && period.participants.length > 0)
         ? period.participants
-        : (population[area] || []);
+        : [];
+
+      if (crList.length === 0) {
+        if (area === 'ALL') {
+          crList = [...(population['BNN'] || []), ...(population['CPD'] || [])];
+        } else {
+          crList = population[area] || [];
+        }
+      }
 
       const sortedCRs = [...crList].sort((a, b) => {
         if (b.ta !== a.ta) return b.ta - a.ta;
@@ -5989,23 +5908,25 @@
         let rewardType = "none";
         let prizeVal = 0;
 
-        // Get penalty config for this star level
         let isLevelPenaltyActive = false;
         let levelPenaltyAmt = 100000;
         if (period.penalty && period.penalty["star" + cr.star]) {
           isLevelPenaltyActive = period.penalty["star" + cr.star].active;
           levelPenaltyAmt = period.penalty["star" + cr.star].amt;
         } else if (period.penalty) {
-          // Migration/Old format fallback
           if (cr.star === 1) {
             isLevelPenaltyActive = period.penalty.active ?? true;
             levelPenaltyAmt = period.penalty.amt ?? 100000;
           }
         }
 
+        let rewardRp = 0;
+        let penaltyRp = 0;
+
         if (isLevelPenaltyActive && cr.ta < targetPenalty) {
           rewardType = "penalty";
           rewardText = `Penalti: Potongan Rp ` + levelPenaltyAmt.toLocaleString('id-ID');
+          penaltyRp = levelPenaltyAmt;
         } else if (cr.ta >= targetReward) {
           const matchedReward = period.rewards.find(r =>
             r.level === cr.star &&
@@ -6018,6 +5939,7 @@
             prizeVal = matchedReward.prize;
             if (rewardType === 'cash') {
               rewardText = "Rp " + prizeVal.toLocaleString('id-ID');
+              rewardRp = prizeVal;
             } else {
               rewardText = prizeVal.toString();
             }
@@ -6031,9 +5953,13 @@
           cr_id: cr.cr_id,
           name: cr.name,
           ta: cr.ta,
+          brands: cr.brands || 0,
+          skus: cr.skus || 0,
           star: cr.star,
           reward: rewardText,
-          reward_type: rewardType
+          reward_type: rewardType,
+          reward_rp: rewardRp,
+          penalty_rp: penaltyRp
         });
       });
 
@@ -6148,6 +6074,15 @@
       container.scrollLeft = scrollLeft - walkX;
       container.scrollTop = scrollTop - walkY;
     });
+
+    // Global modal click outside to close (backdrop click)
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+      backdrop.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.style.display = 'none';
+        }
+      });
+    });
   </script>
 
   <!-- Floating Prototype Control Panel (Right Drawer) -->
@@ -6189,16 +6124,14 @@
       <button class="proto-sw-btn" id="case-btn-no_program" onclick="setCase('no_program', event)"><b>BELUM ADA
           PROGRAM</b><br>Simulasi fallback ke program periode sebelumnya</button>
 
-      <div
-        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-        <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8);">Akses Menu Sales CR:</span>
-        <label class="switch">
-          <input type="checkbox" id="global-program-toggle-sidebar"
-            onchange="toggleGlobalProgram(this.checked); syncToggleStates(this.checked);">
-          <span class="slider"></span>
-        </label>
-      </div>
     </div>
+
+    <!-- Main Menu Link -->
+    <a href="../index.html" style="text-decoration: none;">
+      <button class="proto-sw-btn" style="background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); width: 100%; text-align: center; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <i class="fas fa-home"></i> Kembali ke Menu Utama
+      </button>
+    </a>
   </div>
 
   <script>
