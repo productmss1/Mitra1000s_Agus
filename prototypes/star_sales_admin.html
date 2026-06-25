@@ -1375,25 +1375,23 @@
           <!-- Left Column: Form Settings -->
           <div style="display: flex; flex-direction: column; gap: 20px;">
 
-            <!-- Setup & Config Form -->
-            <div class="card" id="form-card" style="position: relative;">
-              <!-- Locked state Overlay -->
-              <div id="locked-state-overlay"
-                style="display: none; background: rgba(248, 250, 252, 0.4); border: 2px dashed #CBD5E1; padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px;">
-                <div style="color: #1E40AF; display: flex; gap: 12px; font-size: 12px;">
-                  <i class="fa-solid fa-lock" style="font-size: 16px;"></i>
-                  <div>
-                    <strong>Data Terkunci (Locked):</strong> Periode ini berstatus Selesai/Locked. Semua parameter tidak
-                    bisa diedit untuk menjaga audit kelayakan.
-                  </div>
+            <!-- Locked state Overlay -->
+            <div id="locked-state-overlay"
+              style="display: none; background: rgba(248, 250, 252, 0.4); border: 2px dashed #CBD5E1; padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px;">
+              <div style="color: #1E40AF; display: flex; gap: 12px; font-size: 12px;">
+                <i class="fa-solid fa-lock" style="font-size: 16px;"></i>
+                <div>
+                  <strong>Data Terkunci (Locked):</strong> Periode ini berstatus Selesai/Locked. Semua parameter tidak
+                  bisa diedit untuk menjaga audit kelayakan.
                 </div>
               </div>
+            </div>
 
-
-
-              <!-- Setup GUI Form -->
-              <form id="config-form" onsubmit="saveConfiguration(event)">
-
+            <!-- Setup GUI Form -->
+            <form id="config-form" onsubmit="saveConfiguration(event)" style="display: flex; flex-direction: column; gap: 20px;">
+              
+              <!-- Card 1: Informasi Periode & Eligibility -->
+              <div class="card" id="period-info-card">
                 <!-- Section 1: Informasi Periode -->
                 <div style="margin-bottom: 24px;">
                   <h3
@@ -1439,7 +1437,7 @@
                             ID di-generate secara otomatis setelah program statusnya menjadi "Terjadwal".</span>
                         </span>
                       </label>
-                      <input type="text" id="period-id-display" placeholder="Otomatis" disabled
+                      <input type="text" id="period-id-display" placeholder="XX-XXX-XXXXXXXX" disabled
                         style="background: #F1F5F9; color: var(--slate-500); border-color: var(--slate-200); font-family: monospace; font-weight: 700; height: 38px; padding: 10px 12px; border: 1px solid var(--slate-300); border-radius: var(--radius-sm); font-size: 12px; outline: none; width: 100%;">
                     </div>
                     <div class="form-group" id="group-period-title">
@@ -1484,129 +1482,13 @@
                   </div>
                 </div>
 
-                <!-- Section 2: Target Toko Aktif (TA) per Level Bintang -->
-                <div style="margin-bottom: 24px;">
-                  <h3
-                    style="font-size: 13px; font-weight: 800; color: var(--navy); border-left: 3px solid #00BCD4; padding-left: 8px; margin-bottom: 16px; text-transform: uppercase;">
-                    2. Target Toko Aktif (TA) per Level Bintang</h3>
-
-                  <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <!-- Table Header -->
-                    <div
-                      style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; padding: 6px 12px; background: #F8FAFC; border-radius: 4px; font-weight: 700; font-size: 11px; color: var(--slate-700);">
-                      <span>Level Bintang</span>
-                      <span style="display: flex; align-items: center; gap: 4px;">
-                        Batas TA Reward
-                        <span class="tooltip-container"
-                          style="position: relative; cursor: pointer; color: var(--slate-500);">
-                          <i class="fa-solid fa-circle-info"></i>
-                          <span class="tooltip-text">
-                            Jumlah minimum Toko Aktif (TA) yang harus dicapai Sales/CR agar berhak menerima
-                            insentif/reward di level ini.
-                          </span>
-                        </span>
-                      </span>
-                      <span style="display: flex; align-items: center; gap: 4px;">
-                        Batas TA Penalti
-                        <span class="tooltip-container"
-                          style="position: relative; cursor: pointer; color: var(--slate-500);">
-                          <i class="fa-solid fa-circle-info"></i>
-                          <span class="tooltip-text">
-                            Batas minimal pencapaian Toko Aktif (TA) agar bebas dari denda/penalti di level bintang ini.
-                          </span>
-                        </span>
-                      </span>
-                    </div>
-
-                    <!-- Level Rows -->
-                    <!-- Star 5 -->
-                    <div
-                      style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--slate-100);">
-                      <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐⭐⭐⭐ Star 5</span>
-                      <div class="form-group" id="group-target-reward-star5" style="margin: 0;">
-                        <input type="number" id="target-reward-star5" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                      <div class="form-group" id="group-target-penalty-star5" style="margin: 0;">
-                        <input type="number" id="target-penalty-star5" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                    </div>
-
-                    <!-- Star 4 -->
-                    <div
-                      style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--slate-100);">
-                      <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐⭐⭐ Star 4</span>
-                      <div class="form-group" id="group-target-reward-star4" style="margin: 0;">
-                        <input type="number" id="target-reward-star4" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                      <div class="form-group" id="group-target-penalty-star4" style="margin: 0;">
-                        <input type="number" id="target-penalty-star4" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                    </div>
-
-                    <!-- Star 3 -->
-                    <div
-                      style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--slate-100);">
-                      <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐⭐ Star 3</span>
-                      <div class="form-group" id="group-target-reward-star3" style="margin: 0;">
-                        <input type="number" id="target-reward-star3" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                      <div class="form-group" id="group-target-penalty-star3" style="margin: 0;">
-                        <input type="number" id="target-penalty-star3" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                    </div>
-
-                    <!-- Star 2 -->
-                    <div
-                      style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--slate-100);">
-                      <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐ Star 2</span>
-                      <div class="form-group" id="group-target-reward-star2" style="margin: 0;">
-                        <input type="number" id="target-reward-star2" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                      <div class="form-group" id="group-target-penalty-star2" style="margin: 0;">
-                        <input type="number" id="target-penalty-star2" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                    </div>
-
-                    <!-- Star 1 -->
-                    <div
-                      style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: center; padding: 8px 12px;">
-                      <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐ Star 1</span>
-                      <div class="form-group" id="group-target-reward-star1" style="margin: 0;">
-                        <input type="number" id="target-reward-star1" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                      <div class="form-group" id="group-target-penalty-star1" style="margin: 0;">
-                        <input type="number" id="target-penalty-star1" placeholder="0" min="0" max="100"
-                          style="text-align: center;" required onfocus="handleNumberInputFocus(this)"
-                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <!-- Section 3: Aturan Kelayakan Belanja (Eligibility) -->
-                <div style="margin-bottom: 24px;">
+                <div>
                   <h3
                     style="font-size: 13px; font-weight: 800; color: var(--navy); border-left: 3px solid #00BCD4; padding-left: 8px; margin-bottom: 16px; text-transform: uppercase;">
-                    3. Aturan Kelayakan Belanja (Eligibility)</h3>
+                    2. Aturan Kelayakan Belanja (Eligibility)</h3>
 
-                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px;">
                     <!-- Minimal Omzet VA/Saldo Toko Aktif -->
                     <div class="form-group">
                       <label style="display: flex; align-items: center; gap: 4px;">
@@ -1691,9 +1573,107 @@
                     </div>
                   </div>
                 </div>
+              </div>
 
+              <!-- Participant Management Card -->
+              <div class="card" id="participant-management-card" style="display: block;">
+                <h3
+                  style="font-size: 13px; font-weight: 800; color: var(--navy); border-left: 3px solid #00BCD4; padding-left: 8px; margin-bottom: 16px; text-transform: uppercase;">
+                  3. Manajemen Peserta Kompetisi (Daftar Sales/CR)</h3>
 
-                <!-- Section 4: Reward Builder -->
+                <!-- Lock warning notice -->
+                <div id="participant-lock-notice"
+                  style="display: none; background: #FFF3E0; border: 1px solid #FFE0B2; padding: 10px; border-radius: var(--radius-sm); margin-bottom: 16px; color: #E65100; font-size: 11px;">
+                  <i class="fa-solid fa-lock" style="margin-right: 6px;"></i>
+                  <strong>Snapshot Peserta Terkunci (Locked):</strong> Program ini telah Aktif/Selesai. Daftar peserta
+                  terkunci secara permanen dan tidak dapat diubah untuk menjaga integritas data.
+                </div>
+
+                <!-- Upload & Delete actions (hidden when locked) -->
+                <div id="participant-upload-actions"
+                  style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
+                  <button type="button" class="btn btn-secondary" onclick="downloadParticipantExcel()"
+                    style="font-size: 11px; padding: 8px 12px; background: #2E7D32;">
+                    <i class="fa-solid fa-file-excel" style="color: white;"></i> Download Template Excel Peserta
+                  </button>
+                  <label class="btn btn-primary"
+                    style="font-size: 11px; padding: 8px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; background: var(--primary); margin: 0;">
+                    <i class="fa-solid fa-file-excel"></i> Upload Daftar Peserta (.xlsx)
+                    <input type="file" id="participant-excel-file" accept=".xlsx, .xls"
+                      onchange="uploadParticipantExcel(event)" style="display: none;">
+                  </label>
+                  <button type="button" class="btn btn-danger" id="btn-delete-selected-participants"
+                    onclick="deleteSelectedParticipants()"
+                    style="font-size: 11px; padding: 8px 12px; display: none; background: var(--danger); border-color: var(--danger); align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-trash-can"></i> Hapus Terpilih (<span id="delete-participants-count">0</span>)
+                  </button>
+                </div>
+
+                <!-- Uploaded Sales Summary (visible only after upload) -->
+                <div id="sales-upload-summary" style="display: none; margin-bottom: 16px; padding: 14px; background: #E0F7FA; border: 1.5px solid #00BCD4; border-radius: var(--radius-md);">
+                  <h4 style="font-size: 12px; font-weight: 800; color: #00838F; margin-bottom: 10px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; font-family: var(--font-title);">
+                    <i class="fa-solid fa-circle-check" style="font-size: 14px;"></i> Ringkasan Data Sales Terunggah
+                  </h4>
+                  <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px;">
+                    <div style="background: white; padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid #B2EBF2; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <span style="font-size: 9px; color: var(--slate-500); display: block; font-weight: 700; text-transform: uppercase;">Total Sales</span>
+                      <strong id="summary-total-sales" style="font-size: 16px; color: var(--slate-800); display: block; margin-top: 2px; font-family: var(--font-title);">0</strong>
+                    </div>
+                    <div style="background: white; padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid #B2EBF2; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <span style="font-size: 9px; color: #7E3AF2; display: block; font-weight: 700; text-transform: uppercase;">⭐ Star 5</span>
+                      <strong id="summary-star5-sales" style="font-size: 16px; color: #7E3AF2; display: block; margin-top: 2px; font-family: var(--font-title);">0</strong>
+                    </div>
+                    <div style="background: white; padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid #B2EBF2; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <span style="font-size: 9px; color: #1565C0; display: block; font-weight: 700; text-transform: uppercase;">⭐ Star 4</span>
+                      <strong id="summary-star4-sales" style="font-size: 16px; color: #1565C0; display: block; margin-top: 2px; font-family: var(--font-title);">0</strong>
+                    </div>
+                    <div style="background: white; padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid #B2EBF2; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <span style="font-size: 9px; color: #F59E0B; display: block; font-weight: 700; text-transform: uppercase;">⭐ Star 3</span>
+                      <strong id="summary-star3-sales" style="font-size: 16px; color: #F59E0B; display: block; margin-top: 2px; font-family: var(--font-title);">0</strong>
+                    </div>
+                    <div style="background: white; padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid #B2EBF2; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <span style="font-size: 9px; color: #E65100; display: block; font-weight: 700; text-transform: uppercase;">⭐ Star 2</span>
+                      <strong id="summary-star2-sales" style="font-size: 16px; color: #E65100; display: block; margin-top: 2px; font-family: var(--font-title);">0</strong>
+                    </div>
+                    <div style="background: white; padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid #B2EBF2; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                      <span style="font-size: 9px; color: var(--slate-500); display: block; font-weight: 700; text-transform: uppercase;">⭐ Star 1</span>
+                      <strong id="summary-star1-sales" style="font-size: 16px; color: var(--slate-700); display: block; margin-top: 2px; font-family: var(--font-title);">0</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Participants Preview Table -->
+                <div
+                  style="max-height: 250px; overflow-y: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm); position: relative;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                    <thead>
+                      <tr style="background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
+                        <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">No.</th>
+                        <th style="padding: 10px; width: 120px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">ID Sales / NIK</th>
+                        <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Nama Sales</th>
+                        <th style="padding: 10px; width: 100px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Status</th>
+                        <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
+                          <input type="checkbox" id="check-all-participants" onchange="toggleSelectAllParticipants(this)"
+                            style="cursor: pointer; width: 14px; height: 14px;">
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="participants-tbody">
+                      <!-- Dynamically populated rows -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Card 3: Setup Rewards & Penalties -->
+              <div class="card" id="reward-penalty-card">
+                <!-- Dependency Warning Banner -->
+                <div id="upload-warning-banner" style="display: none; background: #FFF3E0; border: 1px solid #FFE0B2; padding: 12px; border-radius: var(--radius-md); margin-bottom: 16px; color: #E65100; font-size: 11.5px; line-height: 1.5;">
+                  <i class="fa-solid fa-triangle-exclamation" style="margin-right: 6px;"></i>
+                  <strong>Setup Hadiah & Penalti Terkunci:</strong> Harap upload daftar peserta terlebih dahulu di section <strong>Manajemen Peserta Kompetisi</strong> agar sistem dapat menghitung kuota ranking dan batas pencapaian sales.
+                </div>
+
+                <!-- Section 4: Skema Hadiah (Rewards) -->
                 <div style="margin-bottom: 24px;">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                     <h3
@@ -1705,13 +1685,53 @@
                     </button>
                   </div>
 
+                  <!-- Batas TA Reward (Merged here) -->
+                  <div style="background: #F8FAFC; border: 1px solid var(--slate-200); padding: 14px; border-radius: var(--radius-md); margin-bottom: 16px;">
+                    <div style="font-size: 11px; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid var(--slate-200); padding-bottom: 6px; display: flex; align-items: center; gap: 4px;">
+                      Batas Minimum Toko Aktif (TA) Berhak Reward
+                      <span class="tooltip-container" style="position: relative; cursor: pointer; color: var(--slate-500);">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span class="tooltip-text">
+                          Jumlah minimum Toko Aktif (TA) yang harus dicapai Sales/CR agar berhak menerima insentif/reward di level ini.
+                        </span>
+                      </span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+                      <!-- Star 5 -->
+                      <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 9px; margin-bottom: 4px;">⭐⭐⭐⭐⭐ Star 5</label>
+                        <input type="number" id="target-reward-star5" placeholder="0" min="0" max="100" style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)" onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
+                      <!-- Star 4 -->
+                      <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 9px; margin-bottom: 4px;">⭐⭐⭐⭐ Star 4</label>
+                        <input type="number" id="target-reward-star4" placeholder="0" min="0" max="100" style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)" onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
+                      <!-- Star 3 -->
+                      <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 9px; margin-bottom: 4px;">⭐⭐⭐ Star 3</label>
+                        <input type="number" id="target-reward-star3" placeholder="0" min="0" max="100" style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)" onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
+                      <!-- Star 2 -->
+                      <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 9px; margin-bottom: 4px;">⭐⭐ Star 2</label>
+                        <input type="number" id="target-reward-star2" placeholder="0" min="0" max="100" style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)" onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
+                      <!-- Star 1 -->
+                      <div class="form-group" style="margin: 0;">
+                        <label style="font-size: 9px; margin-bottom: 4px;">⭐ Star 1</label>
+                        <input type="number" id="target-reward-star1" placeholder="0" min="0" max="100" style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)" onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
+                    </div>
+                  </div>
+
                   <div id="rewards-repeater-container" style="display: flex; flex-direction: column; gap: 10px;">
                     <!-- Repeater rows rendered here -->
                   </div>
                 </div>
 
                 <!-- Section 5: Pengaturan Penalti per Level Star -->
-                <div style="margin-bottom: 24px; border-top: 1px solid var(--slate-200); padding-top: 20px;">
+                <div style="border-top: 1px solid var(--slate-200); padding-top: 20px;" id="penalty-card">
                   <h3
                     style="font-size: 13px; font-weight: 800; color: var(--navy); border-left: 3px solid #00BCD4; padding-left: 8px; margin-bottom: 16px; text-transform: uppercase;">
                     5. Pengaturan Penalti per Level Star</h3>
@@ -1720,8 +1740,18 @@
                     style="display: flex; flex-direction: column; gap: 12px; background: #F8FAFC; border: 1px solid var(--slate-200); padding: 16px; border-radius: var(--radius-md);">
                     <!-- Header -->
                     <div
-                      style="display: grid; grid-template-columns: 1.5fr 1fr 2fr; gap: 16px; font-weight: 700; font-size: 11px; color: var(--slate-700); padding-bottom: 8px; border-bottom: 1px solid var(--slate-200);">
+                      style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr 1.6fr; gap: 16px; font-weight: 700; font-size: 11px; color: var(--slate-700); padding-bottom: 8px; border-bottom: 1px solid var(--slate-200);">
                       <span>Level Bintang</span>
+                      <span style="display: flex; align-items: center; gap: 4px;">
+                        Batas TA Penalti
+                        <span class="tooltip-container"
+                          style="position: relative; cursor: pointer; color: var(--slate-500);">
+                          <i class="fa-solid fa-circle-info"></i>
+                          <span class="tooltip-text">
+                            Batas minimal pencapaian Toko Aktif (TA) agar bebas dari denda/penalti di level bintang ini.
+                          </span>
+                        </span>
+                      </span>
                       <span style="text-align: center;">Aktifkan Penalti</span>
                       <span>Nominal Penalti (Rp)</span>
                     </div>
@@ -1729,8 +1759,13 @@
                     <!-- Rows for Star 5 to 1 -->
                     <!-- Star 5 -->
                     <div
-                      style="display: grid; grid-template-columns: 1.5fr 1fr 2fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
+                      style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr 1.6fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
                       <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐⭐⭐⭐ Star 5</span>
+                      <div class="form-group" id="group-target-penalty-star5" style="margin: 0;">
+                        <input type="number" id="target-penalty-star5" placeholder="0" min="0" max="100"
+                          style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)"
+                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
                       <div style="display: flex; justify-content: center;">
                         <label class="switch">
                           <input type="checkbox" id="penalty-active-star5"
@@ -1750,8 +1785,13 @@
 
                     <!-- Star 4 -->
                     <div
-                      style="display: grid; grid-template-columns: 1.5fr 1fr 2fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
+                      style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr 1.6fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
                       <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐⭐⭐ Star 4</span>
+                      <div class="form-group" id="group-target-penalty-star4" style="margin: 0;">
+                        <input type="number" id="target-penalty-star4" placeholder="0" min="0" max="100"
+                          style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)"
+                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
                       <div style="display: flex; justify-content: center;">
                         <label class="switch">
                           <input type="checkbox" id="penalty-active-star4"
@@ -1771,8 +1811,13 @@
 
                     <!-- Star 3 -->
                     <div
-                      style="display: grid; grid-template-columns: 1.5fr 1fr 2fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
+                      style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr 1.6fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
                       <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐⭐ Star 3</span>
+                      <div class="form-group" id="group-target-penalty-star3" style="margin: 0;">
+                        <input type="number" id="target-penalty-star3" placeholder="0" min="0" max="100"
+                          style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)"
+                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
                       <div style="display: flex; justify-content: center;">
                         <label class="switch">
                           <input type="checkbox" id="penalty-active-star3"
@@ -1792,8 +1837,13 @@
 
                     <!-- Star 2 -->
                     <div
-                      style="display: grid; grid-template-columns: 1.5fr 1fr 2fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
+                      style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr 1.6fr; gap: 16px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--slate-100);">
                       <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐⭐ Star 2</span>
+                      <div class="form-group" id="group-target-penalty-star2" style="margin: 0;">
+                        <input type="number" id="target-penalty-star2" placeholder="0" min="0" max="100"
+                          style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)"
+                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
                       <div style="display: flex; justify-content: center;">
                         <label class="switch">
                           <input type="checkbox" id="penalty-active-star2"
@@ -1813,8 +1863,13 @@
 
                     <!-- Star 1 -->
                     <div
-                      style="display: grid; grid-template-columns: 1.5fr 1fr 2fr; gap: 16px; align-items: center; padding: 6px 0;">
+                      style="display: grid; grid-template-columns: 1.2fr 1.2fr 1fr 1.6fr; gap: 16px; align-items: center; padding: 6px 0;">
                       <span style="font-size: 12px; font-weight: 700; color: var(--navy);">⭐ Star 1</span>
+                      <div class="form-group" id="group-target-penalty-star1" style="margin: 0;">
+                        <input type="number" id="target-penalty-star1" placeholder="0" min="0" max="100"
+                          style="text-align: center; height: 34px; font-size: 11px; padding: 6px;" required onfocus="handleNumberInputFocus(this)"
+                          onblur="handleNumberInputBlur(this)" oninput="handleNumberInputRaw(this)">
+                      </div>
                       <div style="display: flex; justify-content: center;">
                         <label class="switch">
                           <input type="checkbox" id="penalty-active-star1"
@@ -1833,143 +1888,81 @@
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <!-- Section 6: Syarat & Ketentuan (T&C) -->
-                <div style="margin-bottom: 24px; border-top: 1px solid var(--slate-200); padding-top: 20px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                    <h3
-                      style="font-size: 13px; font-weight: 800; color: var(--navy); border-left: 3px solid #00BCD4; padding-left: 8px; margin: 0; text-transform: uppercase;">
-                      6. Syarat & Ketentuan (T&C)</h3>
-                    <button type="button" class="btn btn-secondary tnc-btn" id="btn-add-tnc" onclick="addTncRow('')"
-                      style="font-size: 11px; padding: 6px 12px; background: var(--navy); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer;">
-                      <i class="fa-solid fa-plus"></i> Tambah Poin T&C
-                    </button>
-                  </div>
-
-                  <div id="tnc-repeater-container"
-                    style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
-                    <!-- Repeater rows rendered here via JS -->
-                  </div>
-
+              <!-- Card 4: Syarat & Ketentuan (T&C) -->
+              <div class="card" id="tnc-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                  <h3
+                    style="font-size: 13px; font-weight: 800; color: var(--navy); border-left: 3px solid #00BCD4; padding-left: 8px; margin: 0; text-transform: uppercase;">
+                    6. Syarat & Ketentuan (T&C)</h3>
+                  <button type="button" class="btn btn-secondary tnc-btn" id="btn-add-tnc" onclick="addTncRow('')"
+                    style="font-size: 11px; padding: 6px 12px; background: var(--navy); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer;">
+                    <i class="fa-solid fa-plus"></i> Tambah Poin T&C
+                  </button>
                 </div>
-              </form>
-            </div>
 
-            <!-- Participant Management Card -->
-            <div class="card" id="participant-management-card" style="display: block;">
+                <div id="tnc-repeater-container"
+                  style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
+                  <!-- Repeater rows rendered here via JS -->
+                </div>
+              </div>
+
+              <!-- Winner Management Card (US-09) -->
+              <div class="card" id="winner-management-card" style="display: none;">
+                <h3
+                  style="font-size: 13px; font-weight: 800; color: var(--navy); border-left: 3px solid #00BCD4; padding-left: 8px; margin-bottom: 16px; text-transform: uppercase;">
+                  7. Manajemen Pemenang &amp; Konten Hadiah</h3>
+                <p style="font-size: 11px; color: var(--slate-600); line-height: 1.6; margin-bottom: 16px;">
+                  Bagian ini menampilkan pratinjau (preview) hasil pencapaian program Star Sales. Melalui tabel di bawah, Anda dapat melihat daftar lengkap sales yang berhasil menjadi pemenang kompetisi, peserta yang tidak mendapatkan reward apa pun (karena tidak lolos kualifikasi minimum), serta peserta yang terkena potongan penalti akibat tidak mencapai target minimal per tier bintang.
+                </p>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;">
+                  <button type="button" class="btn btn-secondary" onclick="downloadWinnerExcelTemplate()"
+                    style="font-size: 11px; padding: 8px 12px; background: #2E7D32;">
+                    <i class="fa-solid fa-file-excel" style="color: white;"></i> Download Pemenang (Excel Template)
+                  </button>
+                </div>
+
+                <!-- Winners Preview Table -->
+                <div style="max-height: 400px; overflow-y: auto; overflow-x: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm); position: relative;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+                    <thead>
+                      <tr style="background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
+                        <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Rank</th>
+                        <th style="padding: 10px; width: 110px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">ID Sales / NIK</th>
+                        <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Nama Sales</th>
+                        <th style="padding: 10px; width: 85px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total TA</th>
+                        <th style="padding: 10px; width: 95px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total Brand</th>
+                        <th style="padding: 10px; width: 85px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total SKU</th>
+                        <th style="padding: 10px; width: 100px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Level Bintang</th>
+                        <th style="padding: 10px; width: 110px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Reward (Rp)</th>
+                        <th style="padding: 10px; width: 110px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Penalti (Rp)</th>
+                        <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Deskripsi Hadiah</th>
+                      </tr>
+                    </thead>
+                    <tbody id="winners-tbody">
+                      <!-- Dynamically populated rows -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Form Save & Control Buttons (Moved to the very bottom) -->
               <div
-                style="border-bottom: 1px solid var(--slate-200); padding-bottom: 10px; margin-bottom: 16px; font-weight: 800; font-size: 13px; color: var(--navy); text-transform: uppercase;">
-                <i class="fa-solid fa-users" style="color: #00BCD4; margin-right: 6px;"></i>
-                Manajemen Peserta Kompetisi (Daftar Sales/CR)
-              </div>
-
-              <!-- Lock warning notice -->
-              <div id="participant-lock-notice"
-                style="display: none; background: #FFF3E0; border: 1px solid #FFE0B2; padding: 10px; border-radius: var(--radius-sm); margin-bottom: 16px; color: #E65100; font-size: 11px;">
-                <i class="fa-solid fa-lock" style="margin-right: 6px;"></i>
-                <strong>Snapshot Peserta Terkunci (Locked):</strong> Program ini telah Aktif/Selesai. Daftar peserta
-                terkunci secara permanen dan tidak dapat diubah untuk menjaga integritas data.
-              </div>
-
-              <!-- Upload & Delete actions (hidden when locked) -->
-              <div id="participant-upload-actions"
-                style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
-                <button type="button" class="btn btn-secondary" onclick="downloadParticipantExcel()"
-                  style="font-size: 11px; padding: 8px 12px; background: #2E7D32;">
-                  <i class="fa-solid fa-file-excel" style="color: white;"></i> Download Template Excel Peserta
-                </button>
-                <label class="btn btn-primary"
-                  style="font-size: 11px; padding: 8px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; background: var(--primary); margin: 0;">
-                  <i class="fa-solid fa-file-excel"></i> Upload Daftar Peserta (.xlsx)
-                  <input type="file" id="participant-excel-file" accept=".xlsx, .xls"
-                    onchange="uploadParticipantExcel(event)" style="display: none;">
-                </label>
-                <button type="button" class="btn btn-danger" id="btn-delete-selected-participants"
-                  onclick="deleteSelectedParticipants()"
-                  style="font-size: 11px; padding: 8px 12px; display: none; background: var(--danger); border-color: var(--danger); align-items: center; gap: 6px;">
-                  <i class="fa-solid fa-trash-can"></i> Hapus Terpilih (<span id="delete-participants-count">0</span>)
-                </button>
-              </div>
-
-              <!-- Participants Preview Table -->
-              <div
-                style="max-height: 250px; overflow-y: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm); position: relative;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
-                  <thead>
-                    <tr style="background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
-                      <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">No.</th>
-                      <th style="padding: 10px; width: 120px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">ID Sales / NIK</th>
-                      <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Nama Sales</th>
-                      <th style="padding: 10px; width: 100px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Status</th>
-                      <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
-                        <input type="checkbox" id="check-all-participants" onchange="toggleSelectAllParticipants(this)"
-                          style="cursor: pointer; width: 14px; height: 14px;">
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody id="participants-tbody">
-                    <!-- Dynamically populated rows -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Winner Management Card (US-09) -->
-            <div class="card" id="winner-management-card" style="display: none;">
-              <div
-                style="border-bottom: 1px solid var(--slate-200); padding-bottom: 10px; margin-bottom: 16px; font-weight: 800; font-size: 13px; color: var(--navy); text-transform: uppercase;">
-                <i class="fa-solid fa-users-viewfinder" style="color: #00BCD4;"></i>
-                Manajemen Pemenang &amp; Konten Hadiah
-              </div>
-              <p style="font-size: 11px; color: var(--slate-600); line-height: 1.6; margin-bottom: 16px;">
-                Bagian ini menampilkan pratinjau (preview) hasil pencapaian program Star Sales. Melalui tabel di bawah, Anda dapat melihat daftar lengkap sales yang berhasil menjadi pemenang kompetisi, peserta yang tidak mendapatkan reward apa pun (karena tidak lolos kualifikasi minimum), serta peserta yang terkena potongan penalti akibat tidak mencapai target minimal per tier bintang.
-              </p>
-
-              <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;">
-                <button type="button" class="btn btn-secondary" onclick="downloadWinnerExcelTemplate()"
-                  style="font-size: 11px; padding: 8px 12px; background: #2E7D32;">
-                  <i class="fa-solid fa-file-excel" style="color: white;"></i> Download Pemenang (Excel Template)
+                style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; padding: 16px; background: white; border: 1px solid var(--slate-200); border-radius: var(--radius-md); box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <button type="button" class="btn btn-ctrl" id="btn-reset" onclick="resetForm()">Reset Input</button>
+                <button type="button" class="btn btn-danger" id="btn-cancel"
+                  style="display: none; background: #dc2626; color: white;" onclick="confirmCancel()">Batalkan
+                  Program</button>
+                <!-- Tombol Hapus dinonaktifkan karena tidak diperlukan (hard delete hanya via database oleh IT) -->
+                <button type="button" id="btn-delete" style="display: none !important;"></button>
+                <button type="submit" form="config-form" class="btn btn-primary" id="btn-save"
+                  style="background: #388E3C; display: inline-flex; align-items: center; gap: 6px;">
+                  <i class="fa-solid fa-floppy-disk"></i> Simpan Konfigurasi
                 </button>
               </div>
-
-              <!-- Winners Preview Table -->
-              <div style="max-height: 400px; overflow-y: auto; overflow-x: auto; border: 1px solid var(--slate-200); border-radius: var(--radius-sm); position: relative;">
-                <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
-                  <thead>
-                    <tr style="background: var(--slate-100); position: sticky; top: 0; z-index: 10;">
-                      <th style="padding: 10px; width: 60px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Rank</th>
-                      <th style="padding: 10px; width: 110px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">ID Sales / NIK</th>
-                      <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Nama Sales</th>
-                      <th style="padding: 10px; width: 85px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total TA</th>
-                      <th style="padding: 10px; width: 95px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total Brand</th>
-                      <th style="padding: 10px; width: 85px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Total SKU</th>
-                      <th style="padding: 10px; width: 100px; text-align: center; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Level Bintang</th>
-                      <th style="padding: 10px; width: 110px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Reward (Rp)</th>
-                      <th style="padding: 10px; width: 110px; text-align: right; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Penalti (Rp)</th>
-                      <th style="padding: 10px; background: var(--slate-100); position: sticky; top: 0; z-index: 10;">Deskripsi Hadiah</th>
-                    </tr>
-                  </thead>
-                  <tbody id="winners-tbody">
-                    <!-- Dynamically populated rows -->
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <!-- Form Save & Control Buttons (Moved to the very bottom) -->
-            <div
-              style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 10px; padding: 16px; background: white; border: 1px solid var(--slate-200); border-radius: var(--radius-md); box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-              <button type="button" class="btn btn-ctrl" id="btn-reset" onclick="resetForm()">Reset Input</button>
-              <button type="button" class="btn btn-danger" id="btn-cancel"
-                style="display: none; background: #dc2626; color: white;" onclick="confirmCancel()">Batalkan
-                Program</button>
-              <!-- Tombol Hapus dinonaktifkan karena tidak diperlukan (hard delete hanya via database oleh IT) -->
-              <button type="button" id="btn-delete" style="display: none !important;"></button>
-              <button type="submit" form="config-form" class="btn btn-primary" id="btn-save"
-                style="background: #388E3C; display: inline-flex; align-items: center; gap: 6px;">
-                <i class="fa-solid fa-floppy-disk"></i> Simpan Konfigurasi
-              </button>
-            </div>
+            </form>
           </div>
 
           <!-- Right Column: Sim Preview & Actions -->
@@ -2834,7 +2827,7 @@
     // Seeding Shared State & Population
     function initializeSharedState() {
       // Force migration: check version to clear old cached periods/configs
-      const EXPECTED_VERSION = "v21"; // Increment to force cache eviction
+      const EXPECTED_VERSION = "v22"; // Increment to force cache eviction
       const currentVersion = localStorage.getItem('star_sales_periods_version');
       if (currentVersion !== EXPECTED_VERSION) {
         localStorage.removeItem('star_sales_periods');
@@ -3427,6 +3420,7 @@
     let currentSortOrder = "desc";
     let pendingSavePeriod = null;
     let pendingSaveTargetId = "";
+    let hasJustUploadedParticipants = false;
 
     window.onload = function () {
       initializeSharedState();
@@ -3519,6 +3513,7 @@
 
     // AREA & ACCESS CONTROL (US-08)
     function switchArea(area) {
+      hasJustUploadedParticipants = false;
       activeArea = area;
 
       const areaLabel = document.getElementById('toggle-area-label');
@@ -3799,6 +3794,7 @@
     }
 
     function viewProgramDetail(id) {
+      hasJustUploadedParticipants = false;
       activePeriodId = id;
       loadPeriodData(id);
 
@@ -3807,6 +3803,7 @@
     }
 
     function backToProgramsList() {
+      hasJustUploadedParticipants = false;
       const period = mockPeriods.find(p => p.id === activePeriodId);
       if (period && period.status === 'unsaved-draft') {
         document.getElementById('modal-leave-confirm').style.display = 'flex';
@@ -3848,9 +3845,14 @@
 
     function getAreaQuota(area) {
       let N = 127;
-      if (area === 'CPD') N = 80;
-      else if (area === 'BNN') N = 127;
-      else N = 127 + 80; // BOTH_SYNC
+      const period = mockPeriods.find(p => p.id === activePeriodId);
+      if (period && period.participants && period.participants.length > 0) {
+        N = period.participants.length;
+      } else {
+        if (area === 'CPD') N = 80;
+        else if (area === 'BNN') N = 127;
+        else N = 127 + 80; // BOTH_SYNC
+      }
 
       const baseQuota = Math.floor(N / 5);
       let remainder = N % 5;
@@ -4053,7 +4055,17 @@
       const container = document.getElementById('rewards-repeater-container');
       const rowId = "reward_row_" + Date.now() + "_" + Math.floor(Math.random() * 1000);
 
-      const level = data?.level ?? 5;
+      let level = data?.level;
+      if (level === undefined) {
+        const rows = Array.from(document.querySelectorAll('.reward-row-item'));
+        const hasStar5Flat = rows.some(r => {
+          const l = r.querySelector('.reward-level').value;
+          const f = r.querySelector('.reward-flat-cb').checked;
+          return l === "5" && f;
+        });
+        level = hasStar5Flat ? 4 : 5;
+      }
+
       const rankStart = data?.rankStart ?? 1;
       const rankEnd = data?.rankEnd ?? 5;
       const type = data?.type ?? "cash";
@@ -4069,7 +4081,7 @@
       const displayRankRange = isFlat ? 'none' : 'flex';
 
       const rowHtml = `
-        <div class="reward-row-item" id="${rowId}" style="display: flex; flex-direction: column; gap: 4px; background: white; border: 1px solid var(--slate-200); padding: 10px; border-radius: var(--radius-sm); margin-bottom: 8px;">
+        <div class="reward-row-item" id="${rowId}" data-prev-level="${level}" style="display: flex; flex-direction: column; gap: 4px; background: white; border: 1px solid var(--slate-200); padding: 10px; border-radius: var(--radius-sm); margin-bottom: 8px;">
           <div style="display: grid; grid-template-columns: 80px 1fr 100px 140px 40px; gap: 8px; align-items: center;">
             <div class="form-group" style="margin-bottom: 0;">
               <select class="reward-level" style="padding: 6px; font-size: 11px;" onchange="handleRewardLevelChange('${rowId}', this.value); updateRewardRowHelperTexts();">
@@ -4083,7 +4095,7 @@
             <div style="display: flex; flex-direction: column; gap: 2px;">
               <div style="display: flex; align-items: center; gap: 6px;">
                 <label style="font-size: 10px; display: flex; align-items: center; gap: 4px; cursor: pointer; font-weight: normal; text-transform: none; margin: 0;">
-                  <input type="checkbox" class="reward-flat-cb" ${flatChecked} onchange="toggleRewardFlatRange('${rowId}', this.checked); updateRewardRowHelperTexts();" style="width: 12px; height: 12px;"> Flat Rate
+                  <input type="checkbox" class="reward-flat-cb" ${flatChecked} onchange="handleRewardFlatChange('${rowId}', this.checked)" style="width: 12px; height: 12px;"> Flat Rate
                 </label>
               </div>
               <div class="rank-range-inputs" style="display: ${displayRankRange}; align-items: center; gap: 4px;">
@@ -4148,22 +4160,63 @@
 
     function toggleRewardFlatRange(rowId, isFlat) {
       const container = document.querySelector(`#${rowId} .rank-range-inputs`);
-      container.style.display = isFlat ? 'none' : 'flex';
+      if (container) container.style.display = isFlat ? 'none' : 'flex';
     }
 
     function handleRewardLevelChange(rowId, level) {
       const isFlatCb = document.querySelector(`#${rowId} .reward-flat-cb`);
+      const row = document.getElementById(rowId);
+      const oldLevel = row.getAttribute('data-prev-level') || "5";
+
+      if (level === "5") {
+        // Check if there is another Star 5 row that is Flat Rate
+        const otherRows = Array.from(document.querySelectorAll('.reward-row-item')).filter(r => r.id !== rowId);
+        const hasOtherStar5Flat = otherRows.some(r => {
+          const l = r.querySelector('.reward-level').value;
+          const f = r.querySelector('.reward-flat-cb').checked;
+          return l === "5" && f;
+        });
+        if (hasOtherStar5Flat) {
+          showToast("Star 5 sudah menggunakan Flat Rate! Level bintang ini tidak boleh memiliki tier tambahan.", "error", "fa-triangle-exclamation");
+          row.querySelector('.reward-level').value = oldLevel;
+          return;
+        }
+      }
+
+      row.setAttribute('data-prev-level', level);
+
       if (level !== "5") {
-        isFlatCb.checked = true;
+        if (isFlatCb) isFlatCb.checked = true;
         toggleRewardFlatRange(rowId, true);
       } else {
-        isFlatCb.checked = false;
+        if (isFlatCb) isFlatCb.checked = false;
         toggleRewardFlatRange(rowId, false);
       }
     }
 
+    function handleRewardFlatChange(rowId, checked) {
+      const row = document.getElementById(rowId);
+      if (!row) return;
+      const level = row.querySelector('.reward-level').value;
+
+      if (level === "5" && checked) {
+        // Checking if there are other rows for Star 5
+        const otherRows = Array.from(document.querySelectorAll('.reward-row-item')).filter(r => r.id !== rowId);
+        const hasOtherStar5 = otherRows.some(r => r.querySelector('.reward-level').value === "5");
+        if (hasOtherStar5) {
+          showToast("Tidak bisa mengaktifkan Flat Rate karena terdapat tier Star 5 lainnya. Hapus tier tambahan terlebih dahulu!", "error", "fa-triangle-exclamation");
+          row.querySelector('.reward-flat-cb').checked = false;
+          return;
+        }
+      }
+
+      toggleRewardFlatRange(rowId, checked);
+      updateRewardRowHelperTexts();
+    }
+
     function handleRewardPrizeTypeChange(rowId, type) {
       const container = document.getElementById(`container-val-${rowId}`);
+      if (!container) return;
       if (type === 'cash') {
         container.innerHTML = `
           <div style="position: relative; display: flex; align-items: center;">
@@ -4193,38 +4246,45 @@
       return diffDays <= 5;
     }
 
-    // PERIOD BINDING & DETAILS
     function loadPeriodData(id) {
       const period = mockPeriods.find(p => p.id === id);
       if (!period) return;
 
-      // Auto-populate participants from population if empty
-      if (!period.participants || !Array.isArray(period.participants) || period.participants.length === 0) {
-        const population = JSON.parse(localStorage.getItem('star_sales_cr_population') || '{"BNN":[],"CPD":[]}');
-        let crList = [];
-        if (period.area === 'ALL') {
-          crList = [...(population['BNN'] || []), ...(population['CPD'] || [])];
-        } else {
-          crList = population[period.area] || [];
+      // Auto-populate participants from population if empty (only for non-draft periods)
+      const isDraft = ['unsaved-draft', 'draft'].includes(period.status);
+      if (!isDraft) {
+        if (!period.participants || !Array.isArray(period.participants) || period.participants.length === 0) {
+          const population = JSON.parse(localStorage.getItem('star_sales_cr_population') || '{"BNN":[],"CPD":[]}');
+          let crList = [];
+          if (period.area === 'ALL') {
+            crList = [...(population['BNN'] || []), ...(population['CPD'] || [])];
+          } else {
+            crList = population[period.area] || [];
+          }
+          period.participants = JSON.parse(JSON.stringify(crList));
         }
-        period.participants = JSON.parse(JSON.stringify(crList));
+      } else {
+        if (!period.participants) {
+          period.participants = [];
+        }
       }
 
       bindConfigToForm(period);
       renderParticipants(period);
 
       const isLockedStatus = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled', 'dibatalkan'].includes(period.status);
+      const isFullyLocked = ['locked', 'cancelled', 'dibatalkan'].includes(period.status);
       document.getElementById('participant-lock-notice').style.display = isLockedStatus ? 'block' : 'none';
       document.getElementById('participant-upload-actions').style.display = isLockedStatus ? 'none' : 'flex';
 
-      const formCard = document.getElementById('form-card');
+      const formCard = document.getElementById('config-form');
       const lockedOverlay = document.getElementById('locked-state-overlay');
       const btnSave = document.getElementById('btn-save');
       const btnDelete = document.getElementById('btn-delete');
       const btnCancel = document.getElementById('btn-cancel');
       const btnReset = document.getElementById('btn-reset');
       const btnAddReward = formCard.querySelector('button[onclick="addRewardRow()"]');
-      const btnAddTnc = formCard.querySelector('button[onclick="addTncRow()"]');
+      const btnAddTnc = document.getElementById('btn-add-tnc');
 
       // Update detail status pill
       const detailPill = document.getElementById('detail-status-pill');
@@ -4250,7 +4310,7 @@
       if (btnAddTnc) btnAddTnc.removeAttribute('disabled');
 
       // Re-apply toggle penalty disabled states for active fields
-      if (!isLockedStatus) {
+      if (!isFullyLocked) {
         for (let lvl = 1; lvl <= 5; lvl++) {
           const cb = document.getElementById(`penalty-active-star${lvl}`);
           if (cb) togglePenaltyRowActive(lvl, cb.checked);
@@ -4296,7 +4356,7 @@
         if (lockedOverlay) {
           lockedOverlay.style.display = 'block';
           if (textContainer) {
-            textContainer.innerHTML = '<strong>Program Aktif:</strong> Hanya section skema hadiah, syarat & ketentuan, deskripsi, dan toggle duplikasi otomatis yang masih bisa diubah.';
+            textContainer.innerHTML = '<strong>Program Aktif:</strong> Hanya section skema hadiah, pengaturan penalti, syarat & ketentuan, deskripsi, dan toggle duplikasi otomatis yang masih bisa diubah.';
           }
         }
 
@@ -4307,7 +4367,7 @@
         if (btnCancel) btnCancel.style.display = 'inline-flex';
         if (btnReset) btnReset.style.display = 'none';
 
-        // Disable Section 1 (except deskripsi & auto-rollover), Section 2, Section 3, Section 5
+        // Disable Section 1 (except deskripsi & auto-rollover) and Section 2
         const disabledElements = [
           document.getElementById('period-area'),
           document.getElementById('start-month'),
@@ -4316,22 +4376,8 @@
           document.getElementById('min-ta-turnover'),
           document.getElementById('eligibility-ratio'),
           document.getElementById('claim-window'),
-          document.getElementById('grace-period-end-date'),
-          document.getElementById('penalty-active-star1'),
-          document.getElementById('penalty-amount-star1'),
-          document.getElementById('penalty-active-star2'),
-          document.getElementById('penalty-amount-star2'),
-          document.getElementById('penalty-active-star3'),
-          document.getElementById('penalty-amount-star3'),
-          document.getElementById('penalty-active-star4'),
-          document.getElementById('penalty-amount-star4'),
-          document.getElementById('penalty-active-star5'),
-          document.getElementById('penalty-amount-star5')
+          document.getElementById('grace-period-end-date')
         ];
-        for (let lvl = 1; lvl <= 5; lvl++) {
-          disabledElements.push(document.getElementById(`target-reward-star${lvl}`));
-          disabledElements.push(document.getElementById(`target-penalty-star${lvl}`));
-        }
 
         disabledElements.forEach(el => {
           if (el) el.setAttribute('disabled', 'true');
@@ -4348,7 +4394,7 @@
           if (period.status === 'selesai' || period.status === 'grace-period') {
             lockedOverlay.style.display = 'block';
             if (textContainer) {
-              textContainer.innerHTML = `<strong>Data Selesai/Grace Period:</strong> Program sedang diselesaikan. Anda hanya dapat memperbarui Syarat & Ketentuan dan Skema Hadiah.`;
+              textContainer.innerHTML = `<strong>Data Selesai/Grace Period:</strong> Program sedang diselesaikan. Anda hanya dapat memperbarui Syarat & Ketentuan, Skema Hadiah, dan Pengaturan Penalti.`;
             }
             const disabledElements = [
               document.getElementById('period-area'),
@@ -4358,22 +4404,8 @@
               document.getElementById('min-ta-turnover'),
               document.getElementById('eligibility-ratio'),
               document.getElementById('claim-window'),
-              document.getElementById('grace-period-end-date'),
-              document.getElementById('penalty-active-star1'),
-              document.getElementById('penalty-amount-star1'),
-              document.getElementById('penalty-active-star2'),
-              document.getElementById('penalty-amount-star2'),
-              document.getElementById('penalty-active-star3'),
-              document.getElementById('penalty-amount-star3'),
-              document.getElementById('penalty-active-star4'),
-              document.getElementById('penalty-amount-star4'),
-              document.getElementById('penalty-active-star5'),
-              document.getElementById('penalty-amount-star5')
+              document.getElementById('grace-period-end-date')
             ];
-            for (let lvl = 1; lvl <= 5; lvl++) {
-              disabledElements.push(document.getElementById(`target-reward-star${lvl}`));
-              disabledElements.push(document.getElementById(`target-penalty-star${lvl}`));
-            }
             disabledElements.forEach(el => {
               if (el) el.setAttribute('disabled', 'true');
             });
@@ -4404,6 +4436,31 @@
             if (btnCancel) btnCancel.style.display = 'none';
           }
         }
+      }
+
+      // Enforce Area Target Select lock for Scheduled/Created periods
+      if (period.status !== 'unsaved-draft' && period.status !== 'draft') {
+        const areaSelect = document.getElementById('period-area');
+        if (areaSelect) areaSelect.setAttribute('disabled', 'true');
+      }
+
+      // Check participant upload dependency warning & locks
+      const uploadWarning = document.getElementById('upload-warning-banner');
+      const rewardPenaltyCard = document.getElementById('reward-penalty-card');
+      const hasParticipants = period.participants && period.participants.length > 0;
+
+      if (isDraft && !hasParticipants) {
+        if (uploadWarning) uploadWarning.style.display = 'block';
+        if (rewardPenaltyCard) {
+          const cardInputs = rewardPenaltyCard.querySelectorAll('input, select, textarea, button');
+          cardInputs.forEach(el => {
+            if (!el.classList.contains('btn-ctrl')) {
+              el.setAttribute('disabled', 'true');
+            }
+          });
+        }
+      } else {
+        if (uploadWarning) uploadWarning.style.display = 'none';
       }
 
       // Winner Management Card Visibility
@@ -4474,7 +4531,7 @@
 
     function bindConfigToForm(period) {
       const isNewOrDraft = period.status === 'unsaved-draft' || period.status === 'draft' || (period.id && period.id.includes('-NEW-'));
-      document.getElementById('period-id-display').value = isNewOrDraft ? 'Otomatis' : (period.id || 'Otomatis');
+      document.getElementById('period-id-display').value = isNewOrDraft ? 'XX-XXX-XXXXXXXX' : (period.id || 'XX-XXX-XXXXXXXX');
       document.getElementById('period-title').value = period.title || '';
       document.getElementById('period-area').value = period.area || 'BNN';
       isNameManuallyEdited = period.title ? true : false;
@@ -4499,8 +4556,6 @@
 
     function addTncRow(text = "") {
       const container = document.getElementById('tnc-repeater-container');
-      const rowCount = container.children.length;
-      const index = rowCount + 1;
 
       const rowDiv = document.createElement('div');
       rowDiv.className = 'tnc-row';
@@ -4515,7 +4570,6 @@
       label.style.fontWeight = 'bold';
       label.style.minWidth = '20px';
       label.style.color = 'var(--navy)';
-      label.innerText = `${index}.`;
 
       const input = document.createElement('input');
       input.type = 'text';
@@ -4526,37 +4580,20 @@
       input.style.border = '1px solid var(--slate-300)';
       input.style.borderRadius = 'var(--radius-sm)';
       input.style.fontSize = '12px';
-      input.placeholder = `Masukkan Syarat & Ketentuan ke-${index}`;
       input.required = true;
 
       rowDiv.appendChild(label);
       rowDiv.appendChild(input);
 
-      // Points 1 & 2 are required, cannot be deleted (so only add delete button to index >= 3)
-      if (index > 2) {
-        const deleteBtn = document.createElement('button');
-        deleteBtn.type = 'button';
-        deleteBtn.className = 'btn btn-secondary tnc-control tnc-delete-btn';
-        deleteBtn.style.padding = '10px';
-        deleteBtn.style.background = '#EF4444';
-        deleteBtn.style.color = 'white';
-        deleteBtn.style.border = 'none';
-        deleteBtn.style.borderRadius = 'var(--radius-sm)';
-        deleteBtn.style.cursor = 'pointer';
-        deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-        deleteBtn.onclick = function () {
-          rowDiv.remove();
-          reorderTncNumbers();
-        };
-        rowDiv.appendChild(deleteBtn);
-      }
-
       container.appendChild(rowDiv);
+      reorderTncNumbers();
     }
 
     function reorderTncNumbers() {
       const container = document.getElementById('tnc-repeater-container');
       const rows = container.querySelectorAll('.tnc-row');
+      const totalRows = rows.length;
+
       rows.forEach((row, i) => {
         const label = row.querySelector('.tnc-number-label');
         if (label) {
@@ -4568,9 +4605,7 @@
         }
 
         const deleteBtn = row.querySelector('.tnc-delete-btn');
-        if (i < 2) {
-          if (deleteBtn) deleteBtn.remove();
-        } else {
+        if (totalRows >= 3) {
           if (!deleteBtn) {
             const newDeleteBtn = document.createElement('button');
             newDeleteBtn.type = 'button';
@@ -4587,6 +4622,10 @@
               reorderTncNumbers();
             };
             row.appendChild(newDeleteBtn);
+          }
+        } else {
+          if (deleteBtn) {
+            deleteBtn.remove();
           }
         }
       });
@@ -4875,7 +4914,7 @@
       const targetPeriod = mockPeriods.find(p => p.id === activePeriodId);
       if (!targetPeriod) return;
 
-      if (targetPeriod.status === 'locked' || targetPeriod.status === 'selesai') {
+      if (targetPeriod.status === 'locked') {
         const tncInputs = document.querySelectorAll('#tnc-repeater-container .tnc-input');
         const tnc = [];
         let valid = true;
@@ -5050,6 +5089,30 @@
       }
 
       const activeConfig = getFormValuesForActiveForm();
+
+      // Validate Star 5 flat rate constraint
+      let hasStar5Flat = false;
+      let star5RowsCount = 0;
+      activeConfig.rewards.forEach(r => {
+        if (r.level === 5) {
+          star5RowsCount++;
+          if (r.flat) {
+            hasStar5Flat = true;
+          }
+        }
+      });
+      if (hasStar5Flat && star5RowsCount > 1) {
+        showToast("Star 5 dengan Flat Rate berlaku untuk semua peringkat. Anda tidak dapat menambahkan tier/flat rate tambahan untuk level bintang ini!", "error", "fa-triangle-exclamation");
+        return;
+      }
+
+      // Validate ranks using defined validateRanks function
+      const rankValidation = validateRanks(activeConfig.rewards, areaVal);
+      if (!rankValidation.valid) {
+        showToast(rankValidation.msg, "error", "fa-triangle-exclamation");
+        return;
+      }
+
       const updatedPeriod = JSON.parse(JSON.stringify(targetPeriod));
       updatedPeriod.area = areaVal;
       updatedPeriod.title = titleVal;
@@ -5564,10 +5627,14 @@
         return;
       }
       
-      const isLocked = ['active-running', 'grace-period', 'selesai', 'locked', 'cancelled', 'dibatalkan'].includes(period.status);
+      // In prototype: allow upload for all statuses to make testing the summary card easier
+      const isLocked = ['locked', 'cancelled', 'dibatalkan'].includes(period.status);
       if (isLocked) {
-        showToast("Tidak dapat mengunggah peserta pada program yang aktif/selesai/dibatalkan.", "error", "fa-triangle-exclamation");
+        showToast("Tidak dapat mengunggah peserta pada program yang dikunci/dibatalkan.", "error", "fa-triangle-exclamation");
         return;
+      }
+      if (['active-running', 'grace-period', 'selesai'].includes(period.status)) {
+        showToast("Simulasi: Mengunggah peserta pada program aktif/selesai.", "warning", "fa-circle-exclamation");
       }
 
       const header = excelData[0].map(h => h ? h.toString().toLowerCase().trim() : "");
@@ -5638,7 +5705,8 @@
 
       period.participants = uploadedParticipants;
       savePeriodsToStorage();
-      renderParticipants(period);
+      hasJustUploadedParticipants = true;
+      loadPeriodData(period.id);
       showToast(`Berhasil mengunggah ${uploadedParticipants.length} peserta dari Excel.`, "success", "fa-users");
     }
 
@@ -5659,6 +5727,37 @@
       if (btnDelete) btnDelete.style.display = 'none';
 
       const participants = period.participants || [];
+
+      // Update upload summary UI if visible
+      const summaryEl = document.getElementById('sales-upload-summary');
+      if (summaryEl) {
+        if (participants.length > 0) {
+          summaryEl.style.display = 'block';
+          // Count total and stars
+          let star5Count = 0;
+          let star4Count = 0;
+          let star3Count = 0;
+          let star2Count = 0;
+          let star1Count = 0;
+          
+          participants.forEach(p => {
+            if (p.star === 5) star5Count++;
+            else if (p.star === 4) star4Count++;
+            else if (p.star === 3) star3Count++;
+            else if (p.star === 2) star2Count++;
+            else if (p.star === 1) star1Count++;
+          });
+          
+          document.getElementById('summary-total-sales').innerText = participants.length;
+          document.getElementById('summary-star5-sales').innerText = star5Count;
+          document.getElementById('summary-star4-sales').innerText = star4Count;
+          document.getElementById('summary-star3-sales').innerText = star3Count;
+          document.getElementById('summary-star2-sales').innerText = star2Count;
+          document.getElementById('summary-star1-sales').innerText = star1Count;
+        } else {
+          summaryEl.style.display = 'none';
+        }
+      }
       if (participants.length === 0) {
         tbody.innerHTML = `
           <tr>
@@ -5733,7 +5832,7 @@
       if (confirm(`Apakah Anda yakin ingin menghapus ${idsToDelete.length} peserta terpilih dari program ini?`)) {
         period.participants = (period.participants || []).filter(p => !idsToDelete.includes(p.cr_id));
         savePeriodsToStorage();
-        renderParticipants(period);
+        loadPeriodData(period.id);
         showToast(`Berhasil menghapus ${idsToDelete.length} peserta.`, "success", "fa-trash-can");
       }
     }
@@ -5879,6 +5978,7 @@
       }
 
       const sortedCRs = [...crList].sort((a, b) => {
+        if (b.star !== a.star) return b.star - a.star;
         if (b.ta !== a.ta) return b.ta - a.ta;
         if (b.brands !== a.brands) return b.brands - a.brands;
         if (b.skus !== a.skus) return b.skus - a.skus;
