@@ -1263,17 +1263,22 @@
             </div>
           </div>
 
-          <!-- SUB-TABS (Toko Aktif vs Toko Hampir Aktif) -->
+          <!-- SUB-TABS (Toko Aktif vs Toko Hampir Aktif vs Tidak Valid) -->
           <div style="padding: 0 12px 12px; display: flex; gap: 8px;">
             <button id="subtab-aktif-btn" onclick="switchStoreSubTab('aktif')"
               style="flex: 1; padding: 10px; border-radius: 12px; border: none; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; background: var(--white); color: var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; gap: 4px;">
-              Toko Aktif <span id="subbadge-aktif" class="tab-badge"
+              Aktif <span id="subbadge-aktif" class="tab-badge"
                 style="margin: 0; background: #E8F5E9; color: #2E7D32;">0</span>
             </button>
             <button id="subtab-hampir-btn" onclick="switchStoreSubTab('hampir')"
               style="flex: 1; padding: 10px; border-radius: 12px; border: none; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; background: var(--gray1); color: var(--gray3); display: flex; align-items: center; justify-content: center; gap: 4px;">
-              Toko Hampir Aktif <span id="subbadge-hampir" class="tab-badge"
+              Hampir Aktif <span id="subbadge-hampir" class="tab-badge"
                 style="margin: 0; background: #FFF3E0; color: #E65100;">0</span>
+            </button>
+            <button id="subtab-invalid-btn" onclick="switchStoreSubTab('invalid')"
+              style="flex: 1; padding: 10px; border-radius: 12px; border: none; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; background: var(--gray1); color: var(--gray3); display: flex; align-items: center; justify-content: center; gap: 4px;">
+              Tidak Valid <span id="subbadge-invalid" class="tab-badge"
+                style="margin: 0; background: #FFEBEE; color: #C62828;">0</span>
             </button>
           </div>
 
@@ -2772,21 +2777,26 @@
 
       // Return a stable list of stores with their current stats
       return [
-        { name: "TB. Sumber Rejeki Abadi", address: "Slipi, Jakarta Barat", val: 1250000, ratio: 65 },
-        { name: "TB. Sentosa Jaya Makmur", address: "Kemanggisan, Jakarta Barat", val: 1800000, ratio: 70 },
-        { name: "TB. Karya Mandiri Sejahtera", address: "Grogol, Jakarta Barat", val: 1100000, ratio: 55 },
-        { name: "TB. Mitra Usaha Gemilang", address: "Cengkareng, Jakarta Barat", val: 1500000, ratio: 60 },
-        { name: "TB. Sinar Baru Utama", address: "Palmerah, Jakarta Barat", val: 1350000, ratio: 52 },
-        { name: "TB. Berkat Melimpah", address: "Kalideres, Jakarta Barat", val: 1450000, ratio: 58 },
-        { name: "TB. Jaya Abadi", address: "Kembangan, Jakarta Barat", val: 1600000, ratio: 63 },
-        { name: "TB. Makmur Jaya", address: "Kebon Jeruk, Jakarta Barat", val: 1200000, ratio: 50 },
+        { name: "TB. Sumber Rejeki Abadi", address: "Slipi, Jakarta Barat", val: 1250000, ratio: 65, orderIds: ["ORD/202606/0215", "ORD/202606/0218"] },
+        { name: "TB. Sentosa Jaya Makmur", address: "Kemanggisan, Jakarta Barat", val: 1800000, ratio: 70, orderIds: ["ORD/202606/0220"] },
+        { name: "TB. Karya Mandiri Sejahtera", address: "Grogol, Jakarta Barat", val: 1100000, ratio: 55, orderIds: ["ORD/202606/0231", "ORD/202606/0232", "ORD/202606/0240"] },
+        { name: "TB. Mitra Usaha Gemilang", address: "Cengkareng, Jakarta Barat", val: 1500000, ratio: 60, orderIds: ["ORD/202606/0245"] },
+        { name: "TB. Sinar Baru Utama", address: "Palmerah, Jakarta Barat", val: 1350000, ratio: 52, orderIds: ["ORD/202606/0252", "ORD/202606/0253"] },
+        { name: "TB. Berkat Melimpah", address: "Kalideres, Jakarta Barat", val: 1450000, ratio: 58, orderIds: ["ORD/202606/0268"] },
+        { name: "TB. Jaya Abadi", address: "Kembangan, Jakarta Barat", val: 1600000, ratio: 63, orderIds: ["ORD/202606/0280", "ORD/202606/0285"] },
+        { name: "TB. Makmur Jaya", address: "Kebon Jeruk, Jakarta Barat", val: 1200000, ratio: 50, orderIds: ["ORD/202606/0291"] },
 
         // Hampir Aktif stores (ratio below threshold, but have volume)
-        { name: "TB. Mawar Indah", address: "Palmerah, Jakarta Barat", val: 920000, ratio: Math.round(minRatio * 0.92) },
-        { name: "UD. Cahaya Terang", address: "Kemanggisan, Jakarta Barat", val: 850000, ratio: Math.round(minRatio * 0.85) },
-        { name: "TB. Harapan Baru", address: "Grogol, Jakarta Barat", val: 780000, ratio: Math.round(minRatio * 0.75) },
-        { name: "UD. Berkat Bersama", address: "Cengkareng, Jakarta Barat", val: 650000, ratio: Math.round(minRatio * 0.60) },
-        { name: "TB. Sumber Mas", address: "Kembangan, Jakarta Barat", val: 500000, ratio: Math.round(minRatio * 0.45) }
+        { name: "TB. Mawar Indah", address: "Palmerah, Jakarta Barat", val: 920000, ratio: Math.round(minRatio * 0.92), orderIds: ["ORD/202606/0302"] },
+        { name: "UD. Cahaya Terang", address: "Kemanggisan, Jakarta Barat", val: 850000, ratio: Math.round(minRatio * 0.85), orderIds: ["ORD/202606/0315", "ORD/202606/0318"] },
+        { name: "TB. Harapan Baru", address: "Grogol, Jakarta Barat", val: 780000, ratio: Math.round(minRatio * 0.75), orderIds: ["ORD/202606/0322"] },
+        { name: "UD. Berkat Bersama", address: "Cengkareng, Jakarta Barat", val: 650000, ratio: Math.round(minRatio * 0.60), orderIds: ["ORD/202606/0340", "ORD/202606/0341"] },
+        { name: "TB. Sumber Mas", address: "Kembangan, Jakarta Barat", val: 500000, ratio: Math.round(minRatio * 0.45), orderIds: ["ORD/202606/0355"] },
+
+        // Tidak Valid stores
+        { name: "TB. Indah Bangunan", address: "Tomang, Jakarta Barat", val: 1200000, ratio: 60, orderIds: ["ORD/202605/0902", "ORD/202605/0904"], isInvalid: true, invalidReason: "Order Diretur" },
+        { name: "TB. Trijaya Bersama", address: "Grogol, Jakarta Barat", val: 1500000, ratio: 65, orderIds: ["ORD/202605/0915"], isInvalid: true, invalidReason: "Order Dibatalkan" },
+        { name: "TB. Makmur Sentosa", address: "Kebon Jeruk, Jakarta Barat", val: 2100000, ratio: 80, orderIds: ["ORD/202605/0920", "ORD/202605/0925"], isInvalid: true, invalidReason: "Order Dibatalkan dan Order Diretur" }
       ];
     }
 
@@ -2799,6 +2809,10 @@
       document.getElementById('subtab-hampir-btn').style.background = tab === 'hampir' ? 'var(--white)' : 'var(--gray1)';
       document.getElementById('subtab-hampir-btn').style.color = tab === 'hampir' ? 'var(--blue)' : 'var(--gray3)';
       document.getElementById('subtab-hampir-btn').style.boxShadow = tab === 'hampir' ? '0 1px 4px rgba(0,0,0,0.05)' : 'none';
+
+      document.getElementById('subtab-invalid-btn').style.background = tab === 'invalid' ? 'var(--white)' : 'var(--gray1)';
+      document.getElementById('subtab-invalid-btn').style.color = tab === 'invalid' ? 'var(--blue)' : 'var(--gray3)';
+      document.getElementById('subtab-invalid-btn').style.boxShadow = tab === 'invalid' ? '0 1px 4px rgba(0,0,0,0.05)' : 'none';
 
       renderStoresDynamic();
     }
@@ -2814,16 +2828,19 @@
 
       const allStores = getDummyStoresList();
 
-      // Filter based on Aktif (val >= 1.000.000) vs Hampir Aktif (val < 1.000.000)
+      // Filter based on Aktif (val >= 1.000.000) vs Hampir Aktif (val < 1.000.000) vs Tidak Valid
       const activeThreshold = 1000000;
-      const aktifList = allStores.filter(s => s.val >= activeThreshold);
-      const hampirList = allStores.filter(s => s.val < activeThreshold);
+      const aktifList = allStores.filter(s => s.val >= activeThreshold && !s.isInvalid);
+      const hampirList = allStores.filter(s => s.val < activeThreshold && !s.isInvalid);
+      const invalidList = allStores.filter(s => s.isInvalid);
 
       // Update subtab badges count
       const badgeAktif = document.getElementById('subbadge-aktif');
       const badgeHampir = document.getElementById('subbadge-hampir');
+      const badgeInvalid = document.getElementById('subbadge-invalid');
       if (badgeAktif) badgeAktif.innerText = aktifList.length;
       if (badgeHampir) badgeHampir.innerText = hampirList.length;
+      if (badgeInvalid) badgeInvalid.innerText = invalidList.length;
 
       // Overall main tab count badge
       const mainBadge = document.getElementById('toko-count-badge');
@@ -2832,19 +2849,26 @@
       }
 
       // Now filter the active tab list based on search query
-      const activeList = currentStoreSubTab === 'aktif' ? aktifList : hampirList;
-      const filteredList = activeList.filter(s =>
-        s.name.toLowerCase().includes(storeSearchQuery) ||
-        s.address.toLowerCase().includes(storeSearchQuery)
-      );
+      let activeList = aktifList;
+      if (currentStoreSubTab === 'hampir') activeList = hampirList;
+      if (currentStoreSubTab === 'invalid') activeList = invalidList;
+      
+      const filteredList = activeList.filter(s => {
+        const orderMatch = s.orderIds ? s.orderIds.some(id => id.toLowerCase().includes(storeSearchQuery)) : false;
+        return s.name.toLowerCase().includes(storeSearchQuery) ||
+               s.address.toLowerCase().includes(storeSearchQuery) ||
+               orderMatch;
+      });
 
       // Update list title
       const listTitle = document.getElementById('store-list-title');
       if (listTitle) {
         if (currentStoreSubTab === 'aktif') {
           listTitle.innerText = `Toko Aktif (${aktifList.length})`;
-        } else {
+        } else if (currentStoreSubTab === 'hampir') {
           listTitle.innerText = `Toko Hampir Aktif (${hampirList.length})`;
+        } else {
+          listTitle.innerText = `Toko Tidak Valid (${invalidList.length})`;
         }
       }
 
@@ -2866,6 +2890,8 @@
 
       filteredList.forEach(store => {
         let cardHtml = '';
+        const orderIdsDisplay = store.orderIds ? store.orderIds.map(id => `<strong>${id}</strong>`).join(', ') : '';
+        
         if (currentStoreSubTab === 'aktif') {
           cardHtml = `
               <div class="store-card" style="margin: 0 12px 10px; padding: 14px; border-radius: 18px; background: var(--white); box-shadow: 0 1px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 8px;">
@@ -2873,6 +2899,7 @@
                   <div style="flex: 1;">
                     <h5 style="font-size: 14px; font-weight: 700; color: var(--gray4); margin-bottom: 2px;">${store.name}</h5>
                     <p style="font-size: 11px; color: var(--gray3); margin-bottom: 4px;">${store.address}</p>
+                    <p style="font-size: 10px; color: #64748b; margin-bottom: 6px; font-family: monospace; letter-spacing: 0.5px;">Order: ${orderIdsDisplay}</p>
                     <span class="status-flag active-flag" style="display: inline-flex; background: #E8F5E9; color: #2E7D32; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; border: 1px solid #C8E6C9;">Aktif</span>
                   </div>
                   <div style="text-align: right;">
@@ -2881,7 +2908,7 @@
                 </div>
               </div>
             `;
-        } else {
+        } else if (currentStoreSubTab === 'hampir') {
           // Toko Hampir Aktif (Nominal/Progress Bar)
           const targetVal = 1000000; // Rp 1.000.000 threshold
           const progressPercent = Math.min(100, Math.round((store.val / targetVal) * 100));
@@ -2892,6 +2919,7 @@
                   <div style="flex: 1;">
                     <h5 style="font-size: 14px; font-weight: 700; color: var(--gray4); margin-bottom: 2px;">${store.name}</h5>
                     <p style="font-size: 11px; color: var(--gray3); margin-bottom: 4px;">${store.address}</p>
+                    <p style="font-size: 10px; color: #64748b; margin-bottom: 6px; font-family: monospace; letter-spacing: 0.5px;">Order: ${orderIdsDisplay}</p>
                   </div>
                   <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end;">
                     <span style="font-size: 14px; font-weight: 800; color: var(--gray4);">Rp${targetVal.toLocaleString('id-ID')}</span>
@@ -2905,6 +2933,26 @@
                     <span>Terkumpul: Rp${store.val.toLocaleString('id-ID')}</span>
                     <span style="color: #E65100; font-weight: 700;">Kurang Rp${missingAmt.toLocaleString('id-ID')}</span>
                   </div>
+                </div>
+              </div>
+            `;
+        } else if (currentStoreSubTab === 'invalid') {
+          // Toko Tidak Valid
+          cardHtml = `
+              <div class="store-card" style="margin: 0 12px 10px; padding: 14px; border-radius: 18px; background: #FFF5F5; border: 1px solid #FFEBEB; box-shadow: 0 1px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                  <div style="flex: 1;">
+                    <h5 style="font-size: 14px; font-weight: 700; color: #B71C1C; margin-bottom: 2px;">${store.name}</h5>
+                    <p style="font-size: 11px; color: var(--gray3); margin-bottom: 4px;">${store.address}</p>
+                    <p style="font-size: 10px; color: #64748b; margin-bottom: 6px; font-family: monospace; letter-spacing: 0.5px;">Order: ${orderIdsDisplay}</p>
+                    <span class="status-flag" style="display: inline-flex; background: #FFEBEE; color: #C62828; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; border: 1px solid #FFCDD2;">Toko Tidak Valid</span>
+                  </div>
+                  <div style="text-align: right; background: #FFEBEE; padding: 4px 8px; border-radius: 6px; height: max-content;">
+                    <span style="font-size: 12px; font-weight: 800; color: #C62828;">-1 TA</span>
+                  </div>
+                </div>
+                <div style="margin-top: 6px; padding: 8px; background: white; border-radius: 8px; border-left: 3px solid #F44336;">
+                  <p style="font-size: 10px; color: var(--gray4); margin: 0; line-height: 1.4;"><strong>Alasan:</strong> ${store.invalidReason}</p>
                 </div>
               </div>
             `;
